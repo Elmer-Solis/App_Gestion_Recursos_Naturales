@@ -18,8 +18,8 @@ import {
 
 export const Aside = () => {
     return (
-        <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r">
-            <div className="border-b p-2">
+        <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r px-2">
+            <div className="border-b px-2 py-5">
                 <Button variant="outline" size="icon" aria-label="Home">
                     <Triangle className="size-5 fill-foreground" />
                 </Button>

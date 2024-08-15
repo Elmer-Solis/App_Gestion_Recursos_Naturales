@@ -33,7 +33,7 @@ import { ModeToggle } from "./ModleToogle"
 
 export const Header = () => {
     return (
-        <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-4">
+        <header className="sticky top-0 z-10 flex h-[57px] items-center gap-1 border-b bg-background px-8 py-10">
             <h1 className="text-xl font-semibold">Gestion De Recursos Naturales</h1>
             <Drawer>
                 <DrawerTrigger asChild>

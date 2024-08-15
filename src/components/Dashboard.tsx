@@ -1,7 +1,7 @@
 
 import { Aside } from "./Dashboard/Aside"
 import { Header } from './Dashboard/Header';
-import Main from "./Dashboard/Main";
+import { MainDashboard } from "./Dashboard/Mainother";
 
 export function Dashboard() {
     return (
@@ -9,7 +9,8 @@ export function Dashboard() {
             <Aside />
             <div className="flex flex-col">
                 <Header />
-                <Main />
+
+                <MainDashboard />
             </div>
         </div>
     )
