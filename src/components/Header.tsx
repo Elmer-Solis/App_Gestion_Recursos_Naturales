@@ -29,7 +29,7 @@ import {
 import { Input } from "@/components/ui/input"
 
 import { Textarea } from "@/components/ui/textarea"
-import { ModeToggle } from "./ModleToogle"
+import { ModeToggle } from "./settings/ModelToggle"
 
 export const Header = () => {
     return (

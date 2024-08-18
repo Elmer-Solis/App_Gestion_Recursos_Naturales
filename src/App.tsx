@@ -1,18 +1,22 @@
-import { Dashboard } from "./components/Dashboard"
 
-import {
-  TooltipProvider,
-} from "@/components/ui/tooltip"
+import AppRoutes from "./routes/AppRoutes"
 
 function App() {
   return (
-    <TooltipProvider>
-      <Dashboard />
-    </TooltipProvider>
+    <AppRoutes />
   )
 }
 
 export default App
+
+
+
+
+
+
+
+
+
 
 
 
