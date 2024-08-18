@@ -1,7 +1,7 @@
 
 import { Aside } from "./Dashboard/Aside"
 import { Header } from './Dashboard/Header';
-import { MainDashboard } from "./Dashboard/Mainother";
+import { MainDashboard } from "./Dashboard/MainDashboard";
 
 export function Dashboard() {
     return (

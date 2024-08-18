@@ -18,12 +18,14 @@ import {
 
 export const Aside = () => {
     return (
-        <aside className="inset-y fixed  left-0 z-20 flex h-full flex-col border-r px-2">
+        <aside className="inset-y-0 fixed  left-0 z-20 flex h-full flex-col border-r px-2 shadow-sm">
+
             <div className="border-b px-2 py-5">
                 <Button variant="outline" size="icon" aria-label="Home">
                     <Triangle className="size-5 fill-foreground" />
                 </Button>
             </div>
+
             <nav className="grid gap-1 p-2">
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -101,6 +103,7 @@ export const Aside = () => {
                     </TooltipContent>
                 </Tooltip>
             </nav>
+
             <nav className="mt-auto grid gap-1 p-2">
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -133,7 +136,11 @@ export const Aside = () => {
                     </TooltipContent>
                 </Tooltip>
             </nav>
-        </aside>
 
+        </aside>
     )
 }
+
+
+
+
