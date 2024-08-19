@@ -1,15 +1,15 @@
 import { NavLink } from "react-router-dom";
 import {
-    Book,
-    Bot,
-    Code2,
     LifeBuoy,
-    Settings2,
-    SquareTerminal,
     SquareUser,
-    Triangle,
     SquareChevronRight,
-    SquareChevronLeft
+    SquareChevronLeft,
+    LayoutDashboard,
+    User,
+    BrickWall,
+    CalendarDays,
+    FolderOpenDot,
+    Users
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -27,7 +27,6 @@ interface AsideProps {
     isExpanded: boolean;
     toggleAside: () => void;
 }
-
 
 
 export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
@@ -51,47 +50,46 @@ export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
                 <nav className="grid gap-1 p-2">
 
                     <NavLink to="/" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
+                        <LayoutDashboard className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
+                            Dashboard
                         </span>
                     </NavLink>
 
                     <NavLink to="/personal" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
+                        <User className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
+                            Personal
                         </span>
                     </NavLink>
 
                     <NavLink to="/bomba" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
+                        <BrickWall className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
+                            Bomba
                         </span>
                     </NavLink>
 
                     <NavLink to="/calendario" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
+                        <CalendarDays className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
-                        </span>
-                    </NavLink>
-
-                    <NavLink to="/vecinos" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
-                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
+                            Calendario
                         </span>
                     </NavLink>
 
                     <NavLink to="/proyectos" className="flex items-center p-4 ">
-                        <SquareTerminal className="text-2xl" />
+                        <FolderOpenDot className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Menu
+                            Proyectos
                         </span>
                     </NavLink>
 
+                    <NavLink to="/vecinos" className="flex items-center p-4 ">
+                        <Users className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Vecinos
+                        </span>
+                    </NavLink>
                 </nav>
 
                 <nav className="mt-auto grid gap-1 p-2">
@@ -132,13 +130,5 @@ export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
         </>
     )
 }
-
-//  <nav className="flex gap-4">
-//                         <NavLink
-//                             to="/"
-
-//                             className={({ isActive }) =>
-//                                 isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'
-//                             }>Inicio</NavLink>
 
 
