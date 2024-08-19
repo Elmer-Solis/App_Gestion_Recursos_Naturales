@@ -1,7 +1,9 @@
 
 
+
 import MainLayout from '@/layouts/MainLayout'
-import { MainDashboard } from '@/pages/MainDashboard'
+import { IndexPage } from '@/pages/indexPage'
+import Main from '@/pages/Main'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -10,7 +12,9 @@ export default function AppRoutes() {
         <BrowserRouter>
             <Routes  >
                 <Route element={<MainLayout />} >
-                    <Route path='/' element={<MainDashboard />} index />
+                    <Route path='/' element={<IndexPage />} index />
+                    <Route path='/menu' element={<Main />} />
+
                 </Route>
             </Routes>
         </BrowserRouter>
