@@ -2,7 +2,7 @@
 
 
 
-export default function RegistroPersonal() {
+export function RegistroPersonal() {
   return (
     <div>RegistroPersonal</div>
   )

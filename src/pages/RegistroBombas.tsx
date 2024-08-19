@@ -1,6 +1,6 @@
 
 
-export default function RegistroBombas() {
+export function RegistroBombas() {
     return (
         <div>RegistroBombas</div>
     )

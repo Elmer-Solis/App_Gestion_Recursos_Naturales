@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import {
     Book,
     Bot,
@@ -7,6 +8,8 @@ import {
     SquareTerminal,
     SquareUser,
     Triangle,
+    SquareChevronRight,
+    SquareChevronLeft
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -20,132 +23,122 @@ import {
     TooltipProvider,
 } from "@/components/ui/tooltip"
 
-export const Aside = () => {
-    return (
-        <TooltipProvider>
-            <aside className="inset-y-0 fixed  left-0 z-20 flex h-full flex-col border-r px-2 shadow-sm">
-
-                <div className="border-b px-2 py-5">
-                    <Button variant="outline" size="icon" aria-label="Home">
-                        <Triangle className="size-5 fill-foreground" />
-                    </Button>
-                </div>
-
-                <nav className="grid gap-1 p-2">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg bg-muted"
-                                aria-label="Playground"
-                            >
-                                <SquareTerminal className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Playground
-                        </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Models"
-                            >
-                                <Bot className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Models
-                        </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="API"
-                            >
-                                <Code2 className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            API
-                        </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Documentation"
-                            >
-                                <Book className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Documentation
-                        </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="rounded-lg"
-                                aria-label="Settings"
-                            >
-                                <Settings2 className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Settings
-                        </TooltipContent>
-                    </Tooltip>
-                </nav>
-
-                <nav className="mt-auto grid gap-1 p-2">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="mt-auto rounded-lg"
-                                aria-label="Help"
-                            >
-                                <LifeBuoy className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Help
-                        </TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button
-                                variant="ghost"
-                                size="icon"
-                                className="mt-auto rounded-lg"
-                                aria-label="Account"
-                            >
-                                <SquareUser className="size-5" />
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={5}>
-                            Account
-                        </TooltipContent>
-                    </Tooltip>
-                </nav>
-            </aside>
-        </TooltipProvider>
-    )
+interface AsideProps {
+    isExpanded: boolean;
+    toggleAside: () => void;
 }
 
 
+
+export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
+
+    return (
+        <>
+            <aside className="h-full flex flex-col  border-r px-2 shadow-sm">
+                {/* <aside className="h-full flex flex-col  border-r shadow-sm"> */}
+
+                <header className=" flex items-center border-b  px-4 py-5">
+                    <span className={`${isExpanded ? 'block' : 'hidden'} text-lg font-bold`}>Menu</span>
+                    <Button variant="outline" size="icon" aria-label="Home"
+                        onClick={toggleAside}
+                    >
+                        {isExpanded
+                            ? <SquareChevronLeft className="size-7 " />
+                            : <SquareChevronRight className="size-7 " />}
+                    </Button>
+                </header>
+
+                <nav className="grid gap-1 p-2">
+
+                    <NavLink to="/" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                    <NavLink to="/personal" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                    <NavLink to="/bomba" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                    <NavLink to="/calendario" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                    <NavLink to="/vecinos" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                    <NavLink to="/proyectos" className="flex items-center p-4 ">
+                        <SquareTerminal className="text-2xl" />
+                        <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                            Menu
+                        </span>
+                    </NavLink>
+
+                </nav>
+
+                <nav className="mt-auto grid gap-1 p-2">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="mt-auto rounded-lg"
+                                    aria-label="Help"
+                                >
+                                    <LifeBuoy className="size-5" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="right" sideOffset={5}>
+                                Help
+                            </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="mt-auto rounded-lg"
+                                    aria-label="Account"
+                                >
+                                    <SquareUser className="size-5" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent side="right" sideOffset={5}>
+                                Account
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </nav>
+            </aside>
+        </>
+    )
+}
+
+//  <nav className="flex gap-4">
+//                         <NavLink
+//                             to="/"
+
+//                             className={({ isActive }) =>
+//                                 isActive ? 'text-orange-500 uppercase font-bold' : 'text-white uppercase font-bold'
+//                             }>Inicio</NavLink>
 
 

@@ -2,7 +2,7 @@ import { Header } from "./Header"
 import { Outlet } from "react-router-dom"
 import { useState } from 'react';
 import Asides from "./Side";
-
+import { Aside } from "./Aside";
 
 export default function MainLayout() {
 
@@ -17,7 +17,7 @@ export default function MainLayout() {
 
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
             <aside className={`transition-all duration-300 ${isAsideExpanded ? 'w-64' : 'w-16'}`}>
-                <Asides isExpanded={isAsideExpanded} toggleAside={toggleAside} />
+                <Aside isExpanded={isAsideExpanded} toggleAside={toggleAside} />
             </aside>
 
             <div className="flex flex-col w-full">

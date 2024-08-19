@@ -1,6 +1,6 @@
 
 
-export default function Calendario() {
+export function Calendario() {
     return (
         <div>Calendario</div>
     )
