@@ -34,12 +34,15 @@ export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
     return (
         <>
             <aside className="h-full flex flex-col  border-r px-2 shadow-sm">
-                {/* <aside className="h-full flex flex-col  border-r shadow-sm"> */}
 
-                <header className=" flex items-center border-b  px-4 py-5">
-                    <span className={`${isExpanded ? 'block' : 'hidden'} text-lg font-bold`}>Menu</span>
+                <header className=" flex items-center border-b  px-5 py-5">
+                    <span className={`${isExpanded ? 'block' : 'hidden'} text-xl font-bold`}>
+                        <h2>Menu</h2>
+                    </span>
+
                     <Button variant="outline" size="icon" aria-label="Home"
                         onClick={toggleAside}
+                    // className="absolute left-40 top-4 z-20  "
                     >
                         {isExpanded
                             ? <SquareChevronLeft className="size-7 " />
@@ -50,13 +53,14 @@ export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
                 <nav className="grid gap-1 p-2">
 
                     <NavLink to="/" className="flex items-center p-4 ">
-                        <LayoutDashboard className="text-2xl" />
+                        <LayoutDashboard />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
                             Dashboard
                         </span>
                     </NavLink>
 
-                    <NavLink to="/personal" className="flex items-center p-4 ">
+
+                    <NavLink to="/personal" className="flex items-center p-4  ">
                         <User className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
                             Personal
@@ -80,17 +84,33 @@ export const Aside = ({ isExpanded, toggleAside }: AsideProps) => {
                     <NavLink to="/proyectos" className="flex items-center p-4 ">
                         <FolderOpenDot className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Proyectos
+                            Proyecto
                         </span>
                     </NavLink>
 
-                    <NavLink to="/vecinos" className="flex items-center p-4 ">
+                    <NavLink to="/vecinos" className="flex items-center p-4   ">
                         <Users className="text-2xl" />
                         <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
-                            Vecinos
+                            Vecino
                         </span>
                     </NavLink>
                 </nav>
+
+                {/* <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <NavLink to="/vecinos" className="flex items-center p-4   ">
+                                <Users className="text-2xl" />
+                                <span className={`ml-4 transition-all duration-300 ${isExpanded ? 'inline' : 'hidden'}`}>
+                                    Vecino
+                                </span>
+                            </NavLink>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Vecino</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider> */}
 
                 <nav className="mt-auto grid gap-1 p-2">
                     <TooltipProvider>
