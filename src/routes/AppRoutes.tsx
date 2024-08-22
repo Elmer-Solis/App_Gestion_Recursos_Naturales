@@ -3,7 +3,7 @@
 
 import MainLayout from '@/layouts/MainLayout'
 import {
-    IndexPage, Main,
+    Inicio, Main,
     Calendario, RegistroBombas, RegistroPersonal, Proyectos
 } from '@/pages'
 
@@ -16,7 +16,7 @@ export default function AppRoutes() {
         <BrowserRouter>
             <Routes  >
                 <Route element={<MainLayout />} >
-                    <Route path='/' element={<IndexPage />} index />
+                    <Route path='/' element={<Inicio />} index />
                     <Route path='/personal' element={<RegistroPersonal />} />
                     <Route path='/bomba' element={<RegistroBombas />} />
                     <Route path='/calendario' element={<Calendario />} />

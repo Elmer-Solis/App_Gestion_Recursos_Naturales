@@ -1,5 +1,5 @@
 
-export * from './indexPage'
+export * from './Inicio'
 export * from './Main'
 export * from './RegistroBombas'
 export * from './RegistroPersonal'

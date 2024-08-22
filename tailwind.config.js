@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      // backgroundImage: {
+      //   "main": "url('/fondocuadros.svg')"
+      // },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

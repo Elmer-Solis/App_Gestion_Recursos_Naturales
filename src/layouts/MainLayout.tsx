@@ -1,8 +1,9 @@
 import { Header } from "./Header"
 import { Outlet } from "react-router-dom"
 import { useState } from 'react';
+import { Sidebar } from "./SideBar";
 
-import { Aside } from "./Aside";
+
 
 export default function MainLayout() {
 
@@ -12,12 +13,11 @@ export default function MainLayout() {
         setIsAsideExpanded(!isAsideExpanded);
     };
 
-
     return (
 
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
-            <aside className={`transition-all duration-300 ${isAsideExpanded ? 'w-44' : 'w-18'}`}>
-                <Aside isExpanded={isAsideExpanded} toggleAside={toggleAside} />
+            <aside className={``}>
+                <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside} />
             </aside>
 
             <div className="flex flex-col w-full">
@@ -25,7 +25,7 @@ export default function MainLayout() {
                     <Header />
                 </header>
 
-                <main className="flex-grow p-4">
+                <main className="flex-grow p-4 bg-main ">
                     <Outlet />
                 </main>
             </div>
