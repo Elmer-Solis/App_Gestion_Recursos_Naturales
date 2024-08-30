@@ -16,7 +16,7 @@ export default function MainLayout() {
     return (
 
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
-            <aside className={``}>
+            <aside className={`shadow-md`}>
                 <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside} />
             </aside>
 

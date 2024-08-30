@@ -112,7 +112,7 @@ export function Inicio() {
                     <CardHeader className="flex flex-row items-center">
 
                         <div className="grid gap-2">
-                            <CardTitle>Transactions</CardTitle>
+                            <CardTitle>Usuarios Vecinos</CardTitle>
                             <CardDescription>
                                 Recent transactions from your store.
                             </CardDescription>
@@ -254,7 +254,7 @@ export function Inicio() {
                 {/* aqui funciona todavia */}
                 <Card x-chunk="dashboard-01-chunk-5">
                     <CardHeader>
-                        <CardTitle>Recent Sales</CardTitle>
+                        <CardTitle>Fontaneros</CardTitle>
                     </CardHeader>
                     <CardContent className="grid gap-8">
                         <div className="flex items-center gap-4">

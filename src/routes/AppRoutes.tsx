@@ -4,8 +4,9 @@
 import MainLayout from '@/layouts/MainLayout'
 import {
     Inicio, Main,
-    Calendario, RegistroBombas, RegistroPersonal, Proyectos
+    Calendario, RegistroBombas, RegistroPersonal, Proyectos, Fontaneros
 } from '@/pages'
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -17,6 +18,7 @@ export default function AppRoutes() {
             <Routes  >
                 <Route element={<MainLayout />} >
                     <Route path='/' element={<Inicio />} index />
+                    <Route path='/fontaneros' element={<Fontaneros />} index />
                     <Route path='/personal' element={<RegistroPersonal />} />
                     <Route path='/bomba' element={<RegistroBombas />} />
                     <Route path='/calendario' element={<Calendario />} />

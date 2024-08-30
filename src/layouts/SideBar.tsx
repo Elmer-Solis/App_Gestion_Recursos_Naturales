@@ -107,6 +107,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
 // Data links
 const linksArray = [
     { label: "Home", icon: <Home />, to: "/" },
+    { label: "Fontaneros", icon: <User />, to: "/fontaneros" },
     { label: "Estadísticas", icon: <BarChart2 />, to: "/personal" },
     { label: "Productos", icon: <Building />, to: "/bomba" },
     { label: "Diagramas", icon: <BarChart2 />, to: "/calendario" },

@@ -30,6 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
             >
                 <ArrowLeft />
             </button>
+
             <aside
                 className={`bg-gray-800 text-white transition-all duration-300 ${sidebarOpen ? "w-44" : "w-18"
                     } h-full`}
@@ -46,6 +47,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                     </div>
                     {sidebarOpen && <h1 className="text-lg">codigo369</h1>}
                 </div>
+
+
                 <nav>
                     <ul>
                         {linksArray.map(({ icon, label, to }) => (
