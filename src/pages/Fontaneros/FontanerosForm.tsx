@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useFontaneroStore } from '../../store/storeFontanero';
+import { useToast } from "@/hooks/use-toast";
+
 
 // Definir el esquema de validación
 const formSchema = z.object({
@@ -35,6 +37,9 @@ const formSchema = z.object({
 
 // Crear el componente del formulario
 export function FontanerosForm() {
+
+    const { toast } = useToast()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -61,7 +66,7 @@ export function FontanerosForm() {
 
             <p className="text-lg mt-5 text-center mb-10">
                 Añade Fontaneros y {''}
-                <span className="text-indigo-600 font-bold">Administralos</span>
+                <span className="  text-blue-500 font-bold">Administralos</span>
             </p>
             <Card>
                 <Form {...form} >
@@ -114,7 +119,14 @@ export function FontanerosForm() {
                         />
 
                         <Button type="submit"
-                            className="uppercase font-bold w-full "
+                            className="uppercase text-white font-bold w-full "
+                            onClick={() => {
+                                toast({
+                                    variant: 'succes',
+                                    title: "Registro Exitoso",
+                                    description: "Fontanero Registrado Correctamente ",
+                                })
+                            }}
                         >Guardar Fontanero</Button>
                     </form>
                 </Form>

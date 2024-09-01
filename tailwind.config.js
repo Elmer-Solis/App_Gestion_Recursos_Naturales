@@ -54,6 +54,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -79,6 +80,7 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-animate"),
+    //scroll bar agregado tambien
     require('tailwind-scrollbar'),
   ],
 
