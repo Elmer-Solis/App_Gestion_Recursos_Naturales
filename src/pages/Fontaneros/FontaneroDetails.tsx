@@ -11,14 +11,27 @@ import {
 } from "@/components/ui/card"
 
 import { Button } from "@/components/ui/button";
+import { useFontaneroStore } from "@/store/storeFontanero";
+import { useToast } from "@/hooks/use-toast";
 type PatientDetailsProps = {
     fontanero: Fontanero
 }
-
 export default function FontaneroDetails({ fontanero }: PatientDetailsProps) {
 
+    const { toast } = useToast()
 
+    const deleteFontanero = useFontaneroStore((state) => state.deleteFontanero)
+    const getFontaneroById = useFontaneroStore((state) => state.getFontaneroById)
 
+    const handleClick = () => {
+        deleteFontanero(fontanero.id)
+
+        toast({
+            variant: 'delete',
+            title: "Eliminación Exitosa ",
+            description: "Fontanero eliminado Correctamente ",
+        })
+    }
 
     return (
         <Card className="mx-5 my-10 px-5 ">
@@ -45,6 +58,7 @@ export default function FontaneroDetails({ fontanero }: PatientDetailsProps) {
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
+                    onClick={() => getFontaneroById(fontanero.id)}
                 >
                     Editar</Button>
                 {/* <button
@@ -55,6 +69,7 @@ export default function FontaneroDetails({ fontanero }: PatientDetailsProps) {
                 <Button
                     variant={"destructive"}
                     className="py-2 px-10 text-white font-bold uppercase"
+                    onClick={handleClick}
                 >
                     Eliminar</Button>
                 {/* <button

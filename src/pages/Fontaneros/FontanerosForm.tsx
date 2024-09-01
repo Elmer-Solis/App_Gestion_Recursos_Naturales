@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useFontaneroStore } from '../../store/storeFontanero';
 import { useToast } from "@/hooks/use-toast";
+import { useEffect } from "react";
 
 
 // Definir el esquema de validación
@@ -38,7 +39,18 @@ const formSchema = z.object({
 // Crear el componente del formulario
 export function FontanerosForm() {
 
+
+
+
     const { toast } = useToast()
+
+
+
+    const addFontanero = useFontaneroStore(state => state.addFontanero)
+    const activeId = useFontaneroStore(state => state.activeId)
+    const fontaneros = useFontaneroStore(state => state.fontaneros)
+    const updateFontanero = useFontaneroStore(state => state.updateFontanero)
+
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -52,13 +64,40 @@ export function FontanerosForm() {
     });
 
 
-    const addFontanero = useFontaneroStore(state => state.addFontanero)
+    useEffect(() => {
+
+        if (activeId) {
+            const activeFontanero = fontaneros.filter(fontanero => fontanero.id === activeId)[0]
+            form.setValue('name', activeFontanero.name)
+            form.setValue('phone', activeFontanero.phone)
+            form.setValue('bomba', activeFontanero.bomba)
+        }
+
+    }, [activeId])
+
 
     const registerFontanero = (data: z.infer<typeof formSchema>) => {
 
-        addFontanero(data)
+        if (activeId) {
+            updateFontanero(data)
+
+            toast({
+                variant: 'update',
+                title: "Actualizacion Exitosa",
+                description: "Fontanero Actualizado Correctamente ",
+            })
+
+        } else {
+            addFontanero(data)
+            toast({
+                variant: 'succes',
+                title: "Registro Exitoso",
+                description: "Fontanero Registrado Correctamente ",
+            })
+        }
         form.reset()
     };
+
 
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
@@ -120,13 +159,6 @@ export function FontanerosForm() {
 
                         <Button type="submit"
                             className="uppercase text-white font-bold w-full "
-                            onClick={() => {
-                                toast({
-                                    variant: 'succes',
-                                    title: "Registro Exitoso",
-                                    description: "Fontanero Registrado Correctamente ",
-                                })
-                            }}
                         >Guardar Fontanero</Button>
                     </form>
                 </Form>
