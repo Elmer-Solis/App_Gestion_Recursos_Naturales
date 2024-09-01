@@ -2,6 +2,7 @@
 export type Fontanero = {
     id: string
     name: string
+    phone: string
     bomba: string
 }
 

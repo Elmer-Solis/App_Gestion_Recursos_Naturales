@@ -1,8 +1,14 @@
 
-export default function FontaneroDetailItem() {
+type FontaneroDetailItemProps = {
+    label: string
+    data: string
+}
+
+
+export default function FontaneroDetailItem({ label, data }: FontaneroDetailItemProps) {
     return (
-        <p className="font-bold mb-3 text-gray-700 uppercase">hOLA:{''}
-            <span className="font-normal normal-case">hOLA</span>
+        <p className="font-bold mb-3 text-gray-700 uppercase">{label}:{''}
+            <span className="font-normal normal-case">{data}</span>
         </p>
     )
 }

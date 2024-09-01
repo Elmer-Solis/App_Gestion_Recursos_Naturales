@@ -15,6 +15,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useFontaneroStore } from '../../store/storeFontanero';
 
 // Definir el esquema de validación
 const formSchema = z.object({
@@ -45,8 +46,13 @@ export function FontanerosForm() {
         mode: "onChange",
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
 
+    const addFontanero = useFontaneroStore(state => state.addFontanero)
+
+    const registerFontanero = (data: z.infer<typeof formSchema>) => {
+
+        addFontanero(data)
+        form.reset()
     };
 
     return (
@@ -54,11 +60,12 @@ export function FontanerosForm() {
             <h2 className="font-black text-3xl text-center">Seguimiento Fontaneros</h2>
 
             <p className="text-lg mt-5 text-center mb-10">
-                Añade Fontaneros y Administralos
+                Añade Fontaneros y {''}
+                <span className="text-indigo-600 font-bold">Administralos</span>
             </p>
             <Card>
                 <Form {...form} >
-                    <form onSubmit={form.handleSubmit(onSubmit)}
+                    <form onSubmit={form.handleSubmit(registerFontanero)}
                         className=" py-10 px-5 space-y-5 ">
                         <FormField
                             control={form.control}
@@ -106,7 +113,9 @@ export function FontanerosForm() {
                             )}
                         />
 
-                        <Button type="submit">Guardar Fontanero</Button>
+                        <Button type="submit"
+                            className="uppercase font-bold w-full "
+                        >Guardar Fontanero</Button>
                     </form>
                 </Form>
             </Card>
