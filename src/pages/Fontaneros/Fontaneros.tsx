@@ -1,3 +1,4 @@
+import FontaneroList from './FontaneroList';
 import { FontanerosForm } from './FontanerosForm';
 
 
@@ -11,6 +12,7 @@ export function Fontaneros() {
 
             <div className="mt-12 md:flex">
                 <FontanerosForm />
+                <FontaneroList />
             </div>
 
         </div>
