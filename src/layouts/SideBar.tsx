@@ -1,22 +1,13 @@
 import React from "react";
 import {
     Home,
-    Building,
     Settings,
     BarChart2,
     LogOut,
     ChevronLeft,
-    ChevronRight,
-    LifeBuoy,
-    SquareUser,
-    SquareChevronRight,
-    SquareChevronLeft,
-    LayoutDashboard,
-    User,
-    BrickWall,
     CalendarDays,
-    FolderOpenDot,
-    Users
+    User,
+    WashingMachine,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
@@ -108,10 +99,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
 const linksArray = [
     { label: "Home", icon: <Home />, to: "/" },
     { label: "Fontaneros", icon: <User />, to: "/fontaneros" },
-    { label: "Estadísticas", icon: <BarChart2 />, to: "/personal" },
-    { label: "Productos", icon: <Building />, to: "/bomba" },
-    { label: "Diagramas", icon: <BarChart2 />, to: "/calendario" },
-    { label: "Reportes", icon: <BarChart2 />, to: "/proyectos" },
+    { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
+    { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
+    { label: "Proyectos", icon: <BarChart2 />, to: "/proyectos" },
 ];
 
 const secondarylinksArray = [

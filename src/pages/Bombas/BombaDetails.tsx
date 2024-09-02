@@ -6,27 +6,29 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
-import FontaneroDetailItem from "./FontaneroDetailItem";
-import { Fontanero } from '../../types/index';
-import { useFontaneroStore } from "@/store/storeFontanero";
 
-type FontaneroDetailsProps = {
-    fontanero: Fontanero
+import { Bomba } from '../../types/index';
+import { useBombaStore } from "@/store/storeBombas";
+import BombaDetailItem from "./BombaDetailItem";
+
+type BombaDetailsProps = {
+    bomba: Bomba
 }
-export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
+
+export default function BombaDetails({ bomba }: BombaDetailsProps) {
 
     const { toast } = useToast()
 
-    const deleteFontanero = useFontaneroStore((state) => state.deleteFontanero)
-    const getFontaneroById = useFontaneroStore((state) => state.getFontaneroById)
+    const deleteBomba = useBombaStore((state) => state.deleteBomba)
+    const getBombaById = useBombaStore((state) => state.getBombaById)
 
     const handleClick = () => {
-        deleteFontanero(fontanero.id)
+        deleteBomba(bomba.id)
 
         toast({
             variant: 'delete',
             title: "Eliminación Exitosa ",
-            description: "Fontanero eliminado Correctamente ",
+            description: "Bomba eliminado Correctamente ",
         })
     }
 
@@ -35,19 +37,21 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
             <CardHeader >
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]  ">
-                        <img src="/fontanero.png" alt="" />
+                        <img src="/bomba.png" alt="" />
                     </section>
                     <div>
-                        <FontaneroDetailItem label='Nombre' data={fontanero.name} />
-                        <FontaneroDetailItem label='Telefono' data={fontanero.phone} />
-                        <FontaneroDetailItem label='Bomba' data={fontanero.bomba} />
+                        <BombaDetailItem label='Nombre' data={bomba.name} />
+                        <BombaDetailItem label='Telefono' data={bomba.phone} />
+                        <BombaDetailItem label='Bomba' data={bomba.bomba} />
+                        {/* Renderizar las zonas */}
+                        <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
                     </div>
                 </div>
             </CardHeader>
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
-                    onClick={() => getFontaneroById(fontanero.id)}
+                    onClick={() => getBombaById(bomba.id)}
                 >
                     Editar</Button>
                 <Button
@@ -58,6 +62,5 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
                     Eliminar</Button>
             </CardFooter>
         </Card>
-
     )
 }

@@ -13,10 +13,9 @@ type FontaneroState = {
 }
 
 const createFontanero = (fontanero: DraftFontanero): Fontanero => {
-    // console.log(fontanero);
+
     return { ...fontanero, id: uuidv4() }
 }
-
 
 export const useFontaneroStore = create<FontaneroState>()(
     devtools(
