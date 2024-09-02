@@ -12,8 +12,8 @@ export type DraftFontanero = Omit<Fontanero, 'id'>
 export type Bomba = {
     id: string
     name: string;
-    phone: string;
-    bomba: string;
+    direccion: string;
+    bombeo: string;
     zonas: string[];
 }
 

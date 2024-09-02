@@ -41,8 +41,8 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
                     </section>
                     <div>
                         <BombaDetailItem label='Nombre' data={bomba.name} />
-                        <BombaDetailItem label='Telefono' data={bomba.phone} />
-                        <BombaDetailItem label='Bomba' data={bomba.bomba} />
+                        <BombaDetailItem label='Direccion' data={bomba.direccion} />
+                        <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
                         {/* Renderizar las zonas */}
                         <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
                     </div>

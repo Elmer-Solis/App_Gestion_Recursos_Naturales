@@ -28,10 +28,12 @@ const formSchema = z.object({
     }).max(20, {
         message: 'El nombre no debe ser mayor a 20 caracteres'
     }),
-    phone: z
-        .string()
-        .regex(/^[0-9]{8}$/, "Número de teléfono no válido"),
-    bomba: z.string().min(2, {
+    direccion: z.string().min(2, {
+        message: "La direccion de la Bomba es obligatorio.",
+    }).max(30, {
+        message: 'La direccion no debe ser mayor a 30 caracteres'
+    }),
+    bombeo: z.string().min(2, {
         message: "El nombre de la bomba es obligatorio.",
     }),
     zonas: z.array(z.string()).nonempty("Debe seleccionar al menos una zona."),
@@ -50,13 +52,12 @@ export function BombaForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            phone: "",
-            bomba: "",
+            direccion: "",
+            bombeo: "",
             zonas: []
         },
         mode: "onChange",
     });
-
 
     const zonasDisponibles = [
         { id: "zona1", label: "Zona 1" },
@@ -71,8 +72,8 @@ export function BombaForm() {
         if (activeId) {
             const activeBomba = bombas.filter(bomba => bomba.id === activeId)[0]
             form.setValue('name', activeBomba.name)
-            form.setValue('phone', activeBomba.phone)
-            form.setValue('bomba', activeBomba.bomba)
+            form.setValue('direccion', activeBomba.direccion)
+            form.setValue('bombeo', activeBomba.bombeo)
             // Verificar si `zonas` tiene al menos un elemento, si no, asignar un array con un valor por defecto
             if (activeBomba.zonas.length > 0) {
                 form.setValue('zonas', [activeBomba.zonas[0], ...activeBomba.zonas.slice(1)]);
@@ -119,9 +120,9 @@ export function BombaForm() {
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Nombre Completo</FormLabel>
+                                    <FormLabel>Nombre de la Bomba</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Nombre de la Bomba"
+                                        <Input placeholder="Ingresa el nombre de la bomba"
                                             {...field} />
                                     </FormControl>
                                     <FormMessage />
@@ -130,12 +131,12 @@ export function BombaForm() {
                         />
                         <FormField
                             control={form.control}
-                            name="phone"
+                            name="direccion"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Teléfono</FormLabel>
+                                    <FormLabel>Direccion</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Número de Teléfono" {...field}
+                                        <Input placeholder="Ingresa la direccion de la bomba" {...field}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -145,12 +146,12 @@ export function BombaForm() {
 
                         <FormField
                             control={form.control}
-                            name="bomba"
+                            name="bombeo"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Bomba de agua</FormLabel>
+                                    <FormLabel>Capacidad de Bombeo</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Ingrese nombre de bomba" {...field} />
+                                        <Input placeholder="Ingresa la capacidad de bombeo" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
