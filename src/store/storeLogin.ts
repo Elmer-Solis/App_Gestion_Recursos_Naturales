@@ -1,21 +1,27 @@
 import { create } from 'zustand';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import supabase from '@/supabase/supabase.config';
-import { Session, User } from '@supabase/supabase-js';
+
+
+interface UserMetadata {
+    email: string;
+    picture: string
+    name: string;
+    // Agrega otros campos que necesites aquí
+}
+
 
 // Definición del tipo para el estado de autenticación
 interface AuthState {
-    user: User | null;
-    handleSignInWithGoogle: () => Promise<void>;
+    user: UserMetadata | null;
+    handleSignInWithGoogle: () => Promise<{ provider: string; url: string } | undefined>;
     signOut: () => Promise<void>;
-    setUser: (user: User | null) => void;
+    setUser: (user: UserMetadata | null) => void;
 }
 
 // Creación del store con Zustand
 export const useAuthStore = create<AuthState>((set) => ({
     user: null,
-    setUser: (user: User | null) => set({ user }),
+    setUser: (user: UserMetadata | null) => set({ user }),
 
     handleSignInWithGoogle: async () => {
         try {
@@ -23,7 +29,6 @@ export const useAuthStore = create<AuthState>((set) => ({
                 provider: 'google',
             });
             if (error) throw new Error("Ha ocurrido un error durante la autenticación");
-
             return data;
 
         } catch (error) {
@@ -37,36 +42,3 @@ export const useAuthStore = create<AuthState>((set) => ({
     },
 }));
 
-// Hook para gestionar la autenticación y sus efectos
-// export const useAuth = () => {
-//     const { setUser } = useAuthStore();
-//     const navigate = useNavigate();
-
-//     useEffect(() => {
-//         const checkSession = async () => {
-//             const { data: { session } } = await supabase.auth.getSession();
-//             if (session) {
-//                 setUser(session.user);
-//             }
-//         };
-
-//         checkSession();
-
-//         const { data: authListener } = supabase.auth.onAuthStateChange(
-//             async (event, session: Session | null) => {
-//                 if (session === null) {
-//                     navigate('/login', { replace: true });
-//                 } else {
-//                     setUser(session.user);
-//                     navigate('/', { replace: true });
-//                 }
-//             }
-//         );
-
-//         return () => {
-//             authListener?.subscription?.unsubscribe();
-//         };
-//     }, [setUser, navigate]);
-
-//     return useAuthStore();
-// };

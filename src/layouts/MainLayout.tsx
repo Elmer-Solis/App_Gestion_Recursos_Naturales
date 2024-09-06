@@ -17,6 +17,13 @@ export default function MainLayout() {
         setIsAsideExpanded(!isAsideExpanded);
     };
 
+    interface UserMetadata {
+        email: string;
+        picture: string;
+        name: string;
+        // Agrega otros campos que necesites aquí
+    }
+
 
     useEffect(() => {
         const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session: Session | null) => {
@@ -25,7 +32,12 @@ export default function MainLayout() {
             if (session === null) {
                 navigate('/login', { replace: true }); // Redirigir si no hay sesión
             } else {
-                setUser(session.user); // Actualizar el estado con el usuario autenticado
+                const userMetadata: UserMetadata = {
+                    email: session.user?.email || '',
+                    picture: session.user?.user_metadata?.picture || '',
+                    name: session.user?.user_metadata?.name || '',
+                };
+                setUser(userMetadata);
                 console.log('datos', session.user);
                 console.log("Datos del usuario:", session?.user.user_metadata);
                 navigate('/', { replace: true }); // Redirigir a la página principal
