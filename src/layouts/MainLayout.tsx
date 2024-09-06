@@ -2,7 +2,7 @@ import { Header } from "./Header"
 import { Outlet } from "react-router-dom"
 import { useState } from 'react';
 import { Sidebar } from "./SideBar";
-
+import { UserAuth } from "@/context/AuthContext";
 
 
 export default function MainLayout() {
@@ -13,11 +13,14 @@ export default function MainLayout() {
         setIsAsideExpanded(!isAsideExpanded);
     };
 
+
     return (
 
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
             <aside className={`shadow-md`}>
-                <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside} />
+                <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside}
+
+                />
             </aside>
 
             <div className="flex flex-col w-full">

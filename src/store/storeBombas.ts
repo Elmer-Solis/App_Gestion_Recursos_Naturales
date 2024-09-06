@@ -3,11 +3,6 @@ import { devtools } from "zustand/middleware";
 import { Bomba, DraftBomba } from '../types/index';
 import { v4 as uuidv4 } from 'uuid'
 
-
-
-
-
-
 type bombaState = {
     bombas: Bomba[]
     activeId: Bomba['id']

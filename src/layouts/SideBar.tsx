@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
     Home,
     Settings,
@@ -10,6 +10,7 @@ import {
     WashingMachine,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+// const { signOut } = UserAuth()
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -17,6 +18,7 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
+
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
@@ -87,7 +89,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                                 </NavLink>
                             </li>
                         ))}
+
                     </ul>
+
                 </nav>
 
             </aside>
