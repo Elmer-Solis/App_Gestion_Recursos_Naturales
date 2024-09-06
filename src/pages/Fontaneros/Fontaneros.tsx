@@ -1,10 +1,10 @@
 import { Toaster } from '@/components/ui/toaster';
 import FontaneroList from './FontaneroList';
 import { FontanerosForm } from './FontanerosForm';
-import { UserAuth } from '@/context/AuthContext';
+
 
 export function Fontaneros() {
-    const { signOut } = UserAuth()
+    // const { signOut } = UserAuth()
     return (
         <>
             <div className="container mx-auto mt-5 ">
@@ -17,11 +17,6 @@ export function Fontaneros() {
                     <FontanerosForm />
                     <FontaneroList />
                 </div>
-                <button
-                    onClick={signOut}
-                >
-                    salirXd
-                </button>
             </div>
             <Toaster />
         </>

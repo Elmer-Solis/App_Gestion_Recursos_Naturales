@@ -1,12 +1,11 @@
 
-import { UserAuth } from '@/context/AuthContext';
+
 import { MailCheck } from 'lucide-react';
-
-
+import { useAuthStore } from '../store/storeLogin';
 
 export function Login() {
 
-    const { handleSignInWithGoogle } = UserAuth()
+    const handleSignInWithGoogle = useAuthStore((state) => state.handleSignInWithGoogle)
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-tr from-[#262827] to-[#29372F] p-8">

@@ -10,7 +10,8 @@ import {
     WashingMachine,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
-// const { signOut } = UserAuth()
+import { useAuthStore } from '../store/storeLogin';
+
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -18,6 +19,9 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
+
+    const { signOut } = useAuthStore()
+
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -70,11 +74,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                     </ul>
                 </nav>
 
-                <hr className="my-4 border-gray-800 " />
+                <hr className=" border-gray-800 " />
 
                 <nav>
-                    <ul>
-                        {secondarylinksArray.map(({ icon, label, to }) => (
+                    <ul >
+                        {/* {secondarylinksArray.map(({ icon, label, to }) => (
                             <li className="my-2 px-4" key={label}>
                                 <NavLink
                                     to={to}
@@ -82,16 +86,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                                         `flex items-center p-2 rounded ${isActive ? "bg-gray-800" : ""
                                         } hover:bg-gray-700 transition-colors`
                                     }
-                                // aria-label={label}
                                 >
                                     <span className="text-xl text-gray-800 dark:text-blue-50">{icon}</span>
                                     {sidebarOpen && <span className="ml-3 text-gray-50  ">{label}</span>}
                                 </NavLink>
                             </li>
-                        ))}
-
+                        ))} */}
+                        <li className="my-8">
+                            <button
+                                onClick={signOut}
+                                className="w-full flex items-center p-2 px-4 rounded hover:bg-gray-700 transition-colors"
+                            >
+                                <span className="text-xl text-gray-800 dark:text-blue-50"><LogOut /></span>
+                                {sidebarOpen && <span className="ml-3 text-gray-50">Salir</span>}
+                            </button>
+                        </li>
                     </ul>
-
                 </nav>
 
             </aside>
@@ -109,6 +119,6 @@ const linksArray = [
 ];
 
 const secondarylinksArray = [
-    { label: "Configuración", icon: <Settings />, to: "/null" },
+    // { label: "Configuración", icon: <Settings />, to: "/null" },
     { label: "Salir", icon: <LogOut />, to: "/null" },
 ];

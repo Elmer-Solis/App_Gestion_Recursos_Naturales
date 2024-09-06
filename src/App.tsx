@@ -6,9 +6,9 @@ import { BrowserRouter } from 'react-router-dom'
 function App() {
   return (
     <BrowserRouter>
-      <AuthContextProvider>
-        <AppRoutes />
-      </AuthContextProvider>
+      {/* <AuthContextProvider> */}
+      <AppRoutes />
+      {/* </AuthContextProvider> */}
     </BrowserRouter>
   )
 }
