@@ -74,6 +74,46 @@ export const useAuthStore = create<AuthState>((set) => ({
 //     }, []);
 // }
 
+// export const useAuth = () => {
+//     const navigate = useNavigate();
+//     const { setUser } = useAuthStore();
+
+//     useEffect(() => {
+//         const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session: Session | null) => {
+//             console.log('supabase session:', event); // Monitoreo del evento de autenticación
+
+//             if (session === null) {
+//                 navigate('/login', { replace: true }); // Redirigir si no hay sesión
+//             } else {
+//                 const email = session.user?.email || '';
+
+//                 // Solo permitir el acceso a pepito@gmail.com
+//                 if (email !== 'soliselmer389@gmail.com') {
+//                     // Cerrar sesión si el email no coincide
+//                     await supabase.auth.signOut();
+//                     navigate('/login', { replace: true });
+//                     alert('Acceso no autorizado');
+//                 } else {
+//                     const userMetadata: UserMetadata = {
+//                         email: email,
+//                         picture: session.user?.user_metadata?.picture || '',
+//                         name: session.user?.user_metadata?.name || '',
+//                     };
+//                     setUser(userMetadata);
+//                     console.log('datos', session.user);
+//                     console.log("Datos del usuario:", session?.user.user_metadata);
+//                     navigate('/', { replace: true }); // Redirigir a la página principal
+//                 }
+//             }
+//         });
+
+//         // Limpieza del listener al desmontar el componente
+//         return () => {
+//             authListener?.subscription?.unsubscribe();
+//         };
+//     }, []);
+// };
+
 export const useAuth = () => {
     const navigate = useNavigate();
     const { setUser } = useAuthStore();
@@ -87,13 +127,20 @@ export const useAuth = () => {
             } else {
                 const email = session.user?.email || '';
 
-                // Solo permitir el acceso a pepito@gmail.com
-                if (email !== 'soliselmer389@gmail.com') {
-                    // Cerrar sesión si el email no coincide
+                // Realizar consulta en la tabla "users" de Supabase
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('email', email);
+
+                // Verificar si el correo existe en la base de datos
+                if (error || data.length === 0) {
+                    // Cerrar sesión si el email no está autorizado
                     await supabase.auth.signOut();
-                    alert('Acceso no autorizado');
                     navigate('/login', { replace: true });
+                    // alert('Acces no autorizado');
                 } else {
+                    // Si el correo está autorizado, permitir el acceso
                     const userMetadata: UserMetadata = {
                         email: email,
                         picture: session.user?.user_metadata?.picture || '',
