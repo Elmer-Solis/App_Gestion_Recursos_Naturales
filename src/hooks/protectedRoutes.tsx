@@ -9,6 +9,7 @@ interface ProtectedRouteProps {
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
     const { user } = useAuthStore();  // Obtener el estado de autenticación desde el store
     const [isLoading, setIsLoading] = useState(true);  // Estado de carga inicial
+
     useEffect(() => {
         if (user !== null) {
             setIsLoading(false);  // Cambia el estado de carga cuando el usuario está listo

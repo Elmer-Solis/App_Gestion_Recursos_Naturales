@@ -1,7 +1,6 @@
 
 import {
     Home,
-    Settings,
     BarChart2,
     LogOut,
     ChevronLeft,
@@ -118,7 +117,4 @@ const linksArray = [
     { label: "Proyectos", icon: <BarChart2 />, to: "/proyectos" },
 ];
 
-const secondarylinksArray = [
-    // { label: "Configuración", icon: <Settings />, to: "/null" },
-    { label: "Salir", icon: <LogOut />, to: "/null" },
-];
+
