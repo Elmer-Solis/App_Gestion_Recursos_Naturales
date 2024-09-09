@@ -43,9 +43,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                 <div className="flex justify-center items-center pt-5 mb-5">
                     <div className="transform transition-transform">
                         <img
-                            src="/logoAgua.png"
+                            src="/umg.png"
                             alt="Logo"
-                            className={`h-9 w-9 ${sidebarOpen ? "scale-90" : "scale-150"
+                            className={`h-8 w-9 ${sidebarOpen ? "scale-90" : "scale-150"
                                 } transition-transform`}
                         />
                     </div>
