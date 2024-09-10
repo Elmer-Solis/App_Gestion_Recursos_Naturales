@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom"
 import { useState } from 'react';
 import { Sidebar } from "./SideBar";
 import { useAuth } from "@/store/storeLogin";
+import { useInactivityLogout } from "@/hooks/useInactivityLogout";
 
 export default function MainLayout() {
 
@@ -13,6 +14,7 @@ export default function MainLayout() {
     };
 
     useAuth()
+    useInactivityLogout();
 
     return (
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">

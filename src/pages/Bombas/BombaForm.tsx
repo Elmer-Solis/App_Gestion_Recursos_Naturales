@@ -107,7 +107,7 @@ export function BombaForm() {
         <div className="md:w-1/2 lg:w-2/5 mx-5">
             <h2 className="font-black text-3xl text-center">Seguimiento Bombas</h2>
 
-            <p className="text-lg mt-5 text-center mb-10">
+            <p className="text-lg  mt-5 text-center mb-10">
                 Añade Bombas y {''}
                 <span className="  text-blue-500 font-bold">Administralos</span>
             </p>
@@ -157,7 +157,6 @@ export function BombaForm() {
                                 </FormItem>
                             )}
                         />
-
 
                         <FormField
                             control={form.control}

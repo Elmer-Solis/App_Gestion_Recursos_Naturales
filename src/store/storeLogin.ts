@@ -63,7 +63,7 @@ export const useAuthStore = create<AuthState>()(
 
 export const useAuth = () => {
     const navigate = useNavigate();
-
+    const setUser = useAuthStore((state) => state.setUser);
     // useEffect(() => {
     //     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session: Session | null) => {
     //         console.log('supabase session:', event); // Monitoreo del evento de autenticación
@@ -126,14 +126,14 @@ export const useAuth = () => {
                         picture: session.user?.user_metadata?.picture || '',
                         name: session.user?.user_metadata?.name || '',
                     };
-                    useAuthStore.getState().setUser(userMetadata);
+                    setUser(userMetadata);
                 }
             } else {
-                navigate('/login', { replace: true });
+                setUser(null);
             }
         };
 
         checkSession();
-    }, [navigate]);
+    }, [setUser, navigate]);
 
 };
