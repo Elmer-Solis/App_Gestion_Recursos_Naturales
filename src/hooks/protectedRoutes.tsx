@@ -18,7 +18,17 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
     }, [user]);
 
     if (isLoading) {
-        return <div>Cargando...</div>;  // O mostrar algún spinner mientras se carga el usuario
+        return (
+            <div className="flex h-screen justify-center flex-col  items-center space-y-3">
+                <Skeleton className="h-[225px] w-[550px] rounded-xl" />
+                <div className="space-y-2 flex flex-col">
+                    <Skeleton className="h-4 w-[250px]" />
+                    <Skeleton className="h-4 w-[200px]" />
+                </div>
+            </div>
+        )
+
+        // O mostrar algún spinner mientras se carga el usuario
     }
 
     if (!user || user === null) {

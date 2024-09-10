@@ -3,6 +3,7 @@ import supabase from '@/supabase/supabase.config';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { persist } from 'zustand/middleware';
+import { useToast } from '@/hooks/use-toast';
 
 interface UserMetadata {
     email: string;
@@ -60,7 +61,7 @@ export const useAuthStore = create<AuthState>()(
 export const useAuth = () => {
     const navigate = useNavigate();
     const setUser = useAuthStore((state) => state.setUser);
-
+    const { toast } = useToast()
     useEffect(() => {
         const checkSession = async () => {
             const { data: { session } } = await supabase.auth.getSession();
@@ -76,6 +77,11 @@ export const useAuth = () => {
                     useAuthStore.getState().setUser(null);
                     localStorage.removeItem('auth-storage');
                     navigate('/login', { replace: true });
+                    toast({
+                        variant: 'delete',
+                        title: "Error de Autenticación",
+                        description: "El correo ingresado no está autorizado",
+                    })
                 } else {
                     const userMetadata: UserMetadata = {
                         email: email,
@@ -85,6 +91,7 @@ export const useAuth = () => {
                     setUser(userMetadata);
                 }
             } else {
+
                 setUser(null);
                 navigate("/login");
             }

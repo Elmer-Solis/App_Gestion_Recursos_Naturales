@@ -18,7 +18,7 @@ export function Fontaneros() {
                     <FontaneroList />
                 </div>
             </div>
-            <Toaster />
+            {/* <Toaster /> */}
         </>
     )
 }
