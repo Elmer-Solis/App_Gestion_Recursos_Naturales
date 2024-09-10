@@ -27,7 +27,7 @@ export default function MainLayout() {
                     <Header />
                 </header>
 
-                <main className="flex-grow p-4 bg-main ">
+                <main className="flex-grow p-4 bg-main">
                     <Outlet />
                 </main>
             </div>
