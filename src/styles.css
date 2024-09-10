@@ -1,0 +1,28 @@
+@keyframes flotar {
+    0% { 
+        transform: translate(0, 0px); 
+    }
+    50% { 
+        transform: translate(0, 5px); 
+    }
+    100% { 
+        transform: translate(0, 0px); 
+    }
+}
+
+.elemento {
+    animation: flotar 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 1)); /* Sombra suave */
+}
+
+/* Sombra verde para la primera imagen */
+.sombra-verde {
+    animation: flotar 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 5px rgba(0, 255, 0, 0.5)); /* Sombra verde */
+}
+
+/* Sombra azul para la segunda imagen */
+.sombra-azul {
+    animation: flotar 3s ease-in-out infinite;
+    filter: drop-shadow(0 5px 5px rgba(29, 78, 216, 0.5));  /* Sombra azul */
+}

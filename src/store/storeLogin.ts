@@ -86,6 +86,7 @@ export const useAuth = () => {
                 }
             } else {
                 setUser(null);
+                navigate("/login");
             }
         };
         checkSession();

@@ -15,7 +15,6 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
         if (user !== null) {
             setIsLoading(false);  // Cambia el estado de carga cuando el usuario está listo
         }
-
     }, [user]);
 
     if (isLoading) {
@@ -26,9 +25,6 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
         // Si no hay un usuario autenticado, redirigir a /login
         return <Navigate to="/login" replace />;
     }
-
     // Si el usuario está autenticado, renderizar la página protegida
     return element;
 };
-
-
