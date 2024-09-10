@@ -6,25 +6,31 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 
+
 import { useAuthStore } from '../store/storeLogin';
 
+// import '../styles.css'
 export function Login() {
 
     const handleSignInWithGoogle = useAuthStore((state) => state.handleSignInWithGoogle)
 
     return (
-        <div className="flex justify-center items-center h-screen">
-            <Card className="w-[350px] ">
+        <div className="flex justify-center items-center h-screen bg-main ">
+
+            <Card className="w-[350px]  bg-gradient-to-r from-green-900  to-blue-900 p-4">
                 <CardHeader>
-                    <CardTitle className="text-center">Gestion De Recursos Naturales</CardTitle>
+                    <CardTitle className="text-center mb-3 text-white">Gestion De Recursos Naturales</CardTitle>
+                    <hr />
                     {/* <CardDescription>inicia con un click</CardDescription> */}
                 </CardHeader>
-                <CardContent className="flex justify-center">
+                <CardContent className="flex justify-between">
 
-                    <img src="/fontanero.png" alt="fontanero"
-                        className="w-32 h-32"
+                    <img src="/logo.png" alt="logo muni"
+                        className="w-32 h-auto hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:scale-110 hover:translate-y-1"
                     />
-
+                    <img src="/umgM.png" alt="logo mariano"
+                        className="w-32 h-auto hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:scale-110 hover:translate-y-1"
+                    />
                 </CardContent>
                 <CardFooter className="flex justify-between  ">
 
@@ -47,11 +53,16 @@ export function Login() {
                                 </g>
                             </g>
                         </svg>
-                        <span>Continue with Google</span>
+                        <span>Continue Con Google</span>
                     </button>
 
                 </CardFooter>
             </Card>
+
         </div>
+
+
+
+
     );
 }

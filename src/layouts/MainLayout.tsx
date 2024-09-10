@@ -19,9 +19,7 @@ export default function MainLayout() {
     return (
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
             <aside className={`shadow-md`}>
-                <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside}
-
-                />
+                <Sidebar sidebarOpen={isAsideExpanded} setSidebarOpen={toggleAside} />
             </aside>
 
             <div className="flex flex-col w-full">
@@ -29,7 +27,7 @@ export default function MainLayout() {
                     <Header />
                 </header>
 
-                <main className="flex-grow p-4 bg-main">
+                <main className="flex-grow p-4 ">
                     <Outlet />
                 </main>
             </div>
