@@ -58,6 +58,5 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
                     Eliminar</Button>
             </CardFooter>
         </Card>
-
     )
 }

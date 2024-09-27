@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/storeLogin';
 
-const INACTIVITY_LIMIT = 1 * 60 * 1000; // 1 minutos de inactividad
+const INACTIVITY_LIMIT = 20 * 60 * 1000; // 20 minutos de inactividad
 
 export const useInactivityLogout = () => {
     const navigate = useNavigate();
