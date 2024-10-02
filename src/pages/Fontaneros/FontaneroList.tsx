@@ -1,9 +1,19 @@
 import { useFontaneroStore } from "@/store/storeFontanero";
 import FontaneroDetails from "./FontaneroDetails";
+import { useEffect } from "react";
 
 export default function FontaneroList() {
 
-    const fontaneros = useFontaneroStore((state) => state.fontaneros)
+
+
+    const fontaneros = useFontaneroStore((state) => state.fontaneros);
+    const fetchBombas = useFontaneroStore((state) => state.fetchFontaneros);
+
+    // Llamamos a fetchBombas cuando el componente se monta
+    useEffect(() => {
+        fetchBombas();
+    }, [fetchBombas]); // El efecto se ejecuta solo una vez cuando el componente se monta
+
 
     return (
         <div className="md:w-1/2 lg:3/5 md:h-full flex-grow overflow-y-scroll dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] dark:scrollbar-thumb-rounded-lg">

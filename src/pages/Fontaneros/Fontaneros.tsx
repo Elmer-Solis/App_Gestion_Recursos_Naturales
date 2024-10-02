@@ -1,4 +1,4 @@
-import { Toaster } from '@/components/ui/toaster';
+
 import FontaneroList from './FontaneroList';
 import { FontanerosForm } from './FontanerosForm';
 
@@ -18,7 +18,7 @@ export function Fontaneros() {
                     <FontaneroList />
                 </div>
             </div>
-            {/* <Toaster /> */}
+
         </>
     )
 }

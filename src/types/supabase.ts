@@ -36,48 +36,56 @@ export type Database = {
     Tables: {
       bombas: {
         Row: {
-          capacidad_bombeo: string
-          direccion: string
+          capacidad_bombeo: string | null
+          direccion: string | null
           id: number
           nombre_bomba: string
-          zona_distribucion: string
+          zona_distribucion: string | null
         }
         Insert: {
-          capacidad_bombeo: string
-          direccion: string
+          capacidad_bombeo?: string | null
+          direccion?: string | null
           id?: number
           nombre_bomba: string
-          zona_distribucion: string
+          zona_distribucion?: string | null
         }
         Update: {
-          capacidad_bombeo?: string
-          direccion?: string
+          capacidad_bombeo?: string | null
+          direccion?: string | null
           id?: number
           nombre_bomba?: string
-          zona_distribucion?: string
+          zona_distribucion?: string | null
         }
         Relationships: []
       }
       fontaneros: {
         Row: {
-          bomba: string | null
+          bomba_id: number | null
           id: number
           nombre: string
           telefono: string | null
         }
         Insert: {
-          bomba?: string | null
+          bomba_id?: number | null
           id?: number
           nombre: string
           telefono?: string | null
         }
         Update: {
-          bomba?: string | null
+          bomba_id?: number | null
           id?: number
           nombre?: string
           telefono?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fontaneros_bomba_id_fkey"
+            columns: ["bomba_id"]
+            isOneToOne: false
+            referencedRelation: "bombas"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       users: {
         Row: {

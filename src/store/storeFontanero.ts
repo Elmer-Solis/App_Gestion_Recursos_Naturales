@@ -1,56 +1,113 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { Fontanero, DraftFontanero } from '../types/index';
-import { v4 as uuidv4 } from 'uuid'
+import supabase from "@/supabase/supabase.config";
+import { v4 as uuidv4 } from 'uuid';
 
-type FontaneroState = {
-    fontaneros: Fontanero[]
-    activeId: Fontanero['id']
-    addFontanero: (data: DraftFontanero) => void
-    deleteFontanero: (id: Fontanero['id']) => void
-    getFontaneroById: (id: Fontanero['id']) => void //para editar
-    updateFontanero: (data: DraftFontanero) => void //para editar
-}
+// Tipo de Row de Supabase
+type Row = {
+    id: number;
+    nombre: string;
+    telefono: string;
+    bomba_id: number | null;
+};
 
-const createFontanero = (fontanero: DraftFontanero): Fontanero => {
+type fontaneroState = {
+    fontaneros: Fontanero[];
+    activeId: Fontanero['id'];
+    addFontanero: (data: DraftFontanero) => Promise<void>;
+    deleteFontanero: (id: Fontanero['id']) => Promise<void>;
+    getFontaneroById: (id: Fontanero['id']) => void;
+    updateFontanero: (data: DraftFontanero) => Promise<void>;
+    fetchFontaneros: () => Promise<void>;
+};
 
-    return { ...fontanero, id: uuidv4() }
-}
+// Mapeo de Row (Supabase) a Fontanero (local)
+const mapRowToFontanero = (row: Row): Fontanero => ({
+    id: row.id.toString(),
+    name: row.nombre,
+    phone: row.telefono || '',
+    bomba: row.bomba_id?.toString() || ''
+});
 
-export const useFontaneroStore = create<FontaneroState>()(
+export const useFontaneroStore = create<fontaneroState>()(
     devtools(
-
-        (set) => ({
+        (set, get) => ({
             fontaneros: [],
-
             activeId: '',
 
-            addFontanero: (data) => {
-                const newFontanero = createFontanero(data)
+            // Fetch fontaneros de Supabase
+            fetchFontaneros: async () => {
+                const { data, error } = await supabase.from('fontaneros').select('*');
+                if (error) {
+                    console.error('Error obteniendo fontaneros', error.message);
+                    throw error;
+                }
+
+                const fontanerosMapped = (data as Row[]).map(mapRowToFontanero);
+                set({ fontaneros: fontanerosMapped });
+            },
+
+            // Añadir nuevo fontanero
+            addFontanero: async (data: DraftFontanero) => {
+                const newFontanero = { ...data, id: uuidv4() };
+
+                const { error } = await supabase.from('fontaneros').insert([{
+                    nombre: newFontanero.name,
+                    telefono: newFontanero.phone,
+                    bomba_id: newFontanero.bomba ? parseInt(newFontanero.bomba) : null
+                }]);
+
+                if (error) {
+                    console.error('Error agregando fontanero a Supabase', error.message);
+                    throw error;
+                }
+
                 set((state) => ({
                     fontaneros: [...state.fontaneros, newFontanero]
-                }))
+                }));
             },
 
-            deleteFontanero: (id) => {
+            // Eliminar fontanero
+            deleteFontanero: async (id: Fontanero['id']) => {
+                const { error } = await supabase.from('fontaneros').delete().eq('id', parseInt(id));
+                if (error) {
+                    console.error('Error eliminando fontanero de Supabase', error.message);
+                    throw error;
+                }
+
                 set((state) => ({
-                    fontaneros: state.fontaneros.filter(fontanero => fontanero.id !== id)
-                }))
+                    fontaneros: state.fontaneros.filter((fontanero) => fontanero.id !== id)
+                }));
             },
 
-            getFontaneroById: (id) => {
-                set(() => ({
-                    activeId: id
-                }))
+            // Obtener fontanero por ID
+            getFontaneroById: (id: Fontanero['id']) => {
+                set({ activeId: id });
             },
 
-            updateFontanero: (data) => {
+            // Actualizar fontanero
+            updateFontanero: async (data: DraftFontanero) => {
+                const { error } = await supabase
+                    .from('fontaneros')
+                    .update({
+                        nombre: data.name,
+                        telefono: data.phone,
+                        bomba_id: data.bomba ? parseInt(data.bomba) : null
+                    })
+                    .eq('id', parseInt(get().activeId));
+
+                if (error) {
+                    console.error('Error actualizando fontanero en Supabase', error.message);
+                    throw error;
+                }
+
                 set((state) => ({
-                    fontaneros: state.fontaneros.map(fontanero => fontanero.id === state.activeId ?
-                        { id: state.activeId, ...data } : fontanero),
-                    activeId: ''
-                }))
-            }
-
+                    fontaneros: state.fontaneros.map((fontanero) =>
+                        fontanero.id === get().activeId ? { ...fontanero, ...data } : fontanero
+                    )
+                }));
+            },
         })
-    ))
+    )
+);
