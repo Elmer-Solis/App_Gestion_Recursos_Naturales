@@ -22,13 +22,39 @@ import {
 } from "@/components/ui/table";
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
+import { useEffect, useState } from "react";
 
 // Importamos los hooks de Zustand
 
 export function Inicio() {
-    const fontaneros = useFontaneroStore((state) => state.fontaneros); // Obtenemos los fontaneros de la store
-    const bombas = useBombaStore((state) => state.bombas); // Obtenemos las bombas de la store
+    const fontaneros = useFontaneroStore((state) => state.fontaneros);
+    const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
 
+    const bombas = useBombaStore((state) => state.bombas);
+    const fetchBombas = useBombaStore((state) => state.fetchBombas);
+
+    const [loading, setLoading] = useState(true); // Estado de carga
+
+    useEffect(() => {
+        // Fetch both fontaneros and bombas when the component mounts
+        const fetchData = async () => {
+            setLoading(true); // Comenzamos la carga
+            try {
+                await Promise.all([fetchFontaneros(), fetchBombas()]);
+            } catch (error) {
+                console.error("Error al cargar los datos", error);
+            } finally {
+                setLoading(false); // Finalizamos la carga
+            }
+        };
+
+        fetchData();
+    }, [fetchFontaneros, fetchBombas]);
+
+    // Muestra un estado de carga mientras los datos se están recuperando
+    if (loading) {
+        return <div className="p-8 text-center">Cargando datos...</div>;
+    }
     return (
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
             <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
