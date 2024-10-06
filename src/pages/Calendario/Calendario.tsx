@@ -2,6 +2,9 @@ import { Calendar } from 'react-big-calendar'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 import { addHours } from 'date-fns'
+
+
+import { DialogDemo } from './components/CalendarModal';
 import { localizer } from './helpers/calendarLocalizer';
 import { getMessagesES } from './helpers/getMessages';
 import { CalendarEvent } from './components/CalendarEvent';
@@ -51,22 +54,26 @@ export function Calendario() {
     };
 
     return (
-        <Calendar
-            culture='es'
-            defaultView='month'
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 'calc(100vh - 97px)' }}
-            messages={getMessagesES()}
-            eventPropGetter={eventStyleGetter}
-            components={{
-                event: CalendarEvent
-            }}
-            onDoubleClickEvent={onDoubleClick}
-            onSelectEvent={onSelect}
-            onView={onViewChanged}
-        />
+        <>
+
+            <Calendar
+                culture='es'
+                defaultView='month'
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: 'calc(100vh - 97px)' }}
+                messages={getMessagesES()}
+                eventPropGetter={eventStyleGetter}
+                components={{
+                    event: CalendarEvent
+                }}
+                onDoubleClickEvent={onDoubleClick}
+                onSelectEvent={onSelect}
+                onView={onViewChanged}
+            />
+            <DialogDemo />
+        </>
     )
 }
