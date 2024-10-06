@@ -2,6 +2,6 @@
 
 export function Calendario() {
     return (
-        <div>Calendario</div>
+        <div>Calendarios temporal</div>
     )
 }
