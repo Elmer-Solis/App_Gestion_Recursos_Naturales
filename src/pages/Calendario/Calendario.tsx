@@ -5,55 +5,44 @@ import { localizer } from './helpers/calendarLocalizer';
 import { getMessagesES } from './helpers/getMessages';
 import { CalendarEvent } from './components/CalendarEvent';
 import { useUiStore } from '@/store/storeModalCalendario';
-import { useCalendarStore } from '@/store/storeCalendario';
 import { ButtonCalendar } from './components/ButtonCalendar';
-
-
+import { useCalendarStore } from '@/store/storeCalendario';
 
 
 export function Calendario() {
-    // Obtén la función openDateModal desde el store
     const { openDateModal } = useUiStore();
-
-
-    // Obtén los eventos desde el store de Zustand
-    const { events, onSetActiveEvent } = useCalendarStore(); // Accede a los eventos desde Zustand
+    const { events, addEvent, updateEvent, deleteEvent } = useCalendarStore();
 
     const eventStyleGetter = (event, start, end, isSelected) => {
-
         const style = {
             backgroundColor: '#347CF7',
             borderRadius: '0px',
             opacity: 0.8,
             color: 'white',
         };
-
         return { style };
     };
 
-    // Modifica la función onDoubleClick
     const onDoubleClick = (event) => {
         console.log({ doubleClick: event });
-        openDateModal(); // Abre el modal al hacer doble clic en un evento
+        openDateModal();
     };
 
     const onSelect = (event) => {
-        onSetActiveEvent(event);
+        console.log({ onSelect: event });
     };
 
-    const onViewChanged = (event) => {
-        console.log({ viewChanged: event });
+    const onViewChanged = (view) => {
+        console.log({ viewChanged: view });
     };
-
-
 
     return (
         <>
             <Calendar
-                culture='es'
-                defaultView='month'
+                culture="es"
+                defaultView="month"
                 localizer={localizer}
-                events={events}
+                events={events} // Aquí se usan los eventos del store
                 startAccessor="start"
                 endAccessor="end"
                 style={{ height: 'calc(100vh - 97px)' }}

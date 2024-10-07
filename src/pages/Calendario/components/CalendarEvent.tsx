@@ -2,12 +2,12 @@
 
 export const CalendarEvent = ({ event }) => {
 
-    const { title, user } = event;
+    const { title, notes } = event;
 
     return (
         <>
             <strong>{title}</strong>
-            <span> - {user.name}</span>
+            <span> - {notes}</span>
         </>
     )
 }
