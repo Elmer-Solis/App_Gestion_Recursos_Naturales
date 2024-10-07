@@ -4,8 +4,6 @@ import { useEffect } from "react";
 
 export default function FontaneroList() {
 
-
-
     const fontaneros = useFontaneroStore((state) => state.fontaneros);
     const fetchBombas = useFontaneroStore((state) => state.fetchFontaneros);
 

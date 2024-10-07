@@ -13,53 +13,81 @@
 // import { Input } from "@/components/ui/input";
 // import { Label } from "@/components/ui/label";
 // import { Textarea } from "@/components/ui/textarea";
-// import { addHours, addMinutes } from "date-fns";
-// import { useState, useEffect } from "react";
+// import { useToast } from "@/hooks/use-toast";
+// import { useUiStore } from "@/store/storeModalCalendario";
+// import '../../../styles.css'
+// import { useCalendarStore } from "@/store/storeCalendario";
+
 // // Esquema de validación con Zod
 // const formSchema = z
 //     .object({
 //         title: z.string().min(2, { message: "El título debe tener al menos 2 caracteres." }),
 //         notes: z.string().optional(),
-//         start: z.date(),
-//         end: z.date(),
+//         start: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
+//             message: "Fecha de inicio inválida.",
+//         }),
+//         end: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
+//             message: "Fecha de fin inválida.",
+//         }),
 //     })
-//     .refine((data) => data.end >= data.start, {
-//         message: "La fecha de fin no puede ser anterior a la fecha de inicio.",
-//         path: ["end"], // Esto apunta el error al campo "end"
+//     .refine((data) => new Date(data.end) >= new Date(data.start), {
+//         message: "La fecha de fin debe ser mayor o igual a la fecha de inicio.",
+//         path: ["end"], // El error será asignado al campo "end"
 //     });
-
 // export function DialogDemo() {
-//     const [isOpen, setIsOpen] = useState(false);
 
-//     useEffect(() => {
-//         setIsOpen(true);
-//     }, []);
+//     const { onSetActiveEvent } = useCalendarStore();
+
+
+//     // Usamos el store de Zustand
+//     const { isDateModalOpen, closeDateModal } = useUiStore();
+
+//     const { toast } = useToast();
 
 //     const form = useForm({
 //         resolver: zodResolver(formSchema),
 //         defaultValues: {
 //             title: "",
 //             notes: "",
-//             start: new Date(),
-//             end: addHours(new Date(), 1), // Establece la fecha de fin una hora después de la fecha de inicio
+//             start: "",
+//             end: "",
 //         },
-//     })
+//     });
 
 //     const onSubmit = (data) => {
-//         console.log(data);
-//         // Aquí iría la lógica para guardar el evento
+//         if (form.formState.errors.title || form.formState.errors.start || form.formState.errors.end) {
+//             toast({
+//                 title: "Error",
+//                 description: "Revisa los campos requeridos y asegúrate de que la fecha de fin sea mayor a la de inicio.",
+//                 variant: "destructive",
+//             });
+//         } else {
+//             toast({
+//                 title: "Éxito",
+//                 description: "Todos los campos están completos, el evento se guardó correctamente.",
+//                 variant: "succes",
+//             });
 
-//         // Reinicia el formulario después de enviarlo
-//         form.reset({
-//             title: "",
-//             notes: "",
-//             start: new Date(),
-//             end: addMinutes(new Date(), 1),
-//         });
+//             // Lógica para guardar el evento
+//             console.log(data);
+
+//             // Reinicia el formulario después de enviarlo
+//             form.reset({
+//                 title: "",
+//                 notes: "",
+//                 start: "",
+//                 end: "",
+//             });
+
+//             // Cerramos el modal después de guardar
+//             closeDateModal();
+//         }
 //     };
 
 //     return (
-//         <Dialog open={isOpen} onOpenChange={setIsOpen}>
+//         <Dialog open={isDateModalOpen} onOpenChange={(open) => {
+//             if (!open) closeDateModal();
+//         }}>
 //             <DialogContent className="sm:max-w-[600px]">
 //                 <DialogHeader>
 //                     <DialogTitle>Nuevo evento</DialogTitle>
@@ -74,9 +102,14 @@
 //                         <Label htmlFor="start">Fecha y hora inicio</Label>
 //                         <Input
 //                             type="datetime-local"
-//                             {...form.register("start", { valueAsDate: true })}
-//                             className="form-control"
+//                             {...form.register("start")}
+//                             className="form-control custom-datetime-input "
 //                         />
+//                         {form.formState.errors.start && (
+//                             <p className="text-red-500 text-sm">
+//                                 {form.formState.errors.start.message}
+//                             </p>
+//                         )}
 //                     </div>
 
 //                     {/* Fecha y hora fin */}
@@ -84,10 +117,14 @@
 //                         <Label htmlFor="end">Fecha y hora fin</Label>
 //                         <Input
 //                             type="datetime-local"
-//                             {...form.register("end", { valueAsDate: true })}
-//                             className="form-control"
-//                             min={addHours(form.watch("start") || new Date(), 1).toISOString().slice(0, 16)} // Restringe a no ser menor a una hora después de la fecha de inicio
+//                             {...form.register("end")}
+//                             className="form-control custom-datetime-input "
 //                         />
+//                         {form.formState.errors.end && (
+//                             <p className="text-red-500 text-sm">
+//                                 {form.formState.errors.end.message}
+//                             </p>
+//                         )}
 //                     </div>
 
 //                     <hr />
@@ -102,7 +139,11 @@
 //                             {...form.register("title")}
 //                             className="form-control"
 //                         />
-//                         <small className="text-muted">Una descripción corta</small>
+//                         {form.formState.errors.title && (
+//                             <p className="text-red-500 text-sm">
+//                                 {form.formState.errors.title.message}
+//                             </p>
+//                         )}
 //                     </div>
 
 //                     {/* Notas adicionales */}
@@ -115,7 +156,6 @@
 //                             {...form.register("notes")}
 //                             className="form-control"
 //                         ></Textarea>
-//                         <small className="text-muted">Información adicional</small>
 //                     </div>
 
 //                     <DialogFooter>
@@ -129,8 +169,12 @@
 //     );
 // }
 
-"use client";
 
+// useEffect(() => {
+//     if (onSetActiveEvent !== null) {
+//     //   setFormValues({ ...activeEvent });
+//     }
+//   }, [onSetActiveEvent]);
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -146,8 +190,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useUiStore } from "@/store/storeModalCalendario";
+import { useEffect } from "react";
+import '../../../styles.css';
+import { useCalendarStore } from "@/store/storeCalendario";
 
 // Esquema de validación con Zod
 const formSchema = z
@@ -163,16 +210,14 @@ const formSchema = z
     })
     .refine((data) => new Date(data.end) >= new Date(data.start), {
         message: "La fecha de fin debe ser mayor o igual a la fecha de inicio.",
-        path: ["end"], // El error será asignado al campo "end"
+        path: ["end"],
     });
 
 export function DialogDemo() {
-    const { toast } = useToast();
-    const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        setIsOpen(true);
-    }, []);
+    const { onSetActiveEvent, activeEvent } = useCalendarStore();
+    const { isDateModalOpen, closeDateModal } = useUiStore();
+    const { toast } = useToast();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -183,9 +228,21 @@ export function DialogDemo() {
             end: "",
         },
     });
+    function formatDateToInput(date: Date): string {
+        return new Date(date).toISOString().slice(0, 16); // Formato YYYY-MM-DDTHH:MM
+    }
+
+    // Efecto para cargar el evento activo
+    useEffect(() => {
+        if (activeEvent !== null) {
+            form.setValue("title", activeEvent.title || "");
+            form.setValue("notes", activeEvent.notes || "");
+            form.setValue("start", activeEvent.start ? formatDateToInput(new Date(activeEvent.start)) : "");
+            form.setValue("end", activeEvent.end ? formatDateToInput(new Date(activeEvent.end)) : "");
+        }
+    }, [activeEvent, form]);
 
     const onSubmit = (data) => {
-
         if (form.formState.errors.title || form.formState.errors.start || form.formState.errors.end) {
             toast({
                 title: "Error",
@@ -202,6 +259,13 @@ export function DialogDemo() {
             // Lógica para guardar el evento
             console.log(data);
 
+            // Lógica para agregar o actualizar el evento
+            if (activeEvent) {
+                onSetActiveEvent(data); // Actualiza el evento activo
+            } else {
+                // Lógica para crear un nuevo evento
+            }
+
             // Reinicia el formulario después de enviarlo
             form.reset({
                 title: "",
@@ -209,16 +273,21 @@ export function DialogDemo() {
                 start: "",
                 end: "",
             });
+
+            // Cerramos el modal después de guardar
+            closeDateModal();
         }
     };
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isDateModalOpen} onOpenChange={(open) => {
+            if (!open) closeDateModal();
+        }}>
             <DialogContent className="sm:max-w-[600px]">
                 <DialogHeader>
-                    <DialogTitle>Nuevo evento</DialogTitle>
+                    <DialogTitle>{activeEvent ? "Editar evento" : "Nuevo evento"}</DialogTitle>
                     <DialogDescription>
-                        Llena los detalles para crear un nuevo evento. Haz clic en guardar cuando termines.
+                        Llena los detalles para {activeEvent ? "editar" : "crear"} un evento. Haz clic en guardar cuando termines.
                     </DialogDescription>
                 </DialogHeader>
 
@@ -229,7 +298,7 @@ export function DialogDemo() {
                         <Input
                             type="datetime-local"
                             {...form.register("start")}
-                            className="form-control"
+                            className="form-control custom-datetime-input "
                         />
                         {form.formState.errors.start && (
                             <p className="text-red-500 text-sm">
@@ -244,7 +313,7 @@ export function DialogDemo() {
                         <Input
                             type="datetime-local"
                             {...form.register("end")}
-                            className="form-control"
+                            className="form-control custom-datetime-input "
                         />
                         {form.formState.errors.end && (
                             <p className="text-red-500 text-sm">
@@ -270,7 +339,6 @@ export function DialogDemo() {
                                 {form.formState.errors.title.message}
                             </p>
                         )}
-                        {/* <small className="text-gray-400 ">Una descripción corta</small> */}
                     </div>
 
                     {/* Notas adicionales */}
