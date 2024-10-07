@@ -11,11 +11,11 @@ import { useCalendarStore } from '@/store/storeCalendario';
 
 export function Calendario() {
     const { openDateModal } = useUiStore();
-    const { events, addEvent, updateEvent, deleteEvent } = useCalendarStore();
+    const { events, setSelectedEvent } = useCalendarStore();
 
-    const eventStyleGetter = (event, start, end, isSelected) => {
+    const eventStyleGetter = () => {
         const style = {
-            backgroundColor: '#347CF7',
+            backgroundColor: '#7a1772',
             borderRadius: '0px',
             opacity: 0.8,
             color: 'white',
@@ -24,16 +24,12 @@ export function Calendario() {
     };
 
     const onDoubleClick = (event) => {
-        console.log({ doubleClick: event });
+        setSelectedEvent(event);
         openDateModal();
     };
 
     const onSelect = (event) => {
         console.log({ onSelect: event });
-    };
-
-    const onViewChanged = (view) => {
-        console.log({ viewChanged: view });
     };
 
     return (
@@ -53,7 +49,6 @@ export function Calendario() {
                 }}
                 onDoubleClickEvent={onDoubleClick}
                 onSelectEvent={onSelect}
-                onView={onViewChanged}
             />
             <DialogDemo />
             <ButtonCalendar />
