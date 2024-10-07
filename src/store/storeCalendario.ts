@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { addHours, addMinutes } from 'date-fns';
+import { addMinutes } from 'date-fns';
+import { v4 as uuidv4 } from 'uuid';
 
 interface User {
     _id: string;
@@ -7,7 +8,7 @@ interface User {
 }
 
 interface Event {
-    _id: number;
+    _id: string; // Cambiado a string para usar uuid
     title: string;
     notes: string;
     start: Date;
@@ -25,9 +26,9 @@ interface CalendarState {
     onDeleteEvent: () => void;
 }
 
-// Evento temporal inicial
+// Evento temporal inicial usando uuid
 const tempEvent: Event = {
-    _id: new Date().getTime(),
+    _id: uuidv4(), // Generar ID único
     title: 'Cumpleaños del Jefe',
     notes: 'Hay que comprar el pastel',
     start: new Date(),
@@ -45,7 +46,7 @@ export const useCalendarStore = create<CalendarState>((set) => ({
     activeEvent: null,
     onSetActiveEvent: (event) => set({ activeEvent: event }),
     onAddNewEvent: (event) => set((state) => ({
-        events: [...state.events, event],
+        events: [...state.events, { ...event, _id: uuidv4() }], // Asignar un nuevo uuid al evento
         activeEvent: null,
     })),
     onUpdateEvent: (event) => set((state) => ({

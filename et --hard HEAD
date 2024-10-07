@@ -1,0 +1,42 @@
+[33mc0aa9d8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m store calendario y modal funcionando
+[33me9baf83[m calendar agregado con validaciones
+[33m2e28eb3[m dialog agregado del calendario
+[33m5c49c67[m calendario agregado
+[33mbaeb6af[m[33m ([m[1;32mlinea_temporal[m[33m)[m cambios calendar
+[33m1543ee2[m loading de dashboard
+[33mf728c5a[m dashboard add fontaneros y bombas
+[33mdc3dc63[m crud de fontaneros con asignacion de bomba
+[33m4e969b5[m crud de bomba de agua
+[33mcee790e[m toast de login y tamanio imagen login
+[33m50539db[m login disenio nuevo
+[33mc740d01[m mejora del loggin estilo
+[33m3220f4c[m inactividad y storage de login
+[33m6ef54af[m mejora del scrool en fontaneros y bombas
+[33mcc3a73c[m manejor de session en storage y cambio de logo umg
+[33mf5525d6[m validacion user desde el backend
+[33m640657d[m autenticacion
+[33m532e6ce[m cambio de disenio login
+[33m2a8e0c4[m readme notas
+[33mc6fa585[m metadata de usuario y tipado
+[33me2445cc[m mejora del login con zustand login logout
+[33m82be636[m agregar login y autenticacion con google
+[33m06f3867[m crud local bomba
+[33me8a8c7c[m estrucutra de bomba
+[33m56c99a8[m crud de fontanero
+[33m63c8662[m mejora de la ui fontaneros
+[33md9e83fb[m store de zustand y lista de formulario fontaneros agregados
+[33m7cdb1fa[m estructura de la lista fontaneros
+[33m7a4fee4[m formulario fontaneros con estilo agregado
+[33mf8b8894[m mejora del sidebar
+[33mc98d0c5[m mejora del header y sidebar
+[33m9cd6c0a[m mejora de rutas paginas e iconos agregados
+[33m1be81ed[m side bar dinamico
+[33m4ff52bc[m mejora de layout y rutas para las paginas
+[33m7d9ffdb[m reestructura de carpetas con react router
+[33m728ecf2[m logo de pestania agregado
+[33mec9d0c5[m Estructura de dashboard agregado
+[33m5a49c52[m Dashboard separando responsabilidades
+[33mb4473bb[m Dashboard agregado y tema
+[33m4beba99[m configuracion inicial y shadcn
+[33m0c20f8b[m Creacion del proyecto
+[33m53b5b01[m first commit
