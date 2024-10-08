@@ -102,10 +102,18 @@ export function DialogDemo() {
 
         if (selectedEvent) {
             updateEvent(newEvent);
-            toast({ title: "Evento actualizado", description: "El evento fue editado correctamente." });
+            toast({
+                title: "Evento actualizado",
+                variant: 'update',
+                description: "El evento fue editado correctamente."
+            });
         } else {
             addEvent(newEvent);
-            toast({ title: "Evento creado", description: "El evento fue creado correctamente." });
+            toast({
+                title: "Evento creado",
+                variant: 'succes',
+                description: "El evento fue creado correctamente."
+            });
         }
 
         setSelectedEvent(null); // Limpiar el evento seleccionado después de guardar
