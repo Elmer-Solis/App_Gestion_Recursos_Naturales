@@ -17,6 +17,7 @@ interface CalendarState {
     setEvents: (events: Event[]) => void;
     setSelectedEvent: (event: Event | null) => void; // Agregar este método
 }
+
 export const useCalendarStore = create<CalendarState>((set) => ({
     events: [],
     selectedEvent: null,

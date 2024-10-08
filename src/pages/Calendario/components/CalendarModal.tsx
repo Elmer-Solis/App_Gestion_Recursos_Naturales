@@ -19,6 +19,9 @@ import '../../../styles.css';
 import { useCalendarStore } from "@/store/storeCalendario";
 import { useEffect } from "react";
 
+type FormData = z.infer<typeof formSchema>;
+
+
 // Esquema de validación con Zod
 const formSchema = z
     .object({
@@ -107,7 +110,7 @@ export function DialogDemo() {
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: FormData) => {
         const newEvent = {
             id: selectedEvent ? selectedEvent.id : uuidv4(),
             title: data.title,
