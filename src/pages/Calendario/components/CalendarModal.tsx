@@ -59,8 +59,25 @@ export function DialogDemo() {
             },
     })
 
+
+    // useEffect(() => {
+    //     if (selectedEvent) {
+    //         form.reset({
+    //             title: selectedEvent.title,
+    //             notes: selectedEvent.notes || "",
+    //             start: formatDateTimeLocal(selectedEvent.start),
+    //             end: formatDateTimeLocal(selectedEvent.end),
+    //         });
+    //     } else {
+    //         form.reset(); // Limpiar los valores del formulario cuando no haya evento seleccionado
+    //     }
+
+    // }, [selectedEvent, form]);
+
+
     useEffect(() => {
         if (selectedEvent) {
+            // Si hay un evento seleccionado, llena el formulario con sus datos
             form.reset({
                 title: selectedEvent.title,
                 notes: selectedEvent.notes || "",
@@ -68,10 +85,18 @@ export function DialogDemo() {
                 end: formatDateTimeLocal(selectedEvent.end),
             });
         } else {
-            form.reset(); // Limpiar los valores del formulario cuando no haya evento seleccionado
+            // Si no hay evento seleccionado, limpia el formulario
+            form.reset({
+                title: "",
+                notes: "",
+                start: "",
+                end: "",
+            });
         }
-
     }, [selectedEvent, form]);
+
+
+
 
     function formatDateTimeLocal(date: Date) {
         const year = date.getFullYear();
@@ -99,8 +124,8 @@ export function DialogDemo() {
             toast({ title: "Evento creado", description: "El evento fue creado correctamente." });
         }
 
-        form.reset();
         setSelectedEvent(null); // Limpiar el evento seleccionado después de guardar
+        form.reset();
         closeDateModal();
     };
 
