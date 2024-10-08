@@ -6,6 +6,7 @@ import { getMessagesES } from './helpers/getMessages';
 import { useUiStore } from '@/store/storeModalCalendario';
 import { ButtonCalendar } from './components/ButtonCalendar';
 import { useCalendarStore } from '@/store/storeCalendario';
+import { ButtonDeleteCalendar } from './components/ButtonDelete';
 
 interface Event {
     id: string; // Cambiado a string
@@ -37,8 +38,8 @@ export function Calendario() {
         if (!isCurrentMonth) {
             return {
                 style: {
-                    backgroundColor: '#d3d3d3', // Color para los días fuera del mes actual
-                    color: '#999', // Color de texto
+                    backgroundColor: '#2a2727fe', // Color para los días fuera del mes actual
+                    color: '#d80b0b', // Color de texto
                 },
             };
         }
@@ -101,6 +102,7 @@ export function Calendario() {
             />
             <DialogDemo />
             <ButtonCalendar />
+            <ButtonDeleteCalendar />
         </>
     );
 }

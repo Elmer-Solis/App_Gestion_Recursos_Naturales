@@ -62,22 +62,6 @@ export function DialogDemo() {
             },
     })
 
-
-    // useEffect(() => {
-    //     if (selectedEvent) {
-    //         form.reset({
-    //             title: selectedEvent.title,
-    //             notes: selectedEvent.notes || "",
-    //             start: formatDateTimeLocal(selectedEvent.start),
-    //             end: formatDateTimeLocal(selectedEvent.end),
-    //         });
-    //     } else {
-    //         form.reset(); // Limpiar los valores del formulario cuando no haya evento seleccionado
-    //     }
-
-    // }, [selectedEvent, form]);
-
-
     useEffect(() => {
         if (selectedEvent) {
             // Si hay un evento seleccionado, llena el formulario con sus datos
@@ -97,9 +81,6 @@ export function DialogDemo() {
             });
         }
     }, [selectedEvent, form]);
-
-
-
 
     function formatDateTimeLocal(date: Date) {
         const year = date.getFullYear();
