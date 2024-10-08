@@ -1,19 +1,19 @@
 import { useCalendarStore } from "@/store/storeCalendario";
-import { useUiStore } from "@/store/storeModalCalendario";
-import { Trash2 } from 'lucide-react';
 
 export function ButtonDeleteCalendar() {
-    const { openDateModal } = useUiStore();
-    const { setSelectedEvent } = useCalendarStore();
+
+    const { selectedEvent, setSelectedEvent, deleteEvent } = useCalendarStore();
 
     const handleClick = () => {
-        setSelectedEvent(null); // Limpiar el evento seleccionado
-        openDateModal();
+        if (selectedEvent) {
+            deleteEvent(selectedEvent.id); // Eliminar el evento seleccionado
+            setSelectedEvent(null); // Limpiar el evento seleccionado después de eliminarlo
+        }
     };
 
     return (
         <button
-            className="group fixed bottom-[60px] left-[195px] flex h-14 w-14 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-red-800 bg-red-400 hover:bg-red-600"
+            className="group fixed bottom-[225px] left-[195px] flex h-14 w-14 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-red-800 bg-red-400 hover:bg-red-600"
             onClick={handleClick}
         >
             {/* Primer ícono animado */}

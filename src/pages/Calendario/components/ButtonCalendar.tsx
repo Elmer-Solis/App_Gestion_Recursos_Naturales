@@ -1,31 +1,4 @@
-// import { Button } from "@/components/ui/button";
-// import { useCalendarStore } from "@/store/storeCalendario";
 
-// import { useUiStore } from "@/store/storeModalCalendario";
-
-// import { CirclePlus } from 'lucide-react';
-
-
-// export function ButtonCalendar() {
-//     const { openDateModal } = useUiStore();
-//     const { setSelectedEvent } = useCalendarStore();
-
-
-//     const handleClick = () => {
-//         setSelectedEvent(null); // Limpiar el evento seleccionado
-//         openDateModal();
-//     };
-
-//     return (
-//         <Button
-//             variant={"default"}
-//             className="fixed bottom-[55px] right-[55px]  rounded-full"
-//             onClick={handleClick}
-//         >
-//             <CirclePlus />
-//         </Button>
-//     );
-// }
 
 import { useCalendarStore } from "@/store/storeCalendario";
 import { useUiStore } from "@/store/storeModalCalendario";
@@ -42,7 +15,7 @@ export function ButtonCalendar() {
     return (
         <button
             title="Add New"
-            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[55px] right-[55px]"
+            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[225px] right-[55px]"
             onClick={handleClick}
         >
             <svg
