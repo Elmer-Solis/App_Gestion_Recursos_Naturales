@@ -67,7 +67,10 @@ export function DialogDemo() {
                 start: formatDateTimeLocal(selectedEvent.start),
                 end: formatDateTimeLocal(selectedEvent.end),
             });
+        } else {
+            form.reset(); // Limpiar los valores del formulario cuando no haya evento seleccionado
         }
+
     }, [selectedEvent, form]);
 
     function formatDateTimeLocal(date: Date) {
