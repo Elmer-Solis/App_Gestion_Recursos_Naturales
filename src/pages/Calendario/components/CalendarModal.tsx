@@ -231,6 +231,7 @@ import { useUiStore } from "@/store/storeModalCalendario";
 import '../../../styles.css';
 import { useCalendarStore } from "@/store/storeCalendario";
 import { useEffect } from "react";
+// import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
 type FormData = z.infer<typeof formSchema>;
 
@@ -281,10 +282,6 @@ export function DialogDemo() {
                 horasExtras: 0,
             },
     })
-
-    // useEffect(() => {
-    //     form.setValue('horasExtras', Number(form.getValues('horasExtras')) || 0);
-    // }, [form]);
 
     useEffect(() => {
         if (selectedEvent) {
