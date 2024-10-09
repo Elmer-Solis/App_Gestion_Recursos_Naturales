@@ -1,4 +1,3 @@
-
 // import { Calendar } from 'react-big-calendar';
 // import 'react-big-calendar/lib/css/react-big-calendar.css';
 // import { DialogDemo } from './components/CalendarModal';
@@ -62,7 +61,13 @@
 //     };
 
 //     const onSelect = (event: Event) => {
-//         setSelectedEvent(event);
+//         if (selectedEvent && selectedEvent.id === event.id) {
+//             // Si el evento clicado es el mismo que el seleccionado, lo deseleccionamos
+//             setSelectedEvent(null);
+//         } else {
+//             // Si no, seleccionamos el nuevo evento
+//             setSelectedEvent(event);
+//         }
 //         console.log({ onSelect: event });
 //     };
 
@@ -103,6 +108,7 @@
 //     );
 // }
 
+
 import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { DialogDemo } from './components/CalendarModal';
@@ -112,18 +118,29 @@ import { useUiStore } from '@/store/storeModalCalendario';
 import { ButtonCalendar } from './components/ButtonCalendar';
 import { useCalendarStore } from '@/store/storeCalendario';
 import { ButtonDeleteCalendar } from './components/ButtonDelete';
+import { useEffect } from 'react';
+
+
 
 interface Event {
-    id: string;
+    id: string; // Mantener el tipo string
     title: string;
     start: Date;
     end: Date;
     notes?: string;
+    // fontaneros: string[]; // Agregando fontaneros al evento
+    horasExtras?: number;  // Agregando horas extras al evento
 }
 
 export function Calendario() {
     const { openDateModal, isDateModalOpen } = useUiStore();
     const { events, setSelectedEvent, selectedEvent } = useCalendarStore(); // Obtenemos el evento seleccionado
+
+    useEffect(() => {
+        console.log(events);
+    }, [events])
+
+
 
     // Estilos para los eventos
     const eventStyleGetter = (event: Event) => {
@@ -183,6 +200,7 @@ export function Calendario() {
             <>
                 <strong>{title}</strong>
                 {notes && <span> - {notes}</span>}
+                {/* <strong>{title}</strong> */}
             </>
         );
     };
@@ -212,3 +230,4 @@ export function Calendario() {
         </>
     );
 }
+
