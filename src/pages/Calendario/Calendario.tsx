@@ -9,8 +9,6 @@ import { useCalendarStore } from '@/store/storeCalendario';
 import { ButtonDeleteCalendar } from './components/ButtonDelete';
 import { useEffect } from 'react';
 
-
-
 interface Event {
     id: string; // Mantener el tipo string
     title: string;
@@ -21,7 +19,6 @@ interface Event {
     horasExtras?: number;  // Agregando horas extras al evento
     zonas: string[];
 }
-
 
 export function Calendario() {
     const { openDateModal, isDateModalOpen } = useUiStore();
