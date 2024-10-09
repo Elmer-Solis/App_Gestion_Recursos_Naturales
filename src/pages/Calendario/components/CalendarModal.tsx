@@ -435,7 +435,7 @@ export function DialogDemo() {
                         <Textarea
                             id="notes"
                             placeholder="Notas"
-                            rows={5}
+                            rows={3}
                             {...form.register("notes")}
                             className="form-control"
                         ></Textarea>
@@ -457,9 +457,8 @@ export function DialogDemo() {
                         )}
                     </div>
 
-
                     {/* Zonas */}
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="grid grid-cols-1 gap-2 pl-3">
                         <Label htmlFor="zonas">Zonas</Label>
                         {zonasDisponibles.map((zona) => (
                             <div key={zona.id} className="flex items-center space-x-2">

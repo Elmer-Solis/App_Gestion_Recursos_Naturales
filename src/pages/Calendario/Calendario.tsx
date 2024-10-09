@@ -112,7 +112,8 @@ export function Calendario() {
                 onSelectEvent={onSelect}
             />
             <DialogDemo />
-            <ButtonCalendar />
+            {/* <ButtonCalendar /> */}
+            {!selectedEvent && !isDateModalOpen && <ButtonCalendar />}
             {selectedEvent && !isDateModalOpen && <ButtonDeleteCalendar />}
         </>
     );

@@ -58,24 +58,65 @@ export type Database = {
         }
         Relationships: []
       }
+      eventos_actividades: {
+        Row: {
+          fecha_fin: string
+          fecha_inicio: string
+          fontanero_id: number
+          horas_extras: number | null
+          id: number
+          notas_actividad: string | null
+          titulo_actividad: string
+          zona_distribucion: string
+        }
+        Insert: {
+          fecha_fin: string
+          fecha_inicio: string
+          fontanero_id: number
+          horas_extras?: number | null
+          id?: number
+          notas_actividad?: string | null
+          titulo_actividad: string
+          zona_distribucion: string
+        }
+        Update: {
+          fecha_fin?: string
+          fecha_inicio?: string
+          fontanero_id?: number
+          horas_extras?: number | null
+          id?: number
+          notas_actividad?: string | null
+          titulo_actividad?: string
+          zona_distribucion?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eventos_actividades_fontanero_id_fkey"
+            columns: ["fontanero_id"]
+            isOneToOne: false
+            referencedRelation: "fontaneros"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fontaneros: {
         Row: {
           bomba_id: number | null
           id: number
           nombre: string
-          telefono: string | null
+          telefono: string
         }
         Insert: {
           bomba_id?: number | null
           id?: number
           nombre: string
-          telefono?: string | null
+          telefono: string
         }
         Update: {
           bomba_id?: number | null
           id?: number
           nombre?: string
-          telefono?: string | null
+          telefono?: string
         }
         Relationships: [
           {
