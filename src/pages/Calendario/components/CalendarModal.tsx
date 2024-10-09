@@ -240,10 +240,9 @@ const formSchema = z
     .object({
         title: z.string().min(2, { message: "El título debe tener al menos 2 caracteres." }),
         notes: z.string().optional(),
-        horasExtras: z.string()
-            .transform((val) => Number(val))  // Transformar a número
-            .refine((val) => !isNaN(val), { message: "Debe ser un número válido." })  // Asegurarse que sea número
-            .refine((val) => val >= 0, { message: "Las horas extras no pueden ser negativas." })  // Validación mínima
+        horasExtras: z
+            .preprocess((val) => val === '' ? 0 : Number(val), z.number({ invalid_type_error: "Debe ser un número." }))
+            // .nonnegative("Debe ser un número positivo")
             .optional(),
         start: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
             message: "Fecha de inicio inválida.",
@@ -251,12 +250,21 @@ const formSchema = z
         end: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
             message: "Fecha de fin inválida.",
         }),
+        zonas: z.array(z.string()).min(1, { message: "Debe seleccionar al menos una zona." }),
     })
     .refine((data) => new Date(data.end) >= new Date(data.start), {
         message: "La fecha de fin debe ser mayor o igual a la fecha de inicio.",
         path: ["end"],
     });
 
+// Zonas disponibles para selección
+const zonasDisponibles = [
+    { id: 'zona-1', name: 'Zona 1' },
+    { id: 'zona-2', name: 'Zona 2' },
+    { id: 'zona-3', name: 'Zona 3' },
+    { id: 'zona-4', name: 'Zona 4' },
+    { id: 'santa-rita', name: 'santa rita' },
+];
 
 export function DialogDemo() {
 
@@ -273,6 +281,7 @@ export function DialogDemo() {
                 start: selectedEvent.start.toISOString().slice(0, 16),
                 end: selectedEvent.end.toISOString().slice(0, 16),
                 horasExtras: selectedEvent.horasExtras || 0,
+                zonas: selectedEvent.zonas || [],  // Zonas seleccionadas por defecto
             }
             : {
                 title: "",
@@ -280,6 +289,7 @@ export function DialogDemo() {
                 start: "",
                 end: "",
                 horasExtras: 0,
+                zonas: [],  // Ninguna zona seleccionada por defecto
             },
     })
 
@@ -292,7 +302,9 @@ export function DialogDemo() {
                 start: formatDateTimeLocal(selectedEvent.start),
                 end: formatDateTimeLocal(selectedEvent.end),
                 horasExtras: selectedEvent.horasExtras || 0,
+                zonas: selectedEvent.zonas || [],
             });
+
         } else {
             // Si no hay evento seleccionado, limpia el formulario
             form.reset({
@@ -301,6 +313,7 @@ export function DialogDemo() {
                 start: "",
                 end: "",
                 horasExtras: 0,
+                zonas: [],
             });
         }
     }, [selectedEvent, form]);
@@ -321,7 +334,8 @@ export function DialogDemo() {
             notes: data.notes,
             start: new Date(data.start),
             end: new Date(data.end),
-            horasExtras: Number(data.horasExtras),
+            horasExtras: data.horasExtras,
+            zonas: data.zonas,  // Guardar zonas seleccionadas
         };
 
         if (selectedEvent) {
@@ -362,35 +376,38 @@ export function DialogDemo() {
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
                     {/* Fecha y hora inicio */}
-                    <div className="grid grid-cols-1 gap-2">
-                        <Label htmlFor="start">Fecha y hora inicio</Label>
-                        <Input
-                            id="start"
-                            type="datetime-local"
-                            {...form.register("start")}
-                            className="form-control custom-datetime-input"
-                        />
-                        {form.formState.errors.start && (
-                            <p className="text-red-500 text-sm">
-                                {form.formState.errors.start.message}
-                            </p>
-                        )}
-                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        {/* Fecha y hora inicio */}
+                        <div className="grid grid-cols-1 gap-2">
+                            <Label htmlFor="start">Fecha y hora inicio</Label>
+                            <Input
+                                id="start"
+                                type="datetime-local"
+                                {...form.register("start")}
+                                className="form-control custom-datetime-input"
+                            />
+                            {form.formState.errors.start && (
+                                <p className="text-red-500 text-sm">
+                                    {form.formState.errors.start.message}
+                                </p>
+                            )}
+                        </div>
 
-                    {/* Fecha y hora fin */}
-                    <div className="grid grid-cols-1 gap-2">
-                        <Label htmlFor="end">Fecha y hora fin</Label>
-                        <Input
-                            id="end"
-                            type="datetime-local"
-                            {...form.register("end")}
-                            className="form-control custom-datetime-input"
-                        />
-                        {form.formState.errors.end && (
-                            <p className="text-red-500 text-sm">
-                                {form.formState.errors.end.message}
-                            </p>
-                        )}
+                        {/* Fecha y hora fin */}
+                        <div className="grid grid-cols-1 gap-2">
+                            <Label htmlFor="end">Fecha y hora fin</Label>
+                            <Input
+                                id="end"
+                                type="datetime-local"
+                                {...form.register("end")}
+                                className="form-control custom-datetime-input"
+                            />
+                            {form.formState.errors.end && (
+                                <p className="text-red-500 text-sm">
+                                    {form.formState.errors.end.message}
+                                </p>
+                            )}
+                        </div>
                     </div>
 
                     <hr />
@@ -440,6 +457,25 @@ export function DialogDemo() {
                         )}
                     </div>
 
+
+                    {/* Zonas */}
+                    <div className="grid grid-cols-1 gap-2">
+                        <Label htmlFor="zonas">Zonas</Label>
+                        {zonasDisponibles.map((zona) => (
+                            <div key={zona.id} className="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    id={zona.id}
+                                    value={zona.id}
+                                    {...form.register("zonas")}
+                                />
+                                <Label htmlFor={zona.id}>{zona.name}</Label>
+                            </div>
+                        ))}
+                        {form.formState.errors.zonas && (
+                            <p className="text-red-500 text-sm">{form.formState.errors.zonas.message}</p>
+                        )}
+                    </div>
 
                     <DialogFooter>
                         <Button type="submit" className="btn btn-outline-primary btn-block">

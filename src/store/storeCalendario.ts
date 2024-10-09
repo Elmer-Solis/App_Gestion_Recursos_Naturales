@@ -42,6 +42,7 @@ interface Event {
     notes?: string;
     // fontaneros: string[]; // Agregando fontaneros al evento
     horasExtras?: number;  // Agregando horas extras al evento
+    zonas: string[];
 }
 
 interface CalendarState {
