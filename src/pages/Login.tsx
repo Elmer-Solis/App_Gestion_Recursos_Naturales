@@ -23,7 +23,8 @@ export function Login() {
                     <hr />
                     {/* <CardDescription>inicia con un click</CardDescription> */}
                 </CardHeader>
-                <CardContent className="flex justify-evenly">
+
+                <CardContent className="flex justify-evenly items-center">
 
                     <img
                         src="/logo.png"

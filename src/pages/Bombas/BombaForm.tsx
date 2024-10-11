@@ -153,7 +153,6 @@ export function BombaForm() {
                                 </FormItem>
                             )}
                         />
-
                         <FormField
                             control={form.control}
                             name="zonas"
@@ -171,21 +170,17 @@ export function BombaForm() {
                                             control={form.control}
                                             name="zonas"
                                             render={({ field }) => (
-                                                <FormItem
-                                                    key={zona.id}
-                                                    className="flex flex-row items-start space-x-3 space-y-0"
-                                                >
+                                                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                                                     <FormControl>
                                                         <Checkbox
                                                             checked={field.value?.includes(zona.id)}
                                                             onCheckedChange={(checked) => {
-                                                                return checked
-                                                                    ? field.onChange([...field.value, zona.id])
-                                                                    : field.onChange(
-                                                                        field.value?.filter(
-                                                                            (value) => value !== zona.id
-                                                                        )
-                                                                    );
+                                                                // Actualiza `zonas` según el estado del checkbox
+                                                                field.onChange(
+                                                                    checked
+                                                                        ? [...(field.value || []), zona.id]
+                                                                        : field.value?.filter((value) => value !== zona.id)
+                                                                );
                                                             }}
                                                         />
                                                     </FormControl>
