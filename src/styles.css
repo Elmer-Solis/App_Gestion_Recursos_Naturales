@@ -32,3 +32,7 @@
   filter: invert(50%) sepia(100%) saturate(300%) hue-rotate(100deg);
   /* Aquí puedes ajustar los filtros para cambiar el color */
 }
+
+.hidden {
+    display: none;
+}

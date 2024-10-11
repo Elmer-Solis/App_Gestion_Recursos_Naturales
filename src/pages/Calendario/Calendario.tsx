@@ -127,6 +127,7 @@ import { ButtonCalendar } from './components/ButtonCalendar';
 import { useCalendarStore } from '@/store/storeCalendario';
 import { ButtonDeleteCalendar } from './components/ButtonDelete';
 import { useEffect } from 'react';
+import '../../styles.css'
 
 interface Event {
     id: number;
@@ -178,7 +179,6 @@ export function Calendario() {
                 },
             };
         }
-
         return {};
     };
 
@@ -187,6 +187,9 @@ export function Calendario() {
         setSelectedEvent(event);
         openDateModal(); // Abrir el modal
     };
+
+
+
 
     const onSelect = (event: Event) => {
         if (selectedEvent && selectedEvent.id === event.id) {
@@ -227,9 +230,9 @@ export function Calendario() {
                 onSelectEvent={onSelect}
             />
             <DialogDemo />
-            {/* <ButtonCalendar /> */}
+            <ButtonCalendar />
+            {/* <ButtonCalendar className={selectedEvent ? 'hidden' : ''} /> */}
 
-            {!selectedEvent && <ButtonCalendar />}
             {selectedEvent && !isDateModalOpen && <ButtonDeleteCalendar />}
         </>
     );
