@@ -211,7 +211,6 @@
 //     );
 // }
 
-import { v4 as uuidv4 } from "uuid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -231,9 +230,7 @@ import { useUiStore } from "@/store/storeModalCalendario";
 import '../../../styles.css';
 import { useCalendarStore } from "@/store/storeCalendario";
 import { useEffect } from "react";
-// import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-
-type FormData = z.infer<typeof formSchema>;
+import { useFontaneroStore } from "@/store/storeFontanero";
 
 // Esquema de validación con Zod
 const formSchema = z
@@ -242,7 +239,6 @@ const formSchema = z
         notes: z.string().optional(),
         horasExtras: z
             .preprocess((val) => val === '' ? 0 : Number(val), z.number({ invalid_type_error: "Debe ser un número." }))
-            // .nonnegative("Debe ser un número positivo")
             .optional(),
         start: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
             message: "Fecha de inicio inválida.",
@@ -251,6 +247,7 @@ const formSchema = z
             message: "Fecha de fin inválida.",
         }),
         zonas: z.array(z.string()).min(1, { message: "Debe seleccionar al menos una zona." }),
+        fontaneroId: z.string().min(1, { message: 'Debe seleccionar un fontanero.' }),
     })
     .refine((data) => new Date(data.end) >= new Date(data.start), {
         message: "La fecha de fin debe ser mayor o igual a la fecha de inicio.",
@@ -263,12 +260,12 @@ const zonasDisponibles = [
     { id: 'zona-2', name: 'Zona 2' },
     { id: 'zona-3', name: 'Zona 3' },
     { id: 'zona-4', name: 'Zona 4' },
-    { id: 'santa-rita', name: 'santa rita' },
+    { id: 'santa-rita', name: 'Santa Rita' },
 ];
 
 export function DialogDemo() {
-
-    const { addEvent, selectedEvent, updateEvent, setSelectedEvent } = useCalendarStore()
+    const { addEvent, selectedEvent, updateEvent, setSelectedEvent } = useCalendarStore();
+    const { fontaneros, fetchFontaneros } = useFontaneroStore();
     const { isDateModalOpen, closeDateModal } = useUiStore();
     const { toast } = useToast();
 
@@ -282,6 +279,7 @@ export function DialogDemo() {
                 end: selectedEvent.end.toISOString().slice(0, 16),
                 horasExtras: selectedEvent.horasExtras || 0,
                 zonas: selectedEvent.zonas || [],  // Zonas seleccionadas por defecto
+                fontaneroId: selectedEvent.fontaneroId ? selectedEvent.fontaneroId.toString() : "", // <-- Añadir fontaneroId aquí
             }
             : {
                 title: "",
@@ -290,8 +288,15 @@ export function DialogDemo() {
                 end: "",
                 horasExtras: 0,
                 zonas: [],  // Ninguna zona seleccionada por defecto
+                fontaneroId: "", // <-- Inicializar fontaneroId en un nuevo evento
             },
-    })
+    });
+
+
+    useEffect(() => {
+        fetchFontaneros();  // Agregar el fetch aquí
+    }, [fetchFontaneros]);
+
 
     useEffect(() => {
         if (selectedEvent) {
@@ -303,8 +308,8 @@ export function DialogDemo() {
                 end: formatDateTimeLocal(selectedEvent.end),
                 horasExtras: selectedEvent.horasExtras || 0,
                 zonas: selectedEvent.zonas || [],
+                fontaneroId: selectedEvent.fontaneroId ? selectedEvent.fontaneroId.toString() : "", // <-- Añadir fontaneroId aquí
             });
-
         } else {
             // Si no hay evento seleccionado, limpia el formulario
             form.reset({
@@ -314,9 +319,11 @@ export function DialogDemo() {
                 end: "",
                 horasExtras: 0,
                 zonas: [],
+                fontaneroId: "", // <-- Limpiar fontaneroId también
             });
         }
     }, [selectedEvent, form]);
+
 
     function formatDateTimeLocal(date: Date) {
         const year = date.getFullYear();
@@ -327,26 +334,27 @@ export function DialogDemo() {
         return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
 
-    const onSubmit = (data: FormData) => {
+    const onSubmit = async (data: any) => {
         const newEvent = {
-            id: selectedEvent ? selectedEvent.id : uuidv4(),
+            id: selectedEvent ? selectedEvent.id : Date.now(), // Usamos Date.now() para generar un ID numérico único
             title: data.title,
             notes: data.notes,
             start: new Date(data.start),
             end: new Date(data.end),
             horasExtras: data.horasExtras,
-            zonas: data.zonas,  // Guardar zonas seleccionadas
+            zonas: data.zonas, // Guardar zonas seleccionadas
+            fontaneroId: data.fontaneroId,  // Asigna un fontaneroId por defecto o usa el existente
         };
 
         if (selectedEvent) {
-            updateEvent(newEvent);
+            await updateEvent(newEvent);
             toast({
                 title: "Evento actualizado",
                 variant: 'update',
                 description: "El evento fue editado correctamente."
             });
         } else {
-            addEvent(newEvent);
+            await addEvent(newEvent); // Añade un nuevo evento
             toast({
                 title: "Evento creado",
                 variant: 'succes',
@@ -366,18 +374,17 @@ export function DialogDemo() {
             <DialogContent className="sm:max-w-[600px]">
                 {/* Título del diálogo */}
                 <DialogTitle>
-                    Crear Evento
+                    {selectedEvent ? "Editar Evento" : "Crear Evento"}
                 </DialogTitle>
 
                 {/* Descripción del diálogo */}
                 <DialogDescription>
-                    Completa el formulario para agregar un nuevo evento.
+                    {selectedEvent ? "Edita los detalles del evento." : "Completa el formulario para agregar un nuevo evento."}
                 </DialogDescription>
 
                 <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
                     {/* Fecha y hora inicio */}
                     <div className="grid grid-cols-2 gap-4">
-                        {/* Fecha y hora inicio */}
                         <div className="grid grid-cols-1 gap-2">
                             <Label htmlFor="start">Fecha y hora inicio</Label>
                             <Input
@@ -441,7 +448,7 @@ export function DialogDemo() {
                         ></Textarea>
                     </div>
 
-                    {/* Horas Extras   */}
+                    {/* Horas Extras */}
                     <div className="grid grid-cols-1 gap-2">
                         <Label htmlFor="horasExtras">Horas Extras</Label>
                         <Input
@@ -455,6 +462,19 @@ export function DialogDemo() {
                                 {form.formState.errors.horasExtras.message}
                             </p>
                         )}
+                    </div>
+
+                    <div>
+                        <Label htmlFor="fontaneroId">Selecciona un Fontanero</Label>
+                        <select id="fontaneroId" {...form.register('fontaneroId')} className="form-control">
+                            <option value="">Selecciona un fontanero</option>
+                            {fontaneros.map((fontanero) => (
+                                <option key={fontanero.id} value={fontanero.id}>
+                                    {fontanero.name}
+                                </option>
+                            ))}
+                        </select>
+                        {form.formState.errors.fontaneroId && <p className="text-red-500">{form.formState.errors.fontaneroId.message}</p>}
                     </div>
 
                     {/* Zonas */}
@@ -486,4 +506,3 @@ export function DialogDemo() {
         </Dialog>
     );
 }
-
