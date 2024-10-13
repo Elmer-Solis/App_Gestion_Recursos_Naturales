@@ -145,7 +145,14 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      horas_extras_por_mes: {
+        Row: {
+          fontanero: string | null
+          mes: string | null
+          total_horas_extras: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

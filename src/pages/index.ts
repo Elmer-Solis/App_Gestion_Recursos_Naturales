@@ -1,5 +1,5 @@
 
-export * from './Inicio'
+export * from './dashboard/Inicio'
 export * from './Main'
 export * from './Bombas/Bombas'
 export * from './Calendario/Calendario'
