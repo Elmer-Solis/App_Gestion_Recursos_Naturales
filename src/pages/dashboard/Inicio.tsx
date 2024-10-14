@@ -1,7 +1,6 @@
 import {
-    Activity,
+
     CreditCard,
-    DollarSign,
     Users,
 } from "lucide-react";
 
@@ -24,6 +23,7 @@ import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
 import { HorasExtras } from './HorasExtras/HorasExtras';
+import { GifMario } from "./mariovista/gifMario";
 
 // Importamos los hooks de Zustand
 
@@ -92,16 +92,7 @@ export function Inicio() {
                 </Card>
 
                 <Card x-chunk="dashboard-01-chunk-3">
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                        <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-                        <Activity className="h-4 w-4 text-muted-foreground" />
-                    </CardHeader>
-                    <CardContent>
-                        <div className="text-2xl font-bold">+573</div>
-                        <p className="text-xs text-muted-foreground">
-                            +201 since last hour
-                        </p>
-                    </CardContent>
+                    <GifMario />
                 </Card>
             </div>
 

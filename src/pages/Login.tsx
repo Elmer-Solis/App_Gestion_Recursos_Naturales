@@ -16,31 +16,24 @@ export function Login() {
 
     return (
         <div className="flex justify-center items-center h-screen bg-main ">
-
             <Card className="w-[350px]  bg-gradient-to-r from-green-950  to-blue-950 p-">
                 <CardHeader>
                     <CardTitle className="text-center mb-3 text-white">Gestion De Recursos Naturales</CardTitle>
                     <hr />
-                    {/* <CardDescription>inicia con un click</CardDescription> */}
                 </CardHeader>
-
                 <CardContent className="flex justify-evenly items-center">
-
                     <img
                         src="/logo.png"
                         alt="logo muni"
                         className="w-32 h-auto sombra-verde"
                     />
-
                     <img
                         src="/umgM.png"
                         alt="logo mariano"
                         className="w-36 h-32 sombra-azul"
                     />
-
                 </CardContent>
                 <CardFooter className="flex justify-between  ">
-
                     <button
                         className="flex items-center  dark:bg-gray-950 dark:hover:bg-gray-900 border border-black 
                         rounded-lg px-6 py-2 text-sm font-medium dark:text-white hover:bg-gray-950
@@ -65,10 +58,8 @@ export function Login() {
                         </svg>
                         <span>Continue Con Google</span>
                     </button>
-
                 </CardFooter>
             </Card>
-
         </div>
     );
 }

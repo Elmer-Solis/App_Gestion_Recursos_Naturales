@@ -1,5 +1,4 @@
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Select, SelectItem, SelectTrigger, SelectContent, SelectValue } from '@/components/ui/select';
 import { useState } from 'react';
 
@@ -17,16 +16,16 @@ const FilterComponent = ({ onFilter }: { onFilter: (filters: { month: string, ye
     };
 
     return (
-        <div className="flex space-x-4">
+        <div className="flex space-x-4 p-8">
             <Select onValueChange={setMonth}>
                 <SelectTrigger className="w-[180px]">
-                    <SelectValue placeholder="Select Month" />
+                    <SelectValue placeholder="Mes" />
                 </SelectTrigger>
                 <SelectContent>
                     {/* Opciones de mes */}
                     {Array.from({ length: 12 }, (_, i) => (
                         <SelectItem key={i + 1} value={String(i + 1).padStart(2, '0')}>
-                            {new Date(0, i).toLocaleString('en', { month: 'long' })}
+                            {new Date(0, i).toLocaleString('es', { month: 'long' })}
                         </SelectItem>
                     ))}
                 </SelectContent>
@@ -34,7 +33,7 @@ const FilterComponent = ({ onFilter }: { onFilter: (filters: { month: string, ye
 
             <Select onValueChange={setYear}>
                 <SelectTrigger className="w-[120px]">
-                    <SelectValue placeholder="Select Year" />
+                    <SelectValue placeholder="Año" />
                 </SelectTrigger>
                 <SelectContent>
                     {/* Opciones de año de 2024 a 2030 */}
