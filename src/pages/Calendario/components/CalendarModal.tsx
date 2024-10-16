@@ -272,54 +272,56 @@ export function DialogDemo() {
                         />
 
                         {/* Horas Extras */}
-                        <FormField
-                            control={form.control}
-                            name="horasExtras"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Horas Extras</FormLabel>
-                                    <FormControl>
-                                        <Input
-                                            id="horasExtras"
-                                            type="number"
-                                            {...field}
-                                            className="form-control"
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
 
-                        {/* Selección de Fontanero */}
-                        <FormField
-                            control={form.control}
-                            name="fontaneroId"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Selecciona un Fontanero</FormLabel>
-                                    <FormControl>
-                                        <Select
-                                            onValueChange={(value) => field.onChange(value)}
-                                            value={field.value}
-                                        >
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Selecciona un fontanero" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {fontaneros.map((fontanero) => (
-                                                    <SelectItem key={fontanero.id} value={fontanero.id}>
-                                                        {fontanero.name}
-                                                    </SelectItem>
-                                                ))}
-                                            </SelectContent>
-                                        </Select>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="horasExtras"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Horas Extras</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="horasExtras"
+                                                type="number"
+                                                {...field}
+                                                className="form-control"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
+                            {/* Selección de Fontanero */}
+                            <FormField
+                                control={form.control}
+                                name="fontaneroId"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Selecciona un Fontanero</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={(value) => field.onChange(value)}
+                                                value={field.value}
+                                            >
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Selecciona un fontanero" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    {fontaneros.map((fontanero) => (
+                                                        <SelectItem key={fontanero.id} value={fontanero.id}>
+                                                            {fontanero.name}
+                                                        </SelectItem>
+                                                    ))}
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
                         <FormField
                             control={form.control}
                             name="zonas"

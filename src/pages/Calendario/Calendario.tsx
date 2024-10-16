@@ -41,7 +41,6 @@ export function Calendario() {
             boxShadow: isSelected ? '0 0 10px 2px rgba(0, 0, 0, 0.5)' : 'none',
             border: isSelected ? '2px solid #FFD700' : 'none',
         };
-
         return { style };
     };
 
@@ -83,7 +82,6 @@ export function Calendario() {
 
     const CalendarEvent = ({ event }: { event: Event }) => {
         const { title, notes } = event;
-
         return (
             <>
                 <strong>{title}</strong>

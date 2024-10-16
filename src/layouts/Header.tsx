@@ -17,10 +17,8 @@ export const Header = () => {
         if (pathname === "/" || pathname === "") {
             return "Dashboard"; // Si la ruta es "/", muestra "Dashboard"
         }
-
         // Elimina la barra inclinada inicial y divide las palabras
         const words = pathname.replace("/", "").split("/");
-
         // Capitaliza la primera letra de cada palabra
         return words
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
