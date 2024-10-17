@@ -32,13 +32,19 @@ export function Inicio() {
         return <div className="p-8 text-center">Cargando datos...</div>;
     }
     return (
-        <main className="container mx-auto mt-5 ">
-            <div className="grid grid-cols-3 gap-12">
-                <HorasExtras />
-                <TablaFontanerosBombas />
-                <TableFontaneros />
-                <TableFontaneros />
-                <TableFontaneros />
+        <main className="container 
+        mx-auto mt-5 px-4 sm:px-6 h-full">
+            <div className="grid grid-cols-1
+             md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 h-full">
+                <div className="pt-4 md:pt-0">
+                    <HorasExtras />
+                </div>
+                <div className=" ">
+                    <TablaFontanerosBombas />
+                </div>
+                <div className="">
+                    <TableFontaneros />
+                </div>
             </div>
         </main>
     );

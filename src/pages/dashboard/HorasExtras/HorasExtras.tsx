@@ -65,15 +65,15 @@ export function HorasExtras() {
     return (
         <Card  >
             {/* <CardHeader className="flex   "> */}
-            <div className=" flex justify-center items-center p-4">
-                <CardTitle>Horas Extras</CardTitle>
+            <div className=" flex justify-center items-center p-4  ">
+                <CardTitle className="text-sm sm:text-xs md:text-lg lg:text-xl pr-2">
+                    Horas Extras
+                </CardTitle>
                 {/* <CardDescription>Horas extras de fontaneros filtradas por mes y año</CardDescription> */}
-
                 <FilterComponent onFilter={setFilters} />
-
             </div>
             {/* </CardHeader> */}
-            <hr className="pb-12" />
+            <hr className="pb-11" />
             <CardContent className="" >
                 <ChartContainer config={chartConfig} className="h-full">
                     <BarChart

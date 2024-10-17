@@ -51,8 +51,10 @@ export const TablaFontanerosBombas = () => {
             <CardHeader>
                 <CardTitle>Bombas de Agua</CardTitle>
             </CardHeader>
-            <CardContent>
-                <Table>
+            <CardContent className="h-full max-h-72 flex-grow overflow-y-auto 
+            dark:scrollbar-thin dark:scrollbar-thumb-[#000000] 
+            dark:scrollbar-track-[#0a0a0a] dark:scrollbar-thumb-rounded-lg">
+                <Table className="w-full">
                     <TableHeader>
                         <TableRow>
                             <TableHead>Nombre de la Bomba</TableHead>
