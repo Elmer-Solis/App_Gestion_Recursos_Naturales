@@ -1,12 +1,12 @@
 
 import { useState, useEffect } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList } from "recharts";
-import { Card, CardDescription, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 // import FilterComponent from "./FilterComponent"; // El componente de filtros
 import supabase from "@/supabase/supabase.config";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
-import { TrendingUp } from "lucide-react";
+
 import FilterComponent from "./Filtro";
 
 
@@ -63,17 +63,23 @@ export function HorasExtras() {
     }, [filters]);
 
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Horas Extras por Mes</CardTitle>
-                <CardDescription>Horas extras de fontaneros filtradas por mes y año</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <ChartContainer config={chartConfig}>
+        <Card  >
+            {/* <CardHeader className="flex   "> */}
+            <div className=" flex justify-center items-center p-4">
+                <CardTitle>Horas Extras</CardTitle>
+                {/* <CardDescription>Horas extras de fontaneros filtradas por mes y año</CardDescription> */}
+
+                <FilterComponent onFilter={setFilters} />
+
+            </div>
+            {/* </CardHeader> */}
+            <hr className="pb-12" />
+            <CardContent className="" >
+                <ChartContainer config={chartConfig} className="h-full">
                     <BarChart
                         data={chartData}
                         layout="vertical"
-                        margin={{ right: 16 }}
+                        margin={{ right: 14, left: -60 }} // Ajuste de márgenes
                     >
                         <CartesianGrid horizontal={false} />
                         <YAxis
@@ -93,7 +99,7 @@ export function HorasExtras() {
                             dataKey="horas_extras"
                             layout="vertical"
                             fill="var(--color-desktop)"
-                            radius={4}
+                            radius={5}
                         >
                             <LabelList
                                 dataKey="fontanero"
@@ -113,15 +119,14 @@ export function HorasExtras() {
                     </BarChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col items-start gap-2 text-sm">
+            {/* <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 font-medium leading-none">
                     Datos de horas extras <TrendingUp className="h-4 w-4" />
                 </div>
                 <div className="leading-none text-muted-foreground">
                     Mostrando horas extras trabajadas por fontaneros para el mes filtrado
                 </div>
-            </CardFooter>
-            <FilterComponent onFilter={setFilters} />
+            </CardFooter> */}
         </Card>
     );
 }

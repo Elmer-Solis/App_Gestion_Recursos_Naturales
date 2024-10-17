@@ -16,9 +16,9 @@ const FilterComponent = ({ onFilter }: { onFilter: (filters: { month: string, ye
     };
 
     return (
-        <div className="flex space-x-4 p-8">
+        <div className="flex space-x-2 ">
             <Select onValueChange={setMonth}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[100px]">
                     <SelectValue placeholder="Mes" />
                 </SelectTrigger>
                 <SelectContent>
@@ -32,7 +32,7 @@ const FilterComponent = ({ onFilter }: { onFilter: (filters: { month: string, ye
             </Select>
 
             <Select onValueChange={setYear}>
-                <SelectTrigger className="w-[120px]">
+                <SelectTrigger className="w-[100px]">
                     <SelectValue placeholder="Año" />
                 </SelectTrigger>
                 <SelectContent>
@@ -45,7 +45,7 @@ const FilterComponent = ({ onFilter }: { onFilter: (filters: { month: string, ye
                 </SelectContent>
             </Select>
 
-            <Button onClick={handleFilter}>Filter</Button>
+            <Button onClick={handleFilter}>Buscar</Button>
         </div>
     );
 };
