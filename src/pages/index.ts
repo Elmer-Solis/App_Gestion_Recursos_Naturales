@@ -6,4 +6,6 @@ export * from './Calendario/Calendario'
 export * from './Proyectos'
 export * from './Fontaneros/Fontaneros'
 export * from './Login'
-
+export * from './Bitacoras/Bitacoras'
+export * from './Calidad_agua/Calidad_agua'
+export * from './Solicitud_vecinos/Solicitud_vecinos'

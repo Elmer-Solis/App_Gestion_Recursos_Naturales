@@ -5,8 +5,11 @@ import {
     LogOut,
     ChevronLeft,
     CalendarDays,
-    User,
+    Wrench,
     WashingMachine,
+    UserPlus,
+    Droplet,
+    FileText,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from '../store/storeLogin';
@@ -106,8 +109,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen, c
 // Data links
 const linksArray = [
     { label: "Home", icon: <Home />, to: "/" },
-    { label: "Fontaneros", icon: <User />, to: "/fontaneros" },
-    { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
     { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
-    { label: "Proyectos", icon: <BarChart2 />, to: "/proyectos" },
+    { label: "Vecinos", icon: <UserPlus />, to: "/solicitud_vecinos" },
+    // { label: "Proyectos", icon: <BarChart2 />, to: "/proyectos" },
+    { label: "Calidad", icon: <Droplet />, to: "/calidad_agua" },
+    { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
+    { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
+    { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
 ];
