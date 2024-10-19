@@ -19,7 +19,7 @@ export function DialogMant() {
     const { isMaintOpen, closeMaint } = useMantenimiento();
 
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
 
         closeMaint();
     };

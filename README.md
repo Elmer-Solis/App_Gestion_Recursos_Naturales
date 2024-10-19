@@ -1,3 +1,4 @@
-# App_Gestion_Recursos_Naturales
+# App_Gestion_Recursos_Naturales 2024 
 
-## react ts tailwind shadcn
+## UMG Ing Sistemas
+
