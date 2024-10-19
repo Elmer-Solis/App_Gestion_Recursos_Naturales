@@ -17,6 +17,13 @@ export const Header = () => {
         if (pathname === "/" || pathname === "") {
             return "Dashboard"; // Si la ruta es "/", muestra "Dashboard"
         }
+        // Excepciones para rutas específicas
+        if (pathname === "/calidad") {
+            return "Calidad Agua";
+        }
+        if (pathname === "/solicitud") {
+            return "Solicitud Vecinos";
+        }
         // Elimina la barra inclinada inicial y divide las palabras
         const words = pathname.replace("/", "").split("/");
         // Capitaliza la primera letra de cada palabra

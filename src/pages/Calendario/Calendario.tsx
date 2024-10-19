@@ -9,6 +9,8 @@ import { useCalendarStore } from '@/store/storeCalendario';
 import { ButtonDeleteCalendar } from './components/ButtonDelete';
 import { useEffect } from 'react';
 import '../../styles.css'
+import { ButtonMant } from './componentsMant/ButtonMant';
+import { DialogMant } from './componentsMant/CalendarMant';
 
 interface Event {
     id: number;
@@ -24,7 +26,6 @@ interface Event {
 export function Calendario() {
     const { openDateModal, isDateModalOpen } = useUiStore();
     const { events, setSelectedEvent, selectedEvent, fetchEvents } = useCalendarStore();
-
     useEffect(() => {
         fetchEvents(); // Carga los eventos desde Supabase al montar el componente
     }, [fetchEvents]);
@@ -54,8 +55,8 @@ export function Calendario() {
         ) {
             return {
                 style: {
-                    backgroundColor: '#041a5d',
-                    color: '#d61212',
+                    backgroundColor: '#000',
+                    color: '#C0C0C0	',
                 },
             };
         }
@@ -108,11 +109,15 @@ export function Calendario() {
                 }}
                 onSelectEvent={(event, e) => onSelect(event, e)}
             />
+            {/* componente y boton para evento */}
             <DialogDemo />
             {/* <ButtonCalendar /> */}
             {!selectedEvent && <ButtonCalendar />}
             {/* {selectedEvent && !isDateModalOpen && <ButtonDeleteCalendar />} */}
             {selectedEvent && !isDateModalOpen && <ButtonDeleteCalendar />}
+            {/* componente y botn para evento mantenimiento     */}
+            <DialogMant />
+            <ButtonMant />
         </>
     );
 }

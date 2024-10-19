@@ -1,7 +1,6 @@
 
 import {
     Home,
-    BarChart2,
     LogOut,
     ChevronLeft,
     CalendarDays,
@@ -110,9 +109,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen, c
 const linksArray = [
     { label: "Home", icon: <Home />, to: "/" },
     { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
-    { label: "Vecinos", icon: <UserPlus />, to: "/solicitud_vecinos" },
-    // { label: "Proyectos", icon: <BarChart2 />, to: "/proyectos" },
-    { label: "Calidad", icon: <Droplet />, to: "/calidad_agua" },
+    { label: "Vecinos", icon: <UserPlus />, to: "/solicitud" },
+    { label: "Calidad", icon: <Droplet />, to: "/calidad" },
     { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
     { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
     { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },

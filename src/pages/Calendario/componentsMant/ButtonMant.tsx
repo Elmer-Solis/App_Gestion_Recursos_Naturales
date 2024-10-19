@@ -1,19 +1,19 @@
 import { useCalendarStore } from "@/store/storeCalendario";
-import { useUiStore } from "@/store/storeModalCalendario";
+import { useMantenimiento } from "@/store/storeModalMant";
 
-export function ButtonCalendar() {
-    const { openDateModal } = useUiStore();
+export function ButtonMant() {
+    const { openMaint } = useMantenimiento();
     const { setSelectedEvent } = useCalendarStore();
 
     const handleClick = () => {
         setSelectedEvent(null); // Limpiar el evento seleccionado
-        openDateModal();
+        openMaint();
     };
 
     return (
         <button
-            title="Crear Evento"
-            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[225px] right-[55px]"
+            title="Agregar Mantenimiento"
+            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[335px] right-[55px]"
             onClick={handleClick}
         >
             <svg
@@ -21,7 +21,7 @@ export function ButtonCalendar() {
                 width="65px"
                 height="65px"
                 viewBox="0 0 24 24"
-                className="  stroke-blue-400 fill-none group-hover:fill-blue-800 group-active:stroke-blue-200 group-active:fill-blue-600 group-active:duration-0 duration-300"
+                className="stroke-lime-400 fill-none group-hover:fill-lime-800 group-active:stroke-lime-200 group-active:fill-lime-600 group-active:duration-0 duration-300"
             >
                 <path
                     d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z"

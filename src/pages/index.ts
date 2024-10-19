@@ -1,9 +1,7 @@
 
 export * from './dashboard/Inicio'
-export * from './Main'
 export * from './Bombas/Bombas'
 export * from './Calendario/Calendario'
-export * from './Proyectos'
 export * from './Fontaneros/Fontaneros'
 export * from './Login'
 export * from './Bitacoras/Bitacoras'

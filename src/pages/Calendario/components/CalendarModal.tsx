@@ -192,7 +192,7 @@ export function DialogDemo() {
                                 name="start"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Fecha y hora inicio</FormLabel>
+                                        <FormLabel htmlFor="start">Fecha y hora inicio</FormLabel>
                                         <FormControl>
                                             <Input
                                                 id="start"
@@ -212,7 +212,7 @@ export function DialogDemo() {
                                 name="end"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Fecha y hora fin</FormLabel>
+                                        <FormLabel htmlFor="end">Fecha y hora fin</FormLabel>
                                         <FormControl>
                                             <Input
                                                 id="end"
@@ -235,7 +235,7 @@ export function DialogDemo() {
                             name="title"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Título del evento</FormLabel>
+                                    <FormLabel htmlFor="title">Título del evento</FormLabel>
                                     <FormControl>
                                         <Input
                                             id="title"
@@ -256,7 +256,7 @@ export function DialogDemo() {
                             name="notes"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Notas</FormLabel>
+                                    <FormLabel htmlFor="notes">Notas</FormLabel>
                                     <FormControl>
                                         <Textarea
                                             id="notes"
@@ -279,7 +279,7 @@ export function DialogDemo() {
                                 name="horasExtras"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Horas Extras</FormLabel>
+                                        <FormLabel htmlFor="horasExtras" >Horas Extras</FormLabel>
                                         <FormControl>
                                             <Input
                                                 id="horasExtras"
@@ -299,13 +299,13 @@ export function DialogDemo() {
                                 name="fontaneroId"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Selecciona un Fontanero</FormLabel>
+                                        <FormLabel >Selecciona un Fontanero</FormLabel>
                                         <FormControl>
                                             <Select
                                                 onValueChange={(value) => field.onChange(value)}
                                                 value={field.value}
                                             >
-                                                <SelectTrigger className="w-full">
+                                                <SelectTrigger id="fontaneroId" className="w-full">
                                                     <SelectValue placeholder="Selecciona un fontanero" />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -328,7 +328,7 @@ export function DialogDemo() {
                             render={() => (
                                 <FormItem>
                                     <div className="mb-4">
-                                        <FormLabel className="text-base">Selecciona la zona</FormLabel>
+                                        <FormLabel className="text-base" htmlFor="zonas">Selecciona la zona</FormLabel>
                                         {/* <FormDescription>
                                             Selecciona las zonas a las que la bomba va a distribuir agua.
                                         </FormDescription> */}
