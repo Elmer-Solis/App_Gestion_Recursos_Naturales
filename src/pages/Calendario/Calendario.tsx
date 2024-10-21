@@ -281,12 +281,14 @@ export function Calendario() {
                 onSelectEvent={(event, e) => onSelect(event, e)}
             />
             {/* componente y botón para evento */}
-            <DialogDemo />
-            {!selectedEvent && !selectedMantenimiento && <ButtonCalendar />}
-            {selectedEvent && !isDateModalOpen && <ButtonDeleteCalendar />}
-            {/* componente y botón para mantenimiento */}
-            <DialogMant />
-            <ButtonMant />
+            <>
+                <DialogDemo />
+                {!selectedEvent && !selectedMantenimiento && <ButtonCalendar />}
+                {(selectedEvent || selectedMantenimiento) && !isDateModalOpen && !isMaintOpen && <ButtonDeleteCalendar />}
+                {/* componente y botón para mantenimiento */}
+                <DialogMant />
+                <ButtonMant />
+            </>
         </>
     );
 }

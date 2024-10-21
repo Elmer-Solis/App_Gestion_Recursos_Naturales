@@ -84,8 +84,8 @@ export const useMantenimientoStore = create<MantenimientoState>((set) => ({
         const { error } = await supabase.from('mantenimiento_bombas')
             .update({
                 bomba_id: mantenimiento.bombaId,
-                fecha_inicioM: mantenimiento.fechaInicioMantenimiento.toISOString(),
-                fecha_finM: mantenimiento.fechaFinMantenimiento.toISOString(),
+                fecha_iniciom: mantenimiento.fechaInicioMantenimiento.toISOString(),
+                fecha_finm: mantenimiento.fechaFinMantenimiento.toISOString(),
                 tipo_mantenimiento: mantenimiento.tipoMantenimiento.join(','), // Corregido: join(',')
                 titulo_mantenimiento: mantenimiento.titulo_mantenimiento,
                 notas_mantenimiento: mantenimiento.notasMantenimiento,
