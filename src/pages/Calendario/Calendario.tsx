@@ -159,7 +159,7 @@ interface Mantenimiento {
     bombaId: number;
     fechaInicioMantenimiento: Date;
     fechaFinMantenimiento: Date;
-    tipoMantenimiento: string[];
+    tipoMantenimiento: string;
     titulo_mantenimiento: string;
     notasMantenimiento?: string;
     costo?: number;

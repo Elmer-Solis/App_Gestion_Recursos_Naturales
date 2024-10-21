@@ -25,7 +25,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-import { Checkbox } from "@/components/ui/checkbox";
+// import { Checkbox } from "@/components/ui/checkbox";
 // import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useBombaStore } from "@/store/storeBombas";
@@ -46,7 +46,7 @@ const formSchema = z
         finm: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
             message: "Fecha de fin inválida.",
         }),
-        tiposmant: z.array(z.string()).min(1, { message: "Debe seleccionar al menos una zona." }),
+        tiposmant: z.string().min(1, { message: "Debe seleccionar un tipo de mantenimiento." }), // Cambiado de array a string
         bombaId: z.string().min(1, { message: 'Debe seleccionar una bomba.' }),
     })
     .refine((data) => new Date(data.finm) >= new Date(data.iniciom), {
@@ -75,7 +75,7 @@ export function DialogMant() {
                 iniciom: selectedMantenimiento.fechaInicioMantenimiento.toISOString().slice(0, 16),
                 finm: selectedMantenimiento.fechaFinMantenimiento.toISOString().slice(0, 16),
                 costo: selectedMantenimiento.costo || 0,
-                tiposmant: selectedMantenimiento.tipoMantenimiento || [],  // Zonas seleccionadas por defecto
+                tiposmant: selectedMantenimiento.tipoMantenimiento || "",  // Cambiado a string
                 bombaId: selectedMantenimiento.bombaId ? selectedMantenimiento.bombaId.toString() : "", // <-- Añadir fontaneroId aquí
             }
             : {
@@ -84,7 +84,7 @@ export function DialogMant() {
                 iniciom: "",
                 finm: "",
                 costo: 0,
-                tiposmant: [],  // Ninguna zona seleccionada por defecto
+                tiposmant: "",  // Ninguna zona seleccionada por defecto
                 bombaId: "", // <-- Inicializar fontaneroId en un nuevo evento
             },
     });
@@ -102,7 +102,7 @@ export function DialogMant() {
                 iniciom: formatDateTimeLocal(selectedMantenimiento.fechaInicioMantenimiento),
                 finm: formatDateTimeLocal(selectedMantenimiento.fechaFinMantenimiento),
                 costo: selectedMantenimiento.costo || 0,
-                tiposmant: selectedMantenimiento.tipoMantenimiento || [],
+                tiposmant: selectedMantenimiento.tipoMantenimiento || '',
                 bombaId: selectedMantenimiento.bombaId ? selectedMantenimiento.bombaId.toString() : "", // <-- Añadir fontaneroId aquí
             });
         } else {
@@ -113,7 +113,7 @@ export function DialogMant() {
                 iniciom: "",
                 finm: "",
                 costo: 0,
-                tiposmant: [],
+                tiposmant: '',
                 bombaId: "", // <-- Limpiar fontaneroId también
             });
         }
@@ -321,16 +321,15 @@ export function DialogMant() {
                             />
                         </div>
 
-                        <FormField
+                        {/* <FormField
                             control={form.control}
                             name="tiposmant"
                             render={() => (
                                 <FormItem>
                                     <div className="mb-4">
-                                        <FormLabel className="text-base" htmlFor="tiposmant">Selecciona tipo de mantenimiento</FormLabel>
-                                        {/* <FormDescription>
-                                            Selecciona las zonas a las que la bomba va a distribuir agua.
-                                        </FormDescription> */}
+                                        <FormLabel className="text-base" htmlFor="tiposmant">
+                                            Selecciona tipo de mantenimiento
+                                        </FormLabel>
                                     </div>
                                     {tiposMantenimiento.map((mantenimiento) => (
                                         <FormField
@@ -341,14 +340,10 @@ export function DialogMant() {
                                                 <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                                                     <FormControl>
                                                         <Checkbox
-                                                            checked={field.value?.includes(mantenimiento.id)}
+                                                            checked={field.value === mantenimiento.id} // Solo uno puede estar seleccionado
                                                             onCheckedChange={(checked) => {
-                                                                // Actualiza `zonas` según el estado del checkbox
-                                                                field.onChange(
-                                                                    checked
-                                                                        ? [...(field.value || []), mantenimiento.id]
-                                                                        : field.value?.filter((value) => value !== mantenimiento.id)
-                                                                );
+                                                                // Si está chequeado, se selecciona este id, si no, se limpia
+                                                                field.onChange(checked ? mantenimiento.id : null);
                                                             }}
                                                         />
                                                     </FormControl>
@@ -360,7 +355,42 @@ export function DialogMant() {
                                     <FormMessage />
                                 </FormItem>
                             )}
+
+                        /> */}
+
+
+                        <FormField
+                            control={form.control}
+                            name="tiposmant"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="mb-4">
+                                        <FormLabel className="text-base" htmlFor="tiposmant">
+                                            Selecciona tipo de mantenimiento
+                                        </FormLabel>
+                                    </div>
+                                    <FormControl>
+                                        <Select
+                                            onValueChange={(value) => field.onChange(value)} // Ahora es un string
+                                            value={field.value} // Asegúrate de que sea un string
+                                        >
+                                            <SelectTrigger className="w-full">
+                                                <SelectValue placeholder="Selecciona un tipo de mantenimiento" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {tiposMantenimiento.map((mantenimiento) => (
+                                                    <SelectItem key={mantenimiento.id} value={mantenimiento.id}>
+                                                        {mantenimiento.name}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
                         />
+
 
                         <DialogFooter>
                             <Button type="submit" className="btn btn-outline-primary btn-block">
