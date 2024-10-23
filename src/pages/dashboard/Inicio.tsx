@@ -46,9 +46,6 @@ export function Inicio() {
                 <div >
                     <MantBombas />
                 </div>
-                <div>
-                    <TableFontaneros />
-                </div>
             </div>
         </main>
     );
