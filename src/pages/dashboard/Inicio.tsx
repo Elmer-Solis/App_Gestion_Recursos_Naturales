@@ -3,9 +3,9 @@ import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
 import { HorasExtras } from './HorasExtras/HorasExtras';
+import { MantBombas } from "./MantenimientoBombas/MantBombas";
 import { TableFontaneros } from './Tablas/TablaFontaneros';
 import { TablaFontanerosBombas } from "./Tablas/TablaFontanerosBombas";
-import { MantBombas } from "./MantenimientoBombas/MantBombas";
 
 // Importamos los hooks de Zustand
 export function Inicio() {
@@ -24,7 +24,6 @@ export function Inicio() {
                 setLoading(false); // Finalizamos la carga
             }
         };
-
         fetchData();
     }, [fetchFontaneros, fetchBombas]);
 
@@ -32,6 +31,7 @@ export function Inicio() {
     if (loading) {
         return <div className="p-8 text-center">Cargando datos...</div>;
     }
+
     return (
         <main className="container 
         mx-auto mt-5 px-4 sm:px-6 ">
@@ -44,10 +44,10 @@ export function Inicio() {
                     <TablaFontanerosBombas />
                 </div>
                 <div >
-                    <TableFontaneros />
+                    <MantBombas />
                 </div>
                 <div>
-                    <MantBombas />
+                    <TableFontaneros />
                 </div>
             </div>
         </main>

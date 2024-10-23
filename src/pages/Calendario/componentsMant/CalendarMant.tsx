@@ -25,8 +25,6 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 
-// import { Checkbox } from "@/components/ui/checkbox";
-// import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import { useBombaStore } from "@/store/storeBombas";
 import { useMantenimiento } from "@/store/storeModalMant";
@@ -320,43 +318,6 @@ export function DialogMant() {
                                 )}
                             />
                         </div>
-
-                        {/* <FormField
-                            control={form.control}
-                            name="tiposmant"
-                            render={() => (
-                                <FormItem>
-                                    <div className="mb-4">
-                                        <FormLabel className="text-base" htmlFor="tiposmant">
-                                            Selecciona tipo de mantenimiento
-                                        </FormLabel>
-                                    </div>
-                                    {tiposMantenimiento.map((mantenimiento) => (
-                                        <FormField
-                                            key={mantenimiento.id}
-                                            control={form.control}
-                                            name="tiposmant"
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value === mantenimiento.id} // Solo uno puede estar seleccionado
-                                                            onCheckedChange={(checked) => {
-                                                                // Si está chequeado, se selecciona este id, si no, se limpia
-                                                                field.onChange(checked ? mantenimiento.id : null);
-                                                            }}
-                                                        />
-                                                    </FormControl>
-                                                    <FormLabel className="font-normal">{mantenimiento.name}</FormLabel>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    ))}
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-
-                        /> */}
 
 
                         <FormField

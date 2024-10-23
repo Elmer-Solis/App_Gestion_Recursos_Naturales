@@ -13,7 +13,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import { useMantenimientoStore } from "@/store/storeCalendarioMant";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export const MantBombas = () => {
     const mantenimientos = useMantenimientoStore((state) => state.mantenimientos);

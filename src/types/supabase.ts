@@ -7,31 +7,6 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          operationName?: string
-          query?: string
-          variables?: Json
-          extensions?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       bombas: {
@@ -169,6 +144,36 @@ export type Database = {
           },
         ]
       }
+      solicitudes_trabajo: {
+        Row: {
+          descripcion_solicitud: string | null
+          direccion_vecino: string
+          estado_solicitud: string
+          fecha_solicitud: string
+          id: number
+          titulo_solicitud: string
+          vecino_nombre: string
+        }
+        Insert: {
+          descripcion_solicitud?: string | null
+          direccion_vecino: string
+          estado_solicitud: string
+          fecha_solicitud: string
+          id?: number
+          titulo_solicitud: string
+          vecino_nombre: string
+        }
+        Update: {
+          descripcion_solicitud?: string | null
+          direccion_vecino?: string
+          estado_solicitud?: string
+          fecha_solicitud?: string
+          id?: number
+          titulo_solicitud?: string
+          vecino_nombre?: string
+        }
+        Relationships: []
+      }
       users: {
         Row: {
           email: string
@@ -191,6 +196,15 @@ export type Database = {
           fontanero: string | null
           mes: string | null
           total_horas_extras: number | null
+        }
+        Relationships: []
+      }
+      vista_mantenimiento_bombas: {
+        Row: {
+          fecha_finm: string | null
+          fecha_iniciom: string | null
+          nombre_bomba: string | null
+          tipo_mantenimiento: string | null
         }
         Relationships: []
       }
