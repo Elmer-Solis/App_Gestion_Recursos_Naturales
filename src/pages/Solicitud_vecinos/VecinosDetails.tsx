@@ -30,7 +30,7 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
     const { toast } = useToast();
 
 
-    const { deleteSolicitud, updateSolicitud, getSolicitudById } = useSolicitudTrabajoStore()
+    const { deleteSolicitud, getSolicitudById } = useSolicitudTrabajoStore()
 
     const handleClick = () => {
         deleteSolicitud(solicitudes.id);
@@ -42,18 +42,21 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
         });
     };
 
-
     return (
         <Card className="mx-5 my-10 px-5 ">
             <CardHeader>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
                         <img src="/soli.png" alt="" />
                     </section>
-                    <div>
-                        <VecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
-                        <VecinosDetailItem label="Teléfono" data={solicitudes.tarifa} />
-
+                    <div className="flex flex-wrap justify-between w-full">
+                        <div className="flex flex-col">
+                            <VecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
+                            <VecinosDetailItem label="Teléfono" data={solicitudes.tarifa} />
+                        </div>
+                        <div className="flex flex-col">
+                            <VecinosDetailItem label="Expediente" data={solicitudes.numero_expediente.toString()} />
+                        </div>
                     </div>
                 </div>
             </CardHeader>

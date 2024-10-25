@@ -13,7 +13,7 @@ export function ButtonCalendar() {
     return (
         <button
             title="Crear Evento"
-            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[260px] right-[55px]"
+            className="group cursor-pointer outline-none hover:rotate-90 duration-300 fixed bottom-[220px] right-[55px]"
             onClick={handleClick}
         >
             <svg

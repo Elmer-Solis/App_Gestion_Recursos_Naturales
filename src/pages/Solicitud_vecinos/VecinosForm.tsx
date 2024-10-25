@@ -166,8 +166,8 @@ export function VecinosForm() {
                                                 <SelectValue placeholder="Selecciona una tarifa" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                <SelectItem value="Comercial">Comercial</SelectItem>
-                                                <SelectItem value="Industrial">Industrial</SelectItem>
+                                                <SelectItem value="Domiciliar">Comercial</SelectItem>
+                                                <SelectItem value="Comercial">Industrial</SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </FormControl>
