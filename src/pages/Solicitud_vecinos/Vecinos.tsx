@@ -8,7 +8,7 @@ export function Vecinos() {
 
             <div className="mt-12 md:flex md:h-[calc(100vh-225px)]">
                 <VecinosForm />
-                {/* <VecinosList /> */}
+                <VecinosList />
             </div>
         </div>
     )

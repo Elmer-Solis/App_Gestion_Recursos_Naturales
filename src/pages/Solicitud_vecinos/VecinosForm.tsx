@@ -24,36 +24,12 @@ import { DatePickerDemo } from "./DatePicker";
 // Definir el esquema de validación
 const formSchema = z.object({
     numero_expediente: z.number(),
-    nombre_solicitante: z.string()
-        .min(2, { message: "El nombre es obligatorio." })
-        .max(50, { message: "El nombre no debe ser mayor a 50 caracteres." }),
-    tarifa: z.string({ message: "La tarifa es obligatoria." }),
-    fecha_ingreso: z.string().refine((val) => !isNaN(Date.parse(val)), {
-        message: "La fecha de ingreso debe ser una fecha válida.",
-    }),
-    fontanero: z.string().min(1, {
-        message: "Debes seleccionar una bomba de agua.",
-    }),
-    bomba: z.string().min(1, {
-        message: "Debes seleccionar una bomba de agua.",
-    })
+    nombre_solicitante: z.string().min(2, { message: "El nombre es obligatorio." }).max(50, { message: "El nombre no debe ser mayor a 50 caracteres." }),
+    tarifa: z.string().nonempty({ message: "La tarifa es obligatoria." }),
+    fecha_ingreso: z.string().refine((val) => !isNaN(Date.parse(val)), { message: "La fecha de ingreso debe ser una fecha válida." }),
+    fontanero: z.string().min(1, { message: "Debes seleccionar un fontanero." }),
+    bomba: z.string().min(1, { message: "Debes seleccionar una bomba de agua." })
 });
-
-
-
-// Tipos de datos actualizados con los nuevos campos
-export type SolicitudTrabajo = {
-    id: string;
-    numero_expediente: number;
-    nombre_solicitante: string;
-    tarifa: string;
-    fecha_ingreso: string; // Fecha en formato ISO (string)
-    fontanero_id: string | null;
-    bomba_distribucion_id: string | null;
-};
-
-export type DraftSolicitudTrabajo = Omit<SolicitudTrabajo, 'id'>;
-
 
 export function VecinosForm() {
     const { toast } = useToast();
@@ -61,8 +37,11 @@ export function VecinosForm() {
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 
+    // Ajustar fecha a formato local
     const adjustToLocalDate = (dateString: string) => {
-        const adjustedDate = adjustToLocalTime(dateString);
+        const date = new Date(dateString);
+        const offset = date.getTimezoneOffset();
+        const adjustedDate = new Date(date.getTime() - offset * 60000);
         const year = adjustedDate.getFullYear();
         const month = String(adjustedDate.getMonth() + 1).padStart(2, "0");
         const day = String(adjustedDate.getDate()).padStart(2, "0");
@@ -75,7 +54,7 @@ export function VecinosForm() {
             numero_expediente: 0,
             nombre_solicitante: "",
             tarifa: "",
-            fecha_ingreso: adjustToLocalDate(new Date().toISOString()), // Usar la fecha ajustada
+            fecha_ingreso: adjustToLocalDate(new Date().toISOString()),
             fontanero: "",
             bomba: ""
         },
@@ -83,16 +62,10 @@ export function VecinosForm() {
     });
 
     useEffect(() => {
-        // Fetch de bombas y fontaneros al montar el componente
+        // Fetch bombas y fontaneros al montar el componente
         fetchBombas();
         fetchFontaneros();
     }, [fetchBombas, fetchFontaneros]);
-
-    function adjustToLocalTime(dateString: string) {
-        const date = new Date(dateString);
-        const offset = date.getTimezoneOffset();
-        return new Date(date.getTime() - offset * 60000);
-    }
 
     useEffect(() => {
         if (activeSolicitudId) {
@@ -101,22 +74,23 @@ export function VecinosForm() {
                 form.setValue("numero_expediente", activeSolicitud.numero_expediente);
                 form.setValue("nombre_solicitante", activeSolicitud.nombre_solicitante);
                 form.setValue("tarifa", activeSolicitud.tarifa);
-                form.setValue("fecha_ingreso", adjustToLocalDate(activeSolicitud.fecha_ingreso)); // Ajustar la fecha
+                form.setValue("fecha_ingreso", adjustToLocalDate(activeSolicitud.fecha_ingreso));
                 form.setValue("fontanero", activeSolicitud.fontanero_id ?? "");
                 form.setValue("bomba", activeSolicitud.bomba_distribucion_id ?? "");
             }
+        } else {
+            form.reset(); // Resetea el formulario si no hay solicitud activa
         }
     }, [activeSolicitudId, solicitudes, form]);
 
     const registerSolicitud = (data: z.infer<typeof formSchema>) => {
-        // Mapeo de campos 'fontanero' y 'bomba' a 'fontanero_id' y 'bomba_distribucion_id'
-        const solicitudData: DraftSolicitudTrabajo = {
+        const solicitudData = {
             numero_expediente: data.numero_expediente,
             nombre_solicitante: data.nombre_solicitante,
             tarifa: data.tarifa,
             fecha_ingreso: data.fecha_ingreso,
-            fontanero_id: data.fontanero, // Aquí se asume que 'fontanero' ya contiene el id
-            bomba_distribucion_id: data.bomba, // Aquí se asume que 'bomba' ya contiene el id
+            fontanero_id: data.fontanero,
+            bomba_distribucion_id: data.bomba,
         };
 
         if (activeSolicitudId) {
@@ -135,9 +109,8 @@ export function VecinosForm() {
             });
         }
 
-        form.reset();
+        form.reset(); // Resetea el formulario después de actualizar o registrar
     };
-
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
 

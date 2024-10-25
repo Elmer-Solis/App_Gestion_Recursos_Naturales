@@ -12,28 +12,28 @@ import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
 
 // Interfaz para Solicitud de Trabajo
 interface SolicitudTrabajo {
-    id: number;
-    vecinoNombre: string;
-    direccionVecino: string;
-    fechaSolicitud: Date;
-    estadoSolicitud: string;
-    tituloSolicitud: string;
-    descripcionSolicitud?: string;
-}
+    id: string;
+    numero_expediente: number;
+    nombre_solicitante: string;
+    tarifa: string;
+    fecha_ingreso: string; // Fecha en formato ISO (string)
+    fontanero_id: string | null;
+    bomba_distribucion_id: string | null;
+};
 
 
 type SolicitudDetailsProps = {
-    solicitud: SolicitudTrabajo;
+    solicitudes: SolicitudTrabajo;
 };
 
-export default function VecinosDetails({ solicitud }: SolicitudDetailsProps) {
+export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
     const { toast } = useToast();
 
 
-    const { deleteSolicitud, updateSolicitud } = useSolicitudTrabajoStore()
+    const { deleteSolicitud, updateSolicitud, getSolicitudById } = useSolicitudTrabajoStore()
 
     const handleClick = () => {
-        deleteSolicitud(solicitud.id);
+        deleteSolicitud(solicitudes.id);
 
         toast({
             variant: "delete",
@@ -51,8 +51,8 @@ export default function VecinosDetails({ solicitud }: SolicitudDetailsProps) {
                         <img src="/soli.png" alt="" />
                     </section>
                     <div>
-                        <VecinosDetailItem label="Nombre" data={solicitud.vecinoNombre} />
-                        <VecinosDetailItem label="Teléfono" data={solicitud.estadoSolicitud} />
+                        <VecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
+                        <VecinosDetailItem label="Teléfono" data={solicitudes.tarifa} />
 
                     </div>
                 </div>
@@ -60,7 +60,7 @@ export default function VecinosDetails({ solicitud }: SolicitudDetailsProps) {
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
-                    onClick={() => updateSolicitud(solicitud)}
+                    onClick={() => getSolicitudById(solicitudes.id)}
                 >
                     Editar
                 </Button>
