@@ -1,37 +1,49 @@
-import { useSolicitudTrabajoStore } from "@/store/storeVecinos"
-import VecinosDetails from "./VecinosDetails"
-import { useEffect, useState } from "react"
-import { useFontaneroStore } from "@/store/storeFontanero"
-import { useBombaStore } from "@/store/storeBombas"
+import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
+import VecinosDetails from "./VecinosDetails";
+import { useEffect, useState } from "react";
+import { useFontaneroStore } from "@/store/storeFontanero";
+import { useBombaStore } from "@/store/storeBombas";
 import { Input } from "@/components/ui/input";
 
 export const VecinosList = () => {
-    const { solicitudes, fetchSolicitudes } = useSolicitudTrabajoStore()
+    const { solicitudes, fetchSolicitudes } = useSolicitudTrabajoStore();
     const { fetchFontaneros } = useFontaneroStore();
     const { fetchBombas } = useBombaStore();
 
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchExpediente, setSearchExpediente] = useState('');
+    const [searchNombre, setSearchNombre] = useState('');
 
     useEffect(() => {
         fetchBombas();
         fetchFontaneros();
         fetchSolicitudes();
-    }, [fetchBombas, fetchFontaneros, fetchSolicitudes]); // El efecto se ejecuta solo una vez cuando el componente se monta
+    }, [fetchBombas, fetchFontaneros, fetchSolicitudes]);
 
-    // Filter solicitudes based on the search query
+    // Filter solicitudes based on the search queries
     const filteredSolicitudes = solicitudes.filter((solicitud) =>
-        solicitud.numero_expediente.toString().includes(searchQuery)
+        solicitud.numero_expediente.toString().includes(searchExpediente) &&
+        solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase())
     );
 
     return (
         <div className="md:w-1/2 lg:3/5 md:h-full flex-grow">
-            <Input
-                type="text"
-                placeholder="Buscar expediente"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)} // Update search query state
-                className="mb-4"
-            />
+            <div className="flex justify-center gap-4">
+                <Input
+                    type="text"
+                    placeholder="Buscar expediente"
+                    value={searchExpediente}
+                    onChange={(e) => setSearchExpediente(e.target.value)} // Update expediente search query state
+                    className="mb-4"
+                />
+                <Input
+                    type="text"
+                    placeholder="Buscar nombre"
+                    value={searchNombre}
+                    onChange={(e) => setSearchNombre(e.target.value)} // Update nombre search query state
+                    className="mb-4"
+                />
+            </div>
+
             <div
                 className="mt-4 h-full overflow-y-scroll
                 dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
@@ -63,4 +75,4 @@ export const VecinosList = () => {
             </div>
         </div>
     );
-}
+};
