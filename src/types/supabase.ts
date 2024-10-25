@@ -7,6 +7,31 @@ export type Json =
   | Json[]
 
 export type Database = {
+  graphql_public: {
+    Tables: {
+      [_ in never]: never
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      graphql: {
+        Args: {
+          operationName?: string
+          query?: string
+          variables?: Json
+          extensions?: Json
+        }
+        Returns: Json
+      }
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
+    }
+  }
   public: {
     Tables: {
       bombas: {
@@ -144,35 +169,149 @@ export type Database = {
           },
         ]
       }
-      solicitudes_trabajo: {
+      solicitud_trabajo: {
         Row: {
-          descripcion_solicitud: string | null
-          direccion_vecino: string
-          estado_solicitud: string
-          fecha_solicitud: string
+          bomba_distribucion_id: number | null
+          fecha_ingreso: string | null
+          fontanero_id: number | null
           id: number
-          titulo_solicitud: string
-          vecino_nombre: string
+          nombre_solicitante: string | null
+          numero_expediente: number | null
+          tarifa: string | null
         }
         Insert: {
-          descripcion_solicitud?: string | null
-          direccion_vecino: string
-          estado_solicitud: string
-          fecha_solicitud: string
+          bomba_distribucion_id?: number | null
+          fecha_ingreso?: string | null
+          fontanero_id?: number | null
           id?: number
-          titulo_solicitud: string
-          vecino_nombre: string
+          nombre_solicitante?: string | null
+          numero_expediente?: number | null
+          tarifa?: string | null
         }
         Update: {
-          descripcion_solicitud?: string | null
-          direccion_vecino?: string
-          estado_solicitud?: string
-          fecha_solicitud?: string
+          bomba_distribucion_id?: number | null
+          fecha_ingreso?: string | null
+          fontanero_id?: number | null
           id?: number
-          titulo_solicitud?: string
-          vecino_nombre?: string
+          nombre_solicitante?: string | null
+          numero_expediente?: number | null
+          tarifa?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "fk_bomba_distribucion"
+            columns: ["bomba_distribucion_id"]
+            isOneToOne: false
+            referencedRelation: "bombas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_fontanero"
+            columns: ["fontanero_id"]
+            isOneToOne: false
+            referencedRelation: "fontaneros"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      solicitudes_trabajo: {
+        Row: {
+          bomba_distribucion_id: number | null
+          deposito_garantia: string | null
+          direccion: string | null
+          drenaje: string | null
+          fecha_ingreso: string
+          fecha_inspeccion: string | null
+          fecha_instalacion: string | null
+          fecha_recibo: string | null
+          fontanero_id: number | null
+          id: number
+          levanto_adoquin: string | null
+          monto: number | null
+          monto_drenaje: number | null
+          nombre_sindico_acompanio: string | null
+          nombre_solicitante: string
+          numero_expediente: number
+          numero_medidor: string | null
+          numero_orden_instalacion: number | null
+          numero_recibo: number | null
+          numero_recibo_drenaje: number | null
+          numero_recibo_garantia: number | null
+          numero_servicios: number | null
+          observacion: string | null
+          tarifa: string | null
+          telefono: number | null
+        }
+        Insert: {
+          bomba_distribucion_id?: number | null
+          deposito_garantia?: string | null
+          direccion?: string | null
+          drenaje?: string | null
+          fecha_ingreso: string
+          fecha_inspeccion?: string | null
+          fecha_instalacion?: string | null
+          fecha_recibo?: string | null
+          fontanero_id?: number | null
+          id?: number
+          levanto_adoquin?: string | null
+          monto?: number | null
+          monto_drenaje?: number | null
+          nombre_sindico_acompanio?: string | null
+          nombre_solicitante: string
+          numero_expediente: number
+          numero_medidor?: string | null
+          numero_orden_instalacion?: number | null
+          numero_recibo?: number | null
+          numero_recibo_drenaje?: number | null
+          numero_recibo_garantia?: number | null
+          numero_servicios?: number | null
+          observacion?: string | null
+          tarifa?: string | null
+          telefono?: number | null
+        }
+        Update: {
+          bomba_distribucion_id?: number | null
+          deposito_garantia?: string | null
+          direccion?: string | null
+          drenaje?: string | null
+          fecha_ingreso?: string
+          fecha_inspeccion?: string | null
+          fecha_instalacion?: string | null
+          fecha_recibo?: string | null
+          fontanero_id?: number | null
+          id?: number
+          levanto_adoquin?: string | null
+          monto?: number | null
+          monto_drenaje?: number | null
+          nombre_sindico_acompanio?: string | null
+          nombre_solicitante?: string
+          numero_expediente?: number
+          numero_medidor?: string | null
+          numero_orden_instalacion?: number | null
+          numero_recibo?: number | null
+          numero_recibo_drenaje?: number | null
+          numero_recibo_garantia?: number | null
+          numero_servicios?: number | null
+          observacion?: string | null
+          tarifa?: string | null
+          telefono?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_bomba_distribucion"
+            columns: ["bomba_distribucion_id"]
+            isOneToOne: false
+            referencedRelation: "bombas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_fontanero"
+            columns: ["fontanero_id"]
+            isOneToOne: false
+            referencedRelation: "fontaneros"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       users: {
         Row: {

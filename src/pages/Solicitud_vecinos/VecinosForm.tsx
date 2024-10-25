@@ -1,14 +1,9 @@
-
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { useEffect } from "react";
-
 import {
     Form,
     FormControl,
@@ -17,215 +12,212 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-
+import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-
+import { useToast } from "@/hooks/use-toast";
+import { useEffect } from "react";
+import { useFontaneroStore } from "@/store/storeFontanero";
+import { useBombaStore } from "@/store/storeBombas";
 import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
+import { DatePickerDemo } from "./DatePicker";
 
-// Esquema de validación con Zod para `SolicitudTrabajo`
-const formSchema = z
-    .object({
-        tituloSolicitud: z.string().min(2, { message: "El título debe tener al menos 2 caracteres." }),
-        descripcionSolicitud: z.string().optional(),
-        fechaSolicitud: z.string().refine((val) => val !== "" && !isNaN(Date.parse(val)), {
-            message: "Fecha de solicitud inválida.",
-        }),
-        estadoSolicitud: z.string().min(1, { message: "Debe seleccionar un estado de solicitud." }),
-        vecinoNombre: z.string().min(1, { message: "El nombre del vecino es obligatorio." }),
-        direccionVecino: z.string().min(1, { message: "La dirección del vecino es obligatoria." }),
-    });
+// Definir el esquema de validación
+const formSchema = z.object({
+    numero_expediente: z.number(),
+    nombre_solicitante: z.string()
+        .min(2, { message: "El nombre es obligatorio." })
+        .max(50, { message: "El nombre no debe ser mayor a 50 caracteres." }),
+    tarifa: z.string({ message: "La tarifa es obligatoria." }),
+    fecha_ingreso: z.string().refine((val) => !isNaN(Date.parse(val)), {
+        message: "La fecha de ingreso debe ser una fecha válida.",
+    }),
+    fontanero: z.string().min(1, {
+        message: "Debes seleccionar una bomba de agua.",
+    }),
+    bomba: z.string().min(1, {
+        message: "Debes seleccionar una bomba de agua.",
+    })
+});
 
-const estadosSolicitud = [
-    { id: 'urgente', name: 'Urgente' },
-    { id: 'alta_prioridad', name: 'Alta prioridad' },
-    { id: 'baja_prioridad', name: 'Baja prioridad' },
-];
+
+
+// Tipos de datos actualizados con los nuevos campos
+export type SolicitudTrabajo = {
+    id: string;
+    numero_expediente: number;
+    nombre_solicitante: string;
+    tarifa: string;
+    fecha_ingreso: string; // Fecha en formato ISO (string)
+    fontanero_id: string | null;
+    bomba_distribucion_id: string | null;
+};
+
+export type DraftSolicitudTrabajo = Omit<SolicitudTrabajo, 'id'>;
+
 
 export function VecinosForm() {
-    const { addSolicitud, selectedSolicitud, updateSolicitud, setSelectedSolicitud } = useSolicitudTrabajoStore();
-
     const { toast } = useToast();
-    const form = useForm({
+    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes } = useSolicitudTrabajoStore();
+    const { fetchBombas, bombas } = useBombaStore();
+    const { fetchFontaneros, fontaneros } = useFontaneroStore();
+
+    const adjustToLocalDate = (dateString: string) => {
+        const adjustedDate = adjustToLocalTime(dateString);
+        const year = adjustedDate.getFullYear();
+        const month = String(adjustedDate.getMonth() + 1).padStart(2, "0");
+        const day = String(adjustedDate.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    };
+
+    const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: selectedSolicitud
-            ? {
-                tituloSolicitud: selectedSolicitud.tituloSolicitud,
-                descripcionSolicitud: selectedSolicitud.descripcionSolicitud || "",
-                fechaSolicitud: selectedSolicitud.fechaSolicitud.toISOString().slice(0, 16),
-                estadoSolicitud: selectedSolicitud.estadoSolicitud || "",
-                vecinoNombre: selectedSolicitud.vecinoNombre,
-                direccionVecino: selectedSolicitud.direccionVecino,
-
-            }
-            : {
-                tituloSolicitud: "",
-                descripcionSolicitud: "",
-                fechaSolicitud: "",
-                estadoSolicitud: "",
-                vecinoNombre: "",
-                direccionVecino: "",
-
-            },
+        defaultValues: {
+            numero_expediente: 0,
+            nombre_solicitante: "",
+            tarifa: "",
+            fecha_ingreso: adjustToLocalDate(new Date().toISOString()), // Usar la fecha ajustada
+            fontanero: "",
+            bomba: ""
+        },
+        mode: "onChange",
     });
 
-
     useEffect(() => {
-        if (selectedSolicitud) {
-            // Si hay una solicitud seleccionada, llena el formulario con sus datos
-            form.reset({
-                tituloSolicitud: selectedSolicitud.tituloSolicitud,
-                descripcionSolicitud: selectedSolicitud.descripcionSolicitud || "",
-                fechaSolicitud: formatDateTimeLocal(selectedSolicitud.fechaSolicitud),
-                estadoSolicitud: selectedSolicitud.estadoSolicitud || '',
-                vecinoNombre: selectedSolicitud.vecinoNombre,
-                direccionVecino: selectedSolicitud.direccionVecino,
+        // Fetch de bombas y fontaneros al montar el componente
+        fetchBombas();
+        fetchFontaneros();
+    }, [fetchBombas, fetchFontaneros]);
 
-            });
-        } else {
-            // Si no hay solicitud seleccionada, limpia el formulario
-            form.reset({
-                tituloSolicitud: "",
-                descripcionSolicitud: "",
-                fechaSolicitud: "",
-                estadoSolicitud: "",
-                vecinoNombre: "",
-                direccionVecino: "",
-
-            });
-        }
-    }, [selectedSolicitud, form]);
-
-    function formatDateTimeLocal(date: Date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        const hours = String(date.getHours()).padStart(2, "0");
-        const minutes = String(date.getMinutes()).padStart(2, "0");
-        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    function adjustToLocalTime(dateString: string) {
+        const date = new Date(dateString);
+        const offset = date.getTimezoneOffset();
+        return new Date(date.getTime() - offset * 60000);
     }
 
-    const onSubmit = async (data: any) => {
-        const fecha = new Date(data.fechaSolicitud);
+    useEffect(() => {
+        if (activeSolicitudId) {
+            const activeSolicitud = solicitudes.find(solicitud => solicitud.id === activeSolicitudId);
+            if (activeSolicitud) {
+                form.setValue("numero_expediente", activeSolicitud.numero_expediente);
+                form.setValue("nombre_solicitante", activeSolicitud.nombre_solicitante);
+                form.setValue("tarifa", activeSolicitud.tarifa);
+                form.setValue("fecha_ingreso", adjustToLocalDate(activeSolicitud.fecha_ingreso)); // Ajustar la fecha
+                form.setValue("fontanero", activeSolicitud.fontanero_id ?? "");
+                form.setValue("bomba", activeSolicitud.bomba_distribucion_id ?? "");
+            }
+        }
+    }, [activeSolicitudId, solicitudes, form]);
 
-        const newSolicitud = {
-            id: selectedSolicitud ? selectedSolicitud.id : Date.now(),
-            tituloSolicitud: data.tituloSolicitud,
-            descripcionSolicitud: data.descripcionSolicitud,
-            fechaSolicitud: fecha,
-            estadoSolicitud: data.estadoSolicitud,
-            vecinoNombre: data.vecinoNombre,
-            direccionVecino: data.direccionVecino,
+    const registerSolicitud = (data: z.infer<typeof formSchema>) => {
+        // Mapeo de campos 'fontanero' y 'bomba' a 'fontanero_id' y 'bomba_distribucion_id'
+        const solicitudData: DraftSolicitudTrabajo = {
+            numero_expediente: data.numero_expediente,
+            nombre_solicitante: data.nombre_solicitante,
+            tarifa: data.tarifa,
+            fecha_ingreso: data.fecha_ingreso,
+            fontanero_id: data.fontanero, // Aquí se asume que 'fontanero' ya contiene el id
+            bomba_distribucion_id: data.bomba, // Aquí se asume que 'bomba' ya contiene el id
         };
 
-        if (selectedSolicitud) {
-            await updateSolicitud(newSolicitud);
+        if (activeSolicitudId) {
+            updateSolicitud(solicitudData);
             toast({
-                title: "Solicitud actualizada",
                 variant: 'update',
-                description: "La solicitud fue editada correctamente."
+                title: "Actualización Exitosa",
+                description: "Solicitud Actualizada Correctamente",
             });
         } else {
-            await addSolicitud(newSolicitud);
+            addSolicitud(solicitudData);
             toast({
-                title: "Solicitud creada",
                 variant: 'succes',
-                description: "La solicitud fue creada correctamente."
+                title: "Registro Exitoso",
+                description: "Solicitud Registrada Correctamente",
             });
         }
 
-        setSelectedSolicitud(null);
         form.reset();
     };
 
     return (
-        <div className="md:w-1/2 lg:w-2/5 mx-5" >
-
-            {/* Formulario con React Hook Form y Zod */}
+        <div className="md:w-1/2 lg:w-2/5 mx-5">
 
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="py-10 px-5 space-y-5">
-                        {/* Fecha de solicitud */}
+                    <form onSubmit={form.handleSubmit(registerSolicitud)} className="py-10 px-5 space-y-5">
                         <FormField
                             control={form.control}
-                            name="fechaSolicitud"
+                            name="numero_expediente"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel htmlFor="fechaSolicitud">Fecha de Solicitud</FormLabel>
+                                    <FormLabel htmlFor="numero_expediente">Número de Expediente</FormLabel>
                                     <FormControl>
                                         <Input
-                                            id="fechaSolicitud"
-                                            type="datetime-local"
+                                            id="numero_expediente"
+                                            type="number"
+                                            placeholder="Número de Expediente"
                                             {...field}
-                                            className="form-control custom-datetime-input"
+                                            onChange={(e) => field.onChange(Number(e.target.value))}
                                         />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-
-                        {/* Título de la solicitud */}
                         <FormField
                             control={form.control}
-                            name="tituloSolicitud"
+                            name="nombre_solicitante"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel htmlFor="tituloSolicitud">Título de la Solicitud</FormLabel>
+                                    <FormLabel htmlFor="nombre_solicitante">Nombre del Solicitante</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            id="tituloSolicitud"
-                                            type="text"
-                                            placeholder="Título de la solicitud"
-                                            {...field}
-                                            className="form-control"
-                                        />
+                                        <Input id="nombre_solicitante" placeholder="Nombre del Solicitante" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-
-                        {/* Descripción */}
                         <FormField
                             control={form.control}
-                            name="descripcionSolicitud"
+                            name="tarifa"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel htmlFor="descripcionSolicitud">Descripción</FormLabel>
-                                    <FormControl>
-                                        <Textarea
-                                            id="descripcionSolicitud"
-                                            placeholder="Descripción"
-                                            rows={3}
-                                            {...field}
-                                            className="form-control"
-                                        ></Textarea>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        {/* Estado de la solicitud */}
-                        <FormField
-                            control={form.control}
-                            name="estadoSolicitud"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Estado de la Solicitud</FormLabel>
+                                    <FormLabel htmlFor="tarifa">Tarifa</FormLabel>
                                     <FormControl>
                                         <Select
                                             onValueChange={(value) => field.onChange(value)}
                                             value={field.value}
                                         >
-                                            <SelectTrigger className="w-full">
-                                                <SelectValue placeholder="Selecciona un estado" />
+                                            <SelectTrigger className="w-full" id="tarifa">
+                                                <SelectValue placeholder="Selecciona una tarifa" />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {estadosSolicitud.map((estado) => (
-                                                    <SelectItem key={estado.id} value={estado.id}>
-                                                        {estado.name}
+                                                <SelectItem value="Comercial">Comercial</SelectItem>
+                                                <SelectItem value="Industrial">Industrial</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="bomba"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel htmlFor="bomba">Bomba de agua</FormLabel>
+                                    <FormControl>
+                                        <Select
+                                            onValueChange={(value) => field.onChange(value)}
+                                            value={field.value}
+                                        >
+                                            <SelectTrigger className="w-full" id="bomba">
+                                                <SelectValue placeholder="Selecciona una bomba" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {bombas.map((bomba) => (
+                                                    <SelectItem key={bomba.id} value={bomba.id}>
+                                                        {bomba.name}
                                                     </SelectItem>
                                                 ))}
                                             </SelectContent>
@@ -235,54 +227,49 @@ export function VecinosForm() {
                                 </FormItem>
                             )}
                         />
-
-                        {/* Vecino */}
                         <FormField
                             control={form.control}
-                            name="vecinoNombre"
+                            name="fecha_ingreso"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Nombre del Vecino</FormLabel>
+                                    <FormLabel htmlFor="fecha_ingreso">Fecha de Ingreso</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            id="vecinoNombre"
-                                            type="text"
-                                            placeholder="Nombre del vecino"
-                                            {...field}
-                                            className="form-control"
-                                        />
+                                        <Input id="fecha_ingreso" type="date" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-
-                        {/* Dirección */}
                         <FormField
                             control={form.control}
-                            name="direccionVecino"
+                            name="fontanero"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Dirección del Vecino</FormLabel>
+                                    <FormLabel htmlFor="fontanero">Fontanero</FormLabel>
                                     <FormControl>
-                                        <Input
-                                            id="direccionVecino"
-                                            type="text"
-                                            placeholder="Dirección"
-                                            {...field}
-                                            className="form-control"
-                                        />
+                                        <Select
+                                            onValueChange={(value) => field.onChange(value)}
+                                            value={field.value}
+                                        >
+                                            <SelectTrigger className="w-full" id="fontanero">
+                                                <SelectValue placeholder="Selecciona un fontanero" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                {fontaneros.map((fontanero) => (
+                                                    <SelectItem key={fontanero.id} value={fontanero.id}>
+                                                        {fontanero.name}
+                                                    </SelectItem>
+                                                ))}
+                                            </SelectContent>
+                                        </Select>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-
-
                         <Button type="submit" className="uppercase text-white font-bold w-full">
-                            <span>Guardar Solicitud</span>
+                            Guardar Solicitud
                         </Button>
-
                     </form>
                 </Form>
             </Card>
