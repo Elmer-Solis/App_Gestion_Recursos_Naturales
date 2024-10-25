@@ -19,7 +19,7 @@ import { useEffect } from "react";
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
-import { DatePickerDemo } from "./DatePicker";
+
 
 // Definir el esquema de validación
 const formSchema = z.object({
@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 export function VecinosForm() {
     const { toast } = useToast();
-    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes } = useSolicitudTrabajoStore();
+    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes, setActiveSolicitudId } = useSolicitudTrabajoStore();
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 
@@ -78,12 +78,11 @@ export function VecinosForm() {
                 form.setValue("fontanero", activeSolicitud.fontanero_id ?? "");
                 form.setValue("bomba", activeSolicitud.bomba_distribucion_id ?? "");
             }
-        } else {
-            form.reset(); // Resetea el formulario si no hay solicitud activa
         }
     }, [activeSolicitudId, solicitudes, form]);
 
-    const registerSolicitud = (data: z.infer<typeof formSchema>) => {
+
+    const registerSolicitud = async (data: z.infer<typeof formSchema>) => {
         const solicitudData = {
             numero_expediente: data.numero_expediente,
             nombre_solicitante: data.nombre_solicitante,
@@ -92,25 +91,28 @@ export function VecinosForm() {
             fontanero_id: data.fontanero,
             bomba_distribucion_id: data.bomba,
         };
-
         if (activeSolicitudId) {
-            updateSolicitud(solicitudData);
+            await updateSolicitud(solicitudData);
             toast({
                 variant: 'update',
                 title: "Actualización Exitosa",
                 description: "Solicitud Actualizada Correctamente",
             });
+            // Limpiar el activeSolicitudId y resetear el formulario
+            setActiveSolicitudId(""); // Limpiar el ID activo después de la actualización;
         } else {
-            addSolicitud(solicitudData);
+            await addSolicitud(solicitudData);
             toast({
                 variant: 'succes',
                 title: "Registro Exitoso",
                 description: "Solicitud Registrada Correctamente",
             });
+            // Resetear el formulario después del registro;
         }
-
-        form.reset(); // Resetea el formulario después de actualizar o registrar
+        form.reset()
     };
+
+
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
 
