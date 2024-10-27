@@ -41,13 +41,17 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/fontanero.png" alt="" />
+                        <img src="/fontanero.png" alt="fontanero" />
                     </section>
-                    <div>
-                        <FontaneroDetailItem label="Nombre" data={fontanero.name} />
-                        <FontaneroDetailItem label="Teléfono" data={fontanero.phone} />
-                        {/* Muestra el nombre de la bomba asignada, si existe */}
-                        <FontaneroDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
+                    <div className="flex  flex-wrap justify-between w-full">
+                        <div className="flex flex-col gap-y-2">
+                            <FontaneroDetailItem label="Nombre" data={fontanero.name} />
+                            <FontaneroDetailItem label="Teléfono" data={fontanero.phone} />
+                        </div>
+                        <div className="flex flex-col gap-y-2" >
+                            <FontaneroDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
+
+                        </div>
                     </div>
                 </div>
             </CardHeader>
