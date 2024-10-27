@@ -156,12 +156,10 @@ export function Calendario() {
                 <DialogDemo />
                 <DialogMant />
 
-                {!selectedEvent && <ButtonCalendar />}
-                {!selectedMantenimiento && <ButtonMant />}
+                {!selectedEvent && !selectedMantenimiento && <ButtonCalendar />}
+                {!selectedEvent && !selectedMantenimiento && <ButtonMant />}
                 {(selectedEvent || selectedMantenimiento) && !isDateModalOpen && !isMaintOpen && <ButtonDeleteCalendar />}
                 {/* componente y botón para mantenimiento */}
-
-
             </>
         </>
     );

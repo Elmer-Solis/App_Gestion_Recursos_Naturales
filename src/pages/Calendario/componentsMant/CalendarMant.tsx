@@ -173,7 +173,7 @@ export function DialogMant() {
             if (!open) closeMaint();
         }}>
             <DialogContent className="sm:max-w-[600px]">
-                <DialogTitle>{selectedMantenimiento ? "Editar Evento" : "Crear Evento"}</DialogTitle>
+                <DialogTitle>{selectedMantenimiento ? "Editar Evento" : "Crear Evento Mantenimiento"}</DialogTitle>
                 <DialogDescription>
                     {selectedMantenimiento ? "Edita los detalles del evento." : "Completa el formulario para agregar un nuevo evento."}
                 </DialogDescription>

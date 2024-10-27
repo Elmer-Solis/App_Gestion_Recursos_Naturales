@@ -1,11 +1,11 @@
-
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
-import { HorasExtras } from './HorasExtras/HorasExtras';
+import { TablaFontanerosBombas } from "../Tablas/TablaFontanerosBombas";
+import { MantBombas } from "../MantenimientoBombas/MantBombas";
 
-// Importamos los hooks de Zustand
-export function Inicio() {
+export const Tablas = () => {
+
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
     const fetchBombas = useBombaStore((state) => state.fetchBombas);
     const [loading, setLoading] = useState(true); // Estado de carga
@@ -28,17 +28,19 @@ export function Inicio() {
     if (loading) {
         return <div className="p-8 text-center">Cargando datos...</div>;
     }
-
     return (
         <main className="container 
         mx-auto mt-5 px-4 sm:px-6 ">
             <div className="grid grid-cols-1
              md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 h-full">
-                <div className="pt-4 md:pt-0">
-                    <HorasExtras />
+
+                <div >
+                    <TablaFontanerosBombas />
+                </div>
+                <div >
+                    <MantBombas />
                 </div>
             </div>
         </main>
-    );
+    )
 }
-

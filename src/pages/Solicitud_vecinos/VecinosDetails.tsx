@@ -29,7 +29,6 @@ type SolicitudDetailsProps = {
 export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
     const { toast } = useToast();
 
-
     const { deleteSolicitud, getSolicitudById } = useSolicitudTrabajoStore()
 
     const handleClick = () => {

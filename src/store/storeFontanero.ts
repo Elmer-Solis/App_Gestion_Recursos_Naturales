@@ -1,8 +1,17 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Fontanero, DraftFontanero } from '../types/index';
 import supabase from "@/supabase/supabase.config";
 import { v4 as uuidv4 } from 'uuid';
+
+export type Fontanero = {
+    id: string
+    name: string
+    phone: string
+    bomba: string
+}
+
+export type DraftFontanero = Omit<Fontanero, 'id'>
+
 
 // Tipo de Row de Supabase
 type Row = {
@@ -33,6 +42,7 @@ const mapRowToFontanero = (row: Row): Fontanero => ({
 export const useFontaneroStore = create<fontaneroState>()(
     devtools(
         (set, get) => ({
+
             fontaneros: [],
             activeId: '',
 
