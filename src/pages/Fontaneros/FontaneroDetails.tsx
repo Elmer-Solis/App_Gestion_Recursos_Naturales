@@ -50,7 +50,6 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
                         </div>
                         <div className="flex flex-col gap-y-2" >
                             <FontaneroDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
-
                         </div>
                     </div>
                 </div>

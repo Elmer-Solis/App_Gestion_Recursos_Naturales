@@ -220,7 +220,7 @@ export type Database = {
           deposito_garantia: string | null
           direccion: string | null
           drenaje: string | null
-          fecha_ingreso: string
+          fecha_ingreso: string | null
           fecha_inspeccion: string | null
           fecha_instalacion: string | null
           fecha_recibo: string | null
@@ -230,8 +230,8 @@ export type Database = {
           monto: number | null
           monto_drenaje: number | null
           nombre_sindico_acompanio: string | null
-          nombre_solicitante: string
-          numero_expediente: number
+          nombre_solicitante: string | null
+          numero_expediente: string | null
           numero_medidor: string | null
           numero_orden_instalacion: number | null
           numero_recibo: number | null
@@ -247,7 +247,7 @@ export type Database = {
           deposito_garantia?: string | null
           direccion?: string | null
           drenaje?: string | null
-          fecha_ingreso: string
+          fecha_ingreso?: string | null
           fecha_inspeccion?: string | null
           fecha_instalacion?: string | null
           fecha_recibo?: string | null
@@ -257,8 +257,8 @@ export type Database = {
           monto?: number | null
           monto_drenaje?: number | null
           nombre_sindico_acompanio?: string | null
-          nombre_solicitante: string
-          numero_expediente: number
+          nombre_solicitante?: string | null
+          numero_expediente?: string | null
           numero_medidor?: string | null
           numero_orden_instalacion?: number | null
           numero_recibo?: number | null
@@ -274,7 +274,7 @@ export type Database = {
           deposito_garantia?: string | null
           direccion?: string | null
           drenaje?: string | null
-          fecha_ingreso?: string
+          fecha_ingreso?: string | null
           fecha_inspeccion?: string | null
           fecha_instalacion?: string | null
           fecha_recibo?: string | null
@@ -284,8 +284,8 @@ export type Database = {
           monto?: number | null
           monto_drenaje?: number | null
           nombre_sindico_acompanio?: string | null
-          nombre_solicitante?: string
-          numero_expediente?: number
+          nombre_solicitante?: string | null
+          numero_expediente?: string | null
           numero_medidor?: string | null
           numero_orden_instalacion?: number | null
           numero_recibo?: number | null

@@ -1,5 +1,5 @@
 
-import { VecinosForm } from "./VecinosForm"
+import { VecinosForm } from "./VecinosForm/VecinosForm"
 import { VecinosList } from "./VecinosList"
 
 export function Vecinos() {

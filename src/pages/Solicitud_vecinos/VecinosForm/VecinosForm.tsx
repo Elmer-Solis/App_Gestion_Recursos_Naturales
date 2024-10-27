@@ -23,12 +23,16 @@ import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
 
 // Definir el esquema de validación
 const formSchema = z.object({
-    numero_expediente: z.number(),
-    nombre_solicitante: z.string().min(2, { message: "El nombre es obligatorio." }).max(50, { message: "El nombre no debe ser mayor a 50 caracteres." }),
-    tarifa: z.string().nonempty({ message: "La tarifa es obligatoria." }),
-    fecha_ingreso: z.string().refine((val) => !isNaN(Date.parse(val)), { message: "La fecha de ingreso debe ser una fecha válida." }),
-    fontanero: z.string().min(1, { message: "Debes seleccionar un fontanero." }),
-    bomba: z.string().min(1, { message: "Debes seleccionar una bomba de agua." })
+    numero_expediente: z.number(),  // Obligatorio
+    nombre_solicitante: z.string()
+        .min(2, { message: "El nombre es obligatorio." })
+        .max(50, { message: "El nombre no debe ser mayor a 50 caracteres." }),  // Obligatorio
+    tarifa: z.string().optional(),  // Opcional
+    fecha_ingreso: z.string()
+        .refine((val) => !isNaN(Date.parse(val)), { message: "La fecha de ingreso debe ser una fecha válida." })
+        .optional(),  // Opcional
+    fontanero: z.string().optional(),  // Opcional
+    bomba: z.string().optional()  // Opcional
 });
 
 export function VecinosForm() {
@@ -86,10 +90,10 @@ export function VecinosForm() {
         const solicitudData = {
             numero_expediente: data.numero_expediente,
             nombre_solicitante: data.nombre_solicitante,
-            tarifa: data.tarifa,
-            fecha_ingreso: data.fecha_ingreso,
-            fontanero_id: data.fontanero,
-            bomba_distribucion_id: data.bomba,
+            tarifa: data.tarifa ?? "",  // Si es undefined, asignar cadena vacía
+            fecha_ingreso: data.fecha_ingreso ?? "",  // Si es undefined, asignar cadena vacía
+            fontanero_id: data.fontanero ?? "",  // Si es undefined, asignar cadena vacía
+            bomba_distribucion_id: data.bomba ?? ""  // Si es undefined, asignar cadena vacía
         };
         if (activeSolicitudId) {
             await updateSolicitud(solicitudData);
@@ -244,6 +248,7 @@ export function VecinosForm() {
                                 </FormItem>
                             )}
                         />
+
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Solicitud
                         </Button>
