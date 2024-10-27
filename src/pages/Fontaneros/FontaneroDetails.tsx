@@ -37,7 +37,7 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
     };
 
     return (
-        <Card className="mx-5 my-10 px-5 ">
+        <Card className="mx-20 my-8 px-5 ">
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">

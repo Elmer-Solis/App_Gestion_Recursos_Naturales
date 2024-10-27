@@ -33,19 +33,26 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
     }
 
     return (
-        <Card className="mx-5 my-10 px-5 ">
+        <Card className="mx-20 my-8 px-5 ">
             <CardHeader >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]  ">
                         <img src="/bomba.png" alt="" />
                     </section>
-                    <div>
-                        <BombaDetailItem label='Nombre' data={bomba.name} />
-                        <BombaDetailItem label='Direccion' data={bomba.direccion} />
-                        <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
-                        {/* Renderizar las zonas */}
-                        <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
+
+                    <div className="flex  flex-wrap justify-between w-full">
+
+                        <div className="flex flex-col">
+                            <BombaDetailItem label='Nombre' data={bomba.name} />
+                            <BombaDetailItem label='Direccion' data={bomba.direccion} />
+                        </div>
+                        <div className="flex flex-col">
+                            <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
+                            <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
+                        </div>
                     </div>
+                    {/* Renderizar las zonas */}
+
                 </div>
             </CardHeader>
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">

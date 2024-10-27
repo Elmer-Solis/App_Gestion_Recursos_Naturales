@@ -108,7 +108,8 @@ export function BombaForm() {
             <h2 className="font-black text-3xl text-center">Seguimiento Bombas</h2>
 
             <p className="text-lg mt-5 text-center mb-10">
-                Añade Bombas y <span className="text-blue-500 font-bold">Administralos</span>
+                Añade Bombas y {''}
+                <span className="text-blue-500 font-bold">Administralos</span>
             </p>
             <Card>
                 <Form {...form}>
