@@ -42,7 +42,7 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
     };
 
     return (
-        <Card className=" my-4 px-5 ">
+        <Card className=" my-4 px-1 ">
             {/* <CardHeader>
                 <div className="flex items-center gap-4">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
@@ -60,22 +60,22 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
                 </div>
             </CardHeader> */}
             <CardHeader>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/soli.png" alt="" />
+                        <img src="/documentos.png" alt="" />
                     </section>
                     <div className="flex flex-wrap justify-between w-full">
-                        <div className="flex flex-col">
-                            <VecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
-                            <VecinosDetailItem label="Teléfono" data={solicitudes.tarifa} />
+                        <div className="flex flex-col gap-y-2">
+                            <VecinosDetailItem label="Nombre" data={solicitudes.numero_expediente.toString()} />
+                            <VecinosDetailItem label="Telefono" data={solicitudes.tarifa} />
                         </div>
-                        <div className="flex flex-col">
-                            <VecinosDetailItem label="Expediente" data={solicitudes.numero_expediente.toString()} />
+                        <div className="flex flex-col gap-y-2">
+                            <VecinosDetailItem label="Expediente" data={solicitudes.nombre_solicitante} />
+                            <VecinosDetailItem label="Instalacion" data={solicitudes.nombre_solicitante} />
                         </div>
                     </div>
                 </div>
             </CardHeader>
-
 
 
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
