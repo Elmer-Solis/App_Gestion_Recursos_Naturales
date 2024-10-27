@@ -21,9 +21,9 @@ export const Header = () => {
         if (pathname === "/calidad") {
             return "Calidad Agua";
         }
-        if (pathname === "/solicitud") {
-            return "Solicitud Vecinos";
-        }
+        // if (pathname === "/solicitud") {
+        //     return "Solicitud Vecinos";
+        // }
         // Elimina la barra inclinada inicial y divide las palabras
         const words = pathname.replace("/", "").split("/");
         // Capitaliza la primera letra de cada palabra
@@ -31,6 +31,12 @@ export const Header = () => {
             .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(" ");
     };
+
+    // Condicional para ocultar el Header en la ruta "/solicitud"
+    if (location.pathname === "/solicitud") {
+        return null; // No renderizar el header
+    }
+
 
     return (
         <header className="flex h-[57px] justify-between items-center gap-1 border-b bg-background  py-10 px-12">

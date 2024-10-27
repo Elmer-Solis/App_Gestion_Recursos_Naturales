@@ -26,7 +26,7 @@ export const VecinosList = () => {
     );
 
     return (
-        <div className="md:w-1/2 lg:3/5 md:h-full flex-grow">
+        <div className="md:w-2/5 lg:w-2/5 md:h-full flex-grow">
             <div className="flex justify-center gap-4">
                 <Input
                     type="text"

@@ -13,7 +13,7 @@ export function Fontaneros() {
                    
                 </h1> */}
 
-                <div className="mt-12 md:flex md:h-[calc(100vh-225px)]">
+                <div className="mt-1 md:flex md:h-[calc(100vh-225px)]">
                     <FontanerosForm />
                     <FontaneroList />
                 </div>
