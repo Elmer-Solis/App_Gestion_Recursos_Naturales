@@ -122,10 +122,11 @@ export function VecinosForm() {
 
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registerSolicitud)} className="py-10 px-5 space-y-5">
+                    <form onSubmit={form.handleSubmit(registerSolicitud)} className="py-10 px-5 space-y-5 ">
                         <FormField
                             control={form.control}
                             name="numero_expediente"
+
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel htmlFor="numero_expediente">Número de Expediente</FormLabel>
@@ -149,7 +150,9 @@ export function VecinosForm() {
                                 <FormItem>
                                     <FormLabel htmlFor="nombre_solicitante">Nombre del Solicitante</FormLabel>
                                     <FormControl>
-                                        <Input id="nombre_solicitante" placeholder="Nombre del Solicitante" {...field} />
+                                        <Input id="nombre_solicitante"
+                                            placeholder="Nombre del Solicitante"
+                                            {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -248,6 +251,8 @@ export function VecinosForm() {
                                 </FormItem>
                             )}
                         />
+
+
 
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Solicitud

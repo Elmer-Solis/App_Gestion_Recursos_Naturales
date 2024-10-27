@@ -66,7 +66,6 @@ export const SvecinosForm = () => {
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 
-
     // Ajustar fecha a formato local
     const adjustToLocalDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -141,10 +140,6 @@ export const SvecinosForm = () => {
         }
     }, [activeSolicitudId, solicitudes, form]);
 
-
-
-
-
     useEffect(() => {
         // Fetch bombas y fontaneros al montar el componente
         fetchBombas();
@@ -202,10 +197,10 @@ export const SvecinosForm = () => {
     };
 
     return (
-        <div>
+        <div className="md:w-3/5 lg:w-3/5 mx-5">
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-10 px-5 space-y-5">
+                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-10 px-5 space-y-10">
 
                         <div className="flex justify-between ">
                             <FormField
@@ -562,7 +557,7 @@ export const SvecinosForm = () => {
                                                 value={field.value}
                                             >
                                                 <SelectTrigger className="w-full" id="tarifa">
-                                                    <SelectValue placeholder="Selecciona una opción" />
+                                                    <SelectValue placeholder="Elige una opción" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="Si">Sí</SelectItem>
@@ -587,7 +582,7 @@ export const SvecinosForm = () => {
                                                 value={field.value}
                                             >
                                                 <SelectTrigger className="w-full" id="drenaje">
-                                                    <SelectValue placeholder="Selecciona una opción" />
+                                                    <SelectValue placeholder="Elige una opción" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="Si">Sí</SelectItem>
@@ -655,7 +650,7 @@ export const SvecinosForm = () => {
                                                 value={field.value}
                                             >
                                                 <SelectTrigger className="w-full" id="levanto_adoquin">
-                                                    <SelectValue placeholder="Selecciona una opción" />
+                                                    <SelectValue placeholder="Elige una opción" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectItem value="Si">Sí</SelectItem>
