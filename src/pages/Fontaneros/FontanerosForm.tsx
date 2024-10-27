@@ -20,6 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
 import { useBombaStore } from "@/store/storeBombas";
 
+
 // Definir el esquema de validación
 const formSchema = z.object({
     name: z.string().min(2, {
@@ -99,8 +100,8 @@ export function FontanerosForm() {
                 Añade Fontaneros y {''}
                 <span className="text-blue-500 font-bold">Administralos</span>
             </p>
-            <Card>
-                <Form {...form} >
+            <Card >
+                <Form {...form}  >
                     <form onSubmit={form.handleSubmit(registerFontanero)} className="py-10 px-5 space-y-5">
                         <FormField
                             control={form.control}

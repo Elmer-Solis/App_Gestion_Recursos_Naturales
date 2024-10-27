@@ -26,7 +26,7 @@ export const VecinosList = () => {
     );
 
     return (
-        <div className="md:w-2/5 lg:w-2/5 md:h-full flex-grow">
+        <div className="mt-4 md:w-2/5 lg:w-2/5 md:h-full flex-grow">
             <div className="flex justify-center gap-4">
                 <Input
                     type="text"
@@ -45,7 +45,7 @@ export const VecinosList = () => {
             </div>
 
             <div
-                className="mt-4 h-full overflow-y-scroll
+                className=" h-full overflow-y-scroll
                 dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
                 dark:scrollbar-thumb-rounded-lg"
                 style={{ maxHeight: "calc(100vh - 100px)" }}

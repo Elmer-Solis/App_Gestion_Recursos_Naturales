@@ -209,7 +209,9 @@ export function VecinosForm() {
                                 <FormItem>
                                     <FormLabel htmlFor="fecha_ingreso">Fecha de Ingreso</FormLabel>
                                     <FormControl>
-                                        <Input id="fecha_ingreso" type="date" {...field} />
+                                        <Input id="fecha_ingreso" type="date" {...field}
+                                            className="custom-datetime-input"
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
