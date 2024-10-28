@@ -47,11 +47,12 @@ export function CalidadDetails({ calidad }: SolicitudDetailsProps) {
                     </section>
                     <div className="flex  flex-wrap justify-between w-full">
                         <div className="flex flex-col gap-y-2">
-                            <CalidadDetailItem label="Nombre" data={calidad.fecha_inspeccion} />
-                            <CalidadDetailItem label="Teléfono" data={calidad.nivel_cloro.toString()} />
+                            <CalidadDetailItem label="Inspeccion" data={calidad.fecha_inspeccion} />
+                            <CalidadDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
                         </div>
                         <div className="flex flex-col gap-y-2" >
-                            <CalidadDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
+                            <CalidadDetailItem label="Cloro" data={calidad.nivel_cloro.toString()} />
+                            <CalidadDetailItem label="PH" data={calidad.nivel_ph.toString()} />
                         </div>
                     </div>
                 </div>
