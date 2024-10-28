@@ -8,6 +8,8 @@ import { useSolicitudVecinoStore } from "@/store/storeSolicitud";
 import { SvecinosDetail } from "./SvecinosDetail";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
+
+
 export function SvecinosList() {
 
     const { solicitudes, fetchSolicitudes } = useSolicitudVecinoStore();

@@ -58,6 +58,41 @@ export type Database = {
         }
         Relationships: []
       }
+      calidad_agua: {
+        Row: {
+          bomba_id: number
+          fecha_inspeccion: string | null
+          id: number
+          nivel_cloro: number | null
+          nivel_ph: number | null
+          otras_metricas: string | null
+        }
+        Insert: {
+          bomba_id: number
+          fecha_inspeccion?: string | null
+          id?: number
+          nivel_cloro?: number | null
+          nivel_ph?: number | null
+          otras_metricas?: string | null
+        }
+        Update: {
+          bomba_id?: number
+          fecha_inspeccion?: string | null
+          id?: number
+          nivel_cloro?: number | null
+          nivel_ph?: number | null
+          otras_metricas?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calidad_agua_bomba_id_fkey"
+            columns: ["bomba_id"]
+            isOneToOne: false
+            referencedRelation: "bombas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       eventos_actividades: {
         Row: {
           fecha_fin: string

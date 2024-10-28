@@ -85,7 +85,6 @@ export function VecinosForm() {
         }
     }, [activeSolicitudId, solicitudes, form]);
 
-
     const registerSolicitud = async (data: z.infer<typeof formSchema>) => {
         const solicitudData = {
             numero_expediente: data.numero_expediente,
@@ -102,7 +101,6 @@ export function VecinosForm() {
                 title: "Actualización Exitosa",
                 description: "Solicitud Actualizada Correctamente",
             });
-            // Limpiar el activeSolicitudId y resetear el formulario
             setActiveSolicitudId(""); // Limpiar el ID activo después de la actualización;
         } else {
             await addSolicitud(solicitudData);
@@ -111,11 +109,9 @@ export function VecinosForm() {
                 title: "Registro Exitoso",
                 description: "Solicitud Registrada Correctamente",
             });
-            // Resetear el formulario después del registro;
         }
         form.reset()
     };
-
 
     return (
         <div className="md:w-3/5 lg:w-3/5 mx-5">
@@ -251,9 +247,6 @@ export function VecinosForm() {
                                 </FormItem>
                             )}
                         />
-
-
-
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Solicitud
                         </Button>

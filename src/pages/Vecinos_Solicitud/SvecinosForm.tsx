@@ -149,7 +149,6 @@ export const SvecinosForm = () => {
         fetchFontaneros();
     }, [fetchBombas, fetchFontaneros]);
 
-
     const registrarSolicitud = async (data: z.infer<typeof formSchema>) => {
         const solicitudData = {
             numero_expediente: data.numero_expediente,                // Obligatorio
@@ -204,7 +203,7 @@ export const SvecinosForm = () => {
         <div className="md:w-3/5 lg:w-3/5 mx-5">
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-10 px-5 space-y-7">
+                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-7 px-5 space-y-6">
 
                         <div className="flex justify-between ">
                             <FormField
@@ -243,8 +242,6 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-
-
                             <FormField
                                 control={form.control}
                                 name="direccion"
@@ -266,7 +263,6 @@ export const SvecinosForm = () => {
                         </div>
 
                         <div className="flex justify-between">
-
                             <FormField
                                 control={form.control}
                                 name="telefono"
@@ -286,7 +282,6 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
-
 
                             <FormField
                                 control={form.control}
