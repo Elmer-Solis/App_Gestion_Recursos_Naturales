@@ -34,6 +34,53 @@ export type Database = {
   }
   public: {
     Tables: {
+      bitacora_tomas: {
+        Row: {
+          fecha_registro: string | null
+          fontanero_id: number | null
+          id: number
+          latitud: string | null
+          longitud: string | null
+          notas: string | null
+          tomas_legales: number | null
+          tomas_usadas: number | null
+          total_tomas: number
+          zona_distribucion: string | null
+        }
+        Insert: {
+          fecha_registro?: string | null
+          fontanero_id?: number | null
+          id?: number
+          latitud?: string | null
+          longitud?: string | null
+          notas?: string | null
+          tomas_legales?: number | null
+          tomas_usadas?: number | null
+          total_tomas: number
+          zona_distribucion?: string | null
+        }
+        Update: {
+          fecha_registro?: string | null
+          fontanero_id?: number | null
+          id?: number
+          latitud?: string | null
+          longitud?: string | null
+          notas?: string | null
+          tomas_legales?: number | null
+          tomas_usadas?: number | null
+          total_tomas?: number
+          zona_distribucion?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bitacora_tomas_fontanero_id_fkey"
+            columns: ["fontanero_id"]
+            isOneToOne: false
+            referencedRelation: "fontaneros"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       bombas: {
         Row: {
           capacidad_bombeo: string | null

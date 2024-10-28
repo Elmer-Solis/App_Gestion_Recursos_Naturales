@@ -37,7 +37,8 @@ const formSchema = z.object({
 
 export function VecinosForm() {
     const { toast } = useToast();
-    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes, setActiveSolicitudId } = useSolicitudTrabajoStore();
+    const { addSolicitud, updateSolicitud, activeSolicitudId,
+        solicitudes, setActiveSolicitudId } = useSolicitudTrabajoStore();
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 
