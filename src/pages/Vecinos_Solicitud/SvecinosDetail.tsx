@@ -37,6 +37,7 @@ export type SolicitudTrabajo = {
     numero_recibo_garantia: number;
     deposito_garantia: string;
     numero_medidor: string;
+    zona: string
 };
 
 type SolicitudDetailsProps = {
@@ -71,7 +72,7 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
                     </section>
                     <div className="flex flex-wrap justify-between w-full">
                         <div className="flex flex-col gap-y-2">
-                            <SvecinosDetailItem label="Nombre" data={solicitudes.numero_expediente.toString()} />
+                            <SvecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
                             <SvecinosDetailItem label="Telefono" data={solicitudes.telefono.toString()} />
                         </div>
                         <div className="flex flex-col gap-y-2">

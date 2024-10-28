@@ -241,6 +241,7 @@ export type Database = {
           observacion: string | null
           tarifa: string | null
           telefono: number | null
+          zona: string | null
         }
         Insert: {
           bomba_distribucion_id?: number | null
@@ -268,6 +269,7 @@ export type Database = {
           observacion?: string | null
           tarifa?: string | null
           telefono?: number | null
+          zona?: string | null
         }
         Update: {
           bomba_distribucion_id?: number | null
@@ -295,6 +297,7 @@ export type Database = {
           observacion?: string | null
           tarifa?: string | null
           telefono?: number | null
+          zona?: string | null
         }
         Relationships: [
           {

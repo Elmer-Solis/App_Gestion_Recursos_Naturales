@@ -30,6 +30,7 @@ export type SolicitudTrabajo = {
     numero_recibo_garantia: number;
     deposito_garantia: string;
     numero_medidor: string;
+    zona: string
 };
 
 // Tipo de borrador de SolicitudTrabajo, excluyendo el campo 'id'
@@ -62,6 +63,7 @@ type SolicitudRow = {
     numero_recibo_garantia: number;
     deposito_garantia: string;
     numero_medidor: string;
+    zona: string
 };
 
 type solicitudTrabajoState = {
@@ -101,6 +103,7 @@ const mapRowToSolicitud = (row: SolicitudRow): SolicitudTrabajo => ({
     numero_recibo_garantia: row.numero_recibo_garantia,
     deposito_garantia: row.deposito_garantia,
     numero_medidor: row.numero_medidor,
+    zona: row.zona
 });
 
 export const useSolicitudVecinoStore = create<solicitudTrabajoState>()(
@@ -148,7 +151,8 @@ export const useSolicitudVecinoStore = create<solicitudTrabajoState>()(
                     levanto_adoquin: newSolicitud.levanto_adoquin,
                     numero_recibo_garantia: newSolicitud.numero_recibo_garantia,
                     deposito_garantia: newSolicitud.deposito_garantia,
-                    numero_medidor: newSolicitud.numero_medidor
+                    numero_medidor: newSolicitud.numero_medidor,
+                    zona: newSolicitud.zona
                 }]);
 
                 if (error) {
@@ -201,7 +205,8 @@ export const useSolicitudVecinoStore = create<solicitudTrabajoState>()(
                         levanto_adoquin: data.levanto_adoquin,
                         numero_recibo_garantia: data.numero_recibo_garantia,
                         deposito_garantia: data.deposito_garantia,
-                        numero_medidor: data.numero_medidor
+                        numero_medidor: data.numero_medidor,
+                        zona: data.zona
                     })
                     .eq('id', parseInt(get().activeSolicitudId));
 

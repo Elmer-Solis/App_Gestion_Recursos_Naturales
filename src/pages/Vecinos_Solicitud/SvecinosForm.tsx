@@ -32,13 +32,13 @@ const formSchema = z.object({
         .refine((val) => !val || !isNaN(Date.parse(val)), { message: "La fecha de ingreso debe ser una fecha válida." }),
     // Obligatorio
     direccion: z.string().optional(),
-    telefono: z.number().int().positive({ message: "El teléfono debe ser un número positivo." }).optional(),
+    telefono: z.number().int().optional(),
     nombre_sindico_acompanio: z.string().optional(),
     fecha_inspeccion: z.string()
         .optional()
         .refine((val) => !val || !isNaN(Date.parse(val)), { message: "La fecha de inspección debe ser válida." }),
     numero_recibo: z.number().int().optional(),
-    monto: z.number().positive({ message: "El monto debe ser positivo." }).optional(),
+    monto: z.number().optional(),
     fecha_recibo: z.string()
         .optional()
         .refine((val) => !val || !isNaN(Date.parse(val)), { message: "La fecha de recibo debe ser válida." }),
@@ -48,7 +48,7 @@ const formSchema = z.object({
         .refine((val) => !val || !isNaN(Date.parse(val)), { message: "La fecha de instalación debe ser válida." }),
     fontanero_id: z.string().optional(),
     observacion: z.string().optional(),
-    numero_servicios: z.number().int().positive({ message: "El número de servicios debe ser positivo." }).optional(),
+    numero_servicios: z.number().int().optional(),
     bomba_distribucion_id: z.string().optional(),
     tarifa: z.string().optional(),
     drenaje: z.string().optional(),
@@ -57,7 +57,8 @@ const formSchema = z.object({
     levanto_adoquin: z.string().optional(),
     numero_recibo_garantia: z.number().int().optional(),
     deposito_garantia: z.string().optional(),
-    numero_medidor: z.string().optional()
+    numero_medidor: z.string().optional(),
+    zona: z.string().optional()
 });
 export const SvecinosForm = () => {
 
@@ -103,7 +104,8 @@ export const SvecinosForm = () => {
             levanto_adoquin: "",                 // Opcional
             numero_recibo_garantia: 0,   // Opcional
             deposito_garantia: "",               // Opcional
-            numero_medidor: ""                   // Opcional
+            numero_medidor: "",                   // Opcional
+            zona: ""
         },
         mode: "onChange",
     });
@@ -136,6 +138,7 @@ export const SvecinosForm = () => {
                 form.setValue("numero_recibo_garantia", activeSolicitud.numero_recibo_garantia);
                 form.setValue("deposito_garantia", activeSolicitud.deposito_garantia);
                 form.setValue("numero_medidor", activeSolicitud.numero_medidor);
+                form.setValue("zona", activeSolicitud.zona);
             }
         }
     }, [activeSolicitudId, solicitudes, form]);
@@ -172,7 +175,8 @@ export const SvecinosForm = () => {
             levanto_adoquin: data.levanto_adoquin ?? "",              // Opcional
             numero_recibo_garantia: data.numero_recibo_garantia ?? 0, // Opcional
             deposito_garantia: data.deposito_garantia ?? "",          // Opcional
-            numero_medidor: data.numero_medidor ?? ""                 // Opcional
+            numero_medidor: data.numero_medidor ?? "",                 // Opcional
+            zona: data.zona ?? ""
         };
 
         if (activeSolicitudId) {
@@ -200,7 +204,7 @@ export const SvecinosForm = () => {
         <div className="md:w-3/5 lg:w-3/5 mx-5">
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-10 px-5 space-y-10">
+                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-10 px-5 space-y-7">
 
                         <div className="flex justify-between ">
                             <FormField
@@ -239,6 +243,30 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
+
+
+                            <FormField
+                                control={form.control}
+                                name="direccion"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="direccion">Direccion</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="direccion"
+                                                className="w-72"
+                                                placeholder="Direccion"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        <div className="flex justify-between">
+
                             <FormField
                                 control={form.control}
                                 name="telefono"
@@ -259,26 +287,6 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-                            <FormField
-                                control={form.control}
-                                name="direccion"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="direccion">Direccion</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="direccion"
-                                                placeholder="Direccion"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-
-                        <div className="flex justify-between">
 
                             <FormField
                                 control={form.control}
@@ -326,6 +334,39 @@ export const SvecinosForm = () => {
 
                             <FormField
                                 control={form.control}
+                                name="zona"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="zona">Zona</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={(value) => field.onChange(value)}
+                                                value={field.value}
+                                            >
+                                                <SelectTrigger className="w-full" id="zona">
+                                                    <SelectValue placeholder="Elige una opción" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="zona_1">Zona 1</SelectItem>
+                                                    <SelectItem value="zona_2">Zona 2</SelectItem>
+                                                    <SelectItem value="zona_3">Zona 3</SelectItem>
+                                                    <SelectItem value="zona_4">Zona 4</SelectItem>
+                                                    <SelectItem value="santa_rita">Sant Rita</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+                        </div>
+
+                        <div className="flex justify-between">
+
+                            <FormField
+                                control={form.control}
                                 name="fecha_inspeccion"
                                 render={({ field }) => (
                                     <FormItem>
@@ -363,9 +404,7 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-                        </div>
 
-                        <div className="flex justify-between">
                             <FormField
                                 control={form.control}
                                 name="monto"
@@ -404,6 +443,12 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+
+                        </div>
+
+                        <div className="flex justify-between">
 
                             <FormField
                                 control={form.control}
@@ -444,9 +489,6 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-                        </div>
-
-                        <div className="flex justify-between">
                             <FormField
                                 control={form.control}
                                 name="fontanero_id"
@@ -492,6 +534,13 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+
+                        </div>
+
+                        <div className="flex justify-between">
+
 
                             <FormField
                                 control={form.control}
@@ -541,10 +590,6 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-                        </div>
-
-                        <div className="flex justify-between">
-
                             <FormField
                                 control={form.control}
                                 name="tarifa"
@@ -560,8 +605,8 @@ export const SvecinosForm = () => {
                                                     <SelectValue placeholder="Elige una opción" />
                                                 </SelectTrigger>
                                                 <SelectContent>
-                                                    <SelectItem value="Si">Sí</SelectItem>
-                                                    <SelectItem value="No">No</SelectItem>
+                                                    <SelectItem value="domiciliar">Domiciliar</SelectItem>
+                                                    <SelectItem value="comercial">Comercial</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
@@ -594,6 +639,12 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+
+                        </div>
+
+                        <div className="flex justify-between">
 
                             <FormField
                                 control={form.control}
@@ -635,9 +686,7 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
-                        </div>
 
-                        <div className="flex justify-between">
                             <FormField
                                 control={form.control}
                                 name="levanto_adoquin"
@@ -682,6 +731,9 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+                        </div>
+
+                        <div className="flex  items-center justify-between">
 
                             <FormField
                                 control={form.control}
@@ -718,11 +770,15 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+                            <Button type="submit" className="uppercase text-white font-bold w-64 ">
+                                Guardar Solicitud
+                            </Button>
+
+
                         </div>
 
-                        <Button type="submit" className="uppercase text-white font-bold w-full">
-                            Guardar Solicitud
-                        </Button>
                     </form>
                 </Form>
             </Card>

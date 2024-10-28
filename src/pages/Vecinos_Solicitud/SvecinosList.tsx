@@ -6,7 +6,7 @@ import { useBombaStore } from "@/store/storeBombas";
 import { Input } from "@/components/ui/input";
 import { useSolicitudVecinoStore } from "@/store/storeSolicitud";
 import { SvecinosDetail } from "./SvecinosDetail";
-
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 
 export function SvecinosList() {
 
@@ -16,13 +16,19 @@ export function SvecinosList() {
 
     const [searchExpediente, setSearchExpediente] = useState('');
     const [searchNombre, setSearchNombre] = useState('');
+    const [searchZona, setSearchZona] = useState<null | string>(null); // Estado para zona, inicialmente null
+
 
     // Filter solicitudes based on the search queries
+    // const filteredSolicitudes = solicitudes.filter((solicitud) =>
+    //     solicitud.numero_expediente.toString().includes(searchExpediente) &&
+    //     solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase())
+    // );
     const filteredSolicitudes = solicitudes.filter((solicitud) =>
         solicitud.numero_expediente.toString().includes(searchExpediente) &&
-        solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase())
+        solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase()) &&
+        (searchZona === null || solicitud.zona === searchZona) // Filtrar por zona
     );
-
 
     useEffect(() => {
         fetchBombas();
@@ -48,6 +54,22 @@ export function SvecinosList() {
                     onChange={(e) => setSearchNombre(e.target.value)} // Update nombre search query state
                     className="mb-4"
                 />
+                <Select
+                    onValueChange={(value) => setSearchZona(value === "todas" ? null : value)}
+                    value={searchZona || "todas"}
+                >
+                    <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Elige una zona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="todas">Todas las zonas</SelectItem>
+                        <SelectItem value="zona_1">Zona 1</SelectItem>
+                        <SelectItem value="zona_2">Zona 2</SelectItem>
+                        <SelectItem value="zona_3">Zona 3</SelectItem>
+                        <SelectItem value="zona_4">Zona 4</SelectItem>
+                        <SelectItem value="santa_rita">Santa Rita</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
             <div
                 className=" h-full overflow-y-scroll
