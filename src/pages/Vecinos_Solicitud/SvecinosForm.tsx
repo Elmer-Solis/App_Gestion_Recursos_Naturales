@@ -204,7 +204,7 @@ export const SvecinosForm = () => {
         <div className="md:w-3/5 lg:w-3/5 mx-5">
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-7 px-5 space-y-6">
+                    <form onSubmit={form.handleSubmit(registrarSolicitud)} className="py-4 px-5 space-y-6">
 
                         <div className="flex justify-between ">
                             <FormField
