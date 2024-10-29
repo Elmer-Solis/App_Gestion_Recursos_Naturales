@@ -26,7 +26,7 @@ export type SolicitudTrabajo = {
     drenaje: string;
     numero_recibo_drenaje: number;
     monto_drenaje: number;
-    levanto_adoquin: string;
+    levanto_adoquin: string; //se cambio por Monto 
     numero_recibo_garantia: number;
     deposito_garantia: string;
     numero_medidor: string;
@@ -48,7 +48,7 @@ type SolicitudRow = {
     fecha_inspeccion: string;
     numero_recibo: number;
     monto: number;
-    fecha_recibo: string;
+    fecha_recibo: string; //eliminado
     numero_orden_instalacion: number;
     fecha_instalacion: string;
     fontanero_id: number | null;

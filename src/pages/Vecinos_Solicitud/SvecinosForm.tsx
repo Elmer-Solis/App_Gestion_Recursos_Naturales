@@ -12,6 +12,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import { Separator } from "@/components/ui/separator"
 
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
@@ -300,6 +301,7 @@ export const SvecinosForm = () => {
                                                 <SelectContent>
                                                     <SelectItem value="Sindico_I">Sindico I</SelectItem>
                                                     <SelectItem value="Sindicio_II">Sindico II</SelectItem>
+                                                    <SelectItem value="Sindicio_I_II">Sindico I II</SelectItem>
                                                 </SelectContent>
                                             </Select>
                                         </FormControl>
@@ -420,12 +422,158 @@ export const SvecinosForm = () => {
                                 )}
                             />
 
+
+
+                        </div>
+                        <Separator />
+
+                        <div className="flex justify-between">
+
                             <FormField
+                                control={form.control}
+                                name="drenaje"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="drenaje">Drenaje</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={(value) => field.onChange(value)}
+                                                value={field.value}
+                                            >
+                                                <SelectTrigger className="w-full" id="drenaje">
+                                                    <SelectValue placeholder="Elige una opción" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="si">Si</SelectItem>
+                                                    <SelectItem value="No">No</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="numero_recibo_drenaje"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="numero_recibo_drenaje">Número de Recibo Drenaje</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="numero_recibo_drenaje"
+                                                type="number"
+                                                placeholder="Número de Recibo Drenaje"
+                                                {...field}
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+                            <FormField
+                                control={form.control}
+                                name="monto_drenaje"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="monto_drenaje">Monto Drenaje</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="monto_drenaje"
+                                                type="number"
+                                                placeholder="Monto Drenaje"
+                                                {...field}
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+                            <FormField
+                                control={form.control}
+                                name="deposito_garantia"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="deposito_garantia">Deposito Garantia</FormLabel>
+                                        <FormControl>
+                                            <Select
+                                                onValueChange={(value) => field.onChange(value)}
+                                                value={field.value}
+                                            >
+                                                <SelectTrigger className="w-full" id="deposito_garantia">
+                                                    <SelectValue placeholder="Elige una opción" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectItem value="si">Si</SelectItem>
+                                                    <SelectItem value="no">No</SelectItem>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                        </div>
+
+
+
+                        <div className="flex justify-between">
+
+                            <FormField
+                                control={form.control}
+                                name="numero_recibo_garantia"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="numero_recibo_garantia">Número de Recibo Garantía</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="numero_recibo_garantia"
+                                                type="number"
+                                                placeholder="Número de Recibo Garantía"
+                                                {...field}
+                                                onChange={(e) => field.onChange(Number(e.target.value))}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+
+                            {/* aqui se cambio unicamente monto por  levanto_adoquin */}
+                            <FormField
+                                control={form.control}
+                                name="levanto_adoquin"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="levanto_adoquin">Monto</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                id="levanto_adoquin"
+                                                placeholder="Monto"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        {/* <FormField
                                 control={form.control}
                                 name="fecha_recibo"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel htmlFor="fecha_recibo">Fecha de Recibo</FormLabel>
+                                        <FormLabel htmlFor="fecha_recibo">Monto</FormLabel>
                                         <FormControl>
                                             <Input
                                                 id="fecha_recibo"
@@ -437,12 +585,11 @@ export const SvecinosForm = () => {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            /> */}
 
 
 
-                        </div>
-
+                        <Separator />
                         <div className="flex justify-between">
 
                             <FormField
@@ -529,13 +676,9 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
-
-
-
                         </div>
 
                         <div className="flex justify-between">
-
 
                             <FormField
                                 control={form.control}
@@ -612,23 +755,16 @@ export const SvecinosForm = () => {
 
                             <FormField
                                 control={form.control}
-                                name="drenaje"
+                                name="numero_medidor"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel htmlFor="tarifa">Drenaje</FormLabel>
+                                        <FormLabel htmlFor="numero_medidor">Numero Medidor</FormLabel>
                                         <FormControl>
-                                            <Select
-                                                onValueChange={(value) => field.onChange(value)}
-                                                value={field.value}
-                                            >
-                                                <SelectTrigger className="w-full" id="drenaje">
-                                                    <SelectValue placeholder="Elige una opción" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectItem value="Si">Sí</SelectItem>
-                                                    <SelectItem value="No">No</SelectItem>
-                                                </SelectContent>
-                                            </Select>
+                                            <Input
+                                                id="numero_medidor"
+                                                placeholder="Numero Medidor"
+                                                {...field}
+                                            />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -639,50 +775,9 @@ export const SvecinosForm = () => {
 
                         </div>
 
-                        <div className="flex justify-between">
-
-                            <FormField
-                                control={form.control}
-                                name="numero_recibo_drenaje"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="numero_recibo_drenaje">Número de Recibo Drenaje</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="numero_recibo_drenaje"
-                                                type="number"
-                                                placeholder="Número de Recibo Drenaje"
-                                                {...field}
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="monto_drenaje"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="monto_drenaje">Monto Drenaje</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="monto_drenaje"
-                                                type="number"
-                                                placeholder="Monto Drenaje"
-                                                {...field}
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
 
 
-                            <FormField
+                        {/* <FormField
                                 control={form.control}
                                 name="levanto_adoquin"
                                 render={({ field }) => (
@@ -705,74 +800,19 @@ export const SvecinosForm = () => {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="numero_recibo_garantia"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="numero_recibo_garantia">Número de Recibo Garantía</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="numero_recibo_garantia"
-                                                type="number"
-                                                placeholder="Número de Recibo Garantía"
-                                                {...field}
-                                                onChange={(e) => field.onChange(Number(e.target.value))}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                        </div>
-
-                        <div className="flex  items-center justify-between">
-
-                            <FormField
-                                control={form.control}
-                                name="deposito_garantia"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="deposito_garantia">Deposito Garantia</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="deposito_garantia"
-                                                placeholder="Deposito Garantia"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-
-                            <FormField
-                                control={form.control}
-                                name="numero_medidor"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="numero_medidor">Numero Medidor</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                id="numero_medidor"
-                                                placeholder="Numero Medidor"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                            /> */}
 
 
-                            <Button type="submit" className="uppercase text-white font-bold w-64 ">
-                                Guardar Solicitud
-                            </Button>
 
 
-                        </div>
+
+
+                        <Button type="submit" className="uppercase text-white font-bold w-full ">
+                            Guardar Solicitud
+                        </Button>
+
+
+
 
                     </form>
                 </Form>
