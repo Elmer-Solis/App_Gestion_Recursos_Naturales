@@ -566,6 +566,14 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             />
+
+
+
+                            <Button type="submit" className="uppercase text-white font-bold w-56 mt-8 ">
+                                Guardar Solicitud
+                            </Button>
+
+
                         </div>
 
                         {/* <FormField
@@ -801,18 +809,6 @@ export const SvecinosForm = () => {
                                     </FormItem>
                                 )}
                             /> */}
-
-
-
-
-
-
-                        <Button type="submit" className="uppercase text-white font-bold w-full ">
-                            Guardar Solicitud
-                        </Button>
-
-
-
 
                     </form>
                 </Form>
