@@ -1,12 +1,13 @@
-import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
+
 import VecinosDetails from "./VecinosDetails";
 import { useEffect, useState } from "react";
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { Input } from "@/components/ui/input";
+import { useTrabajoStore } from "@/store/storeTrabajos";
 
 export const VecinosList = () => {
-    const { solicitudes, fetchSolicitudes } = useSolicitudTrabajoStore();
+    const { solicitudes, fetchSolicitudes } = useTrabajoStore();
     const { fetchFontaneros } = useFontaneroStore();
     const { fetchBombas } = useBombaStore();
 

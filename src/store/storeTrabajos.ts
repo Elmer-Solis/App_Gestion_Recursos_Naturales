@@ -51,7 +51,7 @@ const mapRowToSolicitud = (row: SolicitudRow): SolicitudTrabajo => ({
     bomba_distribucion_id: row.bomba_distribucion_id?.toString() || null,
 });
 
-export const useSolicitudTrabajoStore = create<solicitudTrabajoState>()(
+export const useTrabajoStore = create<solicitudTrabajoState>()(
     devtools(
         (set, get) => ({
             solicitudes: [],

@@ -4,15 +4,15 @@ import { useEffect, useState } from "react";
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { Input } from "@/components/ui/input";
-import { useSolicitudVecinoStore } from "@/store/storeSolicitud";
 import { SvecinosDetail } from "./SvecinosDetail";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import { useSolicitudstore } from "@/store/storeSolicitud";
 
 
 
 export function SvecinosList() {
 
-    const { solicitudes, fetchSolicitudes } = useSolicitudVecinoStore();
+    const { solicitudes, fetchSolicitudes } = useSolicitudstore();
     const { fetchFontaneros } = useFontaneroStore();
     const { fetchBombas } = useBombaStore();
 
@@ -21,11 +21,6 @@ export function SvecinosList() {
     const [searchZona, setSearchZona] = useState<null | string>(null); // Estado para zona, inicialmente null
 
 
-    // Filter solicitudes based on the search queries
-    // const filteredSolicitudes = solicitudes.filter((solicitud) =>
-    //     solicitud.numero_expediente.toString().includes(searchExpediente) &&
-    //     solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase())
-    // );
     const filteredSolicitudes = solicitudes.filter((solicitud) =>
         solicitud.numero_expediente.toString().includes(searchExpediente) &&
         solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase()) &&

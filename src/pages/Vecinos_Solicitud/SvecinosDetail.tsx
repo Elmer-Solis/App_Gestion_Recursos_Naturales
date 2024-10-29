@@ -6,10 +6,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
-
-import { useSolicitudVecinoStore } from "@/store/storeSolicitud";
 import { SvecinosDetailItem } from "./SvecinosDetailItem";
-
+import { useSolicitudstore } from "@/store/storeSolicitud";
 
 export type SolicitudTrabajo = {
     id: string; // SERIAL en SQL
@@ -47,10 +45,9 @@ type SolicitudDetailsProps = {
 
 export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
 
-
+    const { deleteSolicitud, getSolicitudById } = useSolicitudstore()
     const { toast } = useToast();
 
-    const { deleteSolicitud, getSolicitudById } = useSolicitudVecinoStore()
 
     const handleClick = () => {
         deleteSolicitud(solicitudes.id);
@@ -64,7 +61,6 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
 
     return (
         <Card className=" my-4 px-1 ">
-
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
@@ -82,7 +78,6 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
                     </div>
                 </div>
             </CardHeader>
-
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"

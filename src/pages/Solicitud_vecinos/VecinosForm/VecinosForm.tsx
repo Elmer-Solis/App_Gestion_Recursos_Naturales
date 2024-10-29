@@ -18,7 +18,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
-import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
+import { useTrabajoStore } from "@/store/storeTrabajos";
 
 
 // Definir el esquema de validación
@@ -38,7 +38,7 @@ const formSchema = z.object({
 export function VecinosForm() {
     const { toast } = useToast();
     const { addSolicitud, updateSolicitud, activeSolicitudId,
-        solicitudes, setActiveSolicitudId } = useSolicitudTrabajoStore();
+        solicitudes, setActiveSolicitudId } = useTrabajoStore();
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 

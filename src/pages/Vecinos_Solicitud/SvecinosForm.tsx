@@ -20,7 +20,7 @@ import { useEffect } from "react";
 
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
-import { useSolicitudVecinoStore } from "@/store/storeSolicitud";
+import { useSolicitudstore } from "@/store/storeSolicitud";
 
 const formSchema = z.object({
     numero_expediente: z.string(),  // Obligatorio
@@ -63,7 +63,7 @@ const formSchema = z.object({
 export const SvecinosForm = () => {
 
     const { toast } = useToast();
-    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes, setActiveSolicitudId } = useSolicitudVecinoStore();
+    const { addSolicitud, updateSolicitud, activeSolicitudId, solicitudes, setActiveSolicitudId } = useSolicitudstore();
     const { fetchBombas, bombas } = useBombaStore();
     const { fetchFontaneros, fontaneros } = useFontaneroStore();
 

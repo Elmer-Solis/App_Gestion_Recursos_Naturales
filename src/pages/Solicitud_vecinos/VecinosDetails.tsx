@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 import { VecinosDetailItem } from "./VecinosDetailItem";
-import { useSolicitudTrabajoStore } from "@/store/storeVecinos";
+import { useTrabajoStore } from "@/store/storeTrabajos";
 
 // Interfaz para Solicitud de Trabajo
 interface SolicitudTrabajo {
@@ -29,7 +29,7 @@ type SolicitudDetailsProps = {
 export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
     const { toast } = useToast();
 
-    const { deleteSolicitud, getSolicitudById } = useSolicitudTrabajoStore()
+    const { deleteSolicitud, getSolicitudById } = useTrabajoStore()
 
     const handleClick = () => {
         deleteSolicitud(solicitudes.id);
@@ -43,22 +43,7 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
 
     return (
         <Card className=" my-4 px-1 ">
-            {/* <CardHeader>
-                <div className="flex items-center gap-4">
-                    <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/soli.png" alt="" />
-                    </section>
-                    <div className="flex flex-wrap justify-between w-full">
-                        <div className="flex flex-col">
-                            <VecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
-                            <VecinosDetailItem label="Teléfono" data={solicitudes.tarifa} />
-                        </div>
-                        <div className="flex flex-col">
-                            <VecinosDetailItem label="Expediente" data={solicitudes.numero_expediente.toString()} />
-                        </div>
-                    </div>
-                </div>
-            </CardHeader> */}
+
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
@@ -76,7 +61,6 @@ export default function VecinosDetails({ solicitudes }: SolicitudDetailsProps) {
                     </div>
                 </div>
             </CardHeader>
-
 
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button

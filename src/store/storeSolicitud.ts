@@ -106,7 +106,7 @@ const mapRowToSolicitud = (row: SolicitudRow): SolicitudTrabajo => ({
     zona: row.zona
 });
 
-export const useSolicitudVecinoStore = create<solicitudTrabajoState>()(
+export const useSolicitudstore = create<solicitudTrabajoState>()(
     devtools(
         (set, get) => ({
             solicitudes: [],
@@ -164,7 +164,7 @@ export const useSolicitudVecinoStore = create<solicitudTrabajoState>()(
                     solicitudes: [...state.solicitudes, newSolicitud]
                 }));
             }, deleteSolicitud: async (id: SolicitudTrabajo['id']) => {
-                const { error } = await supabase.from('solicitud_trabajo').delete().eq('id', parseInt(id));
+                const { error } = await supabase.from('solicitudes_trabajo').delete().eq('id', parseInt(id));
                 if (error) {
                     console.error('Error eliminando solicitud de trabajo de Supabase', error.message);
                     throw error;
