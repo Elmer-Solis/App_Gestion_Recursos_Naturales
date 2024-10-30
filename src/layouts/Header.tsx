@@ -15,7 +15,7 @@ export const Header = () => {
     // Función para transformar la ruta
     const formatPathname = (pathname: string) => {
         if (pathname === "/" || pathname === "") {
-            return "Dashboard"; // Si la ruta es "/", muestra "Dashboard"
+            return "Dashboard Elmer Dev"; // Si la ruta es "/", muestra "Dashboard"
         }
         // Excepciones para rutas específicas
         if (pathname === "/calidad") {
@@ -33,7 +33,7 @@ export const Header = () => {
     };
 
     // Condicional para ocultar el Header en la ruta "/solicitud"
-    if (location.pathname === "/solicitud") {
+    if (location.pathname === "/solicitud" || location.pathname === '/bombas') {
         return null; // No renderizar el header
     }
 
