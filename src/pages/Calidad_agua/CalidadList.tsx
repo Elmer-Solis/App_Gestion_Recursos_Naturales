@@ -14,12 +14,12 @@ export function CalidadList() {
     }, [fetchBombas, fetchCalidad]);
 
     return (
-        <div className=" md:w-1/2 lg:w-3/5 md:h-full flex-grow overflow-y-scroll
+        <div className="md:w-1/2 lg:w:3/5 md:h-full  overflow-y-scroll
         dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
         dark:scrollbar-thumb-rounded-lg">
             {registrosCalidad.length ? (
                 <>
-                    <h2 className="font-black text-3xl text-center">Listado de Calidad</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">Listado de Calidad</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Administra tus {''}
                         <span className="text-blue-500 font-bold">Procesos</span>
@@ -33,7 +33,7 @@ export function CalidadList() {
                 </>
             ) : (
                 <>
-                    <h2 className="font-black text-3xl text-center">No hay Registro</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">No hay Registro</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Comienza agregando  {''}
                         <span className="text-blue-500 font-bold">Y apareceran en este lugar</span>

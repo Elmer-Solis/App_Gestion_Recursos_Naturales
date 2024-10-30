@@ -131,15 +131,16 @@ export function BitacoraForm() {
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
             <h2 className="font-black text-3xl text-center">Seguimiento Bitacoras</h2>
-            <p className="text-lg mt-5 text-center mb-5">
+            <p className="text-lg mt-5 text-center mb-10">
                 Añade Bitacoras y {''}
                 <span className="text-blue-500 font-bold">Administralos</span>
             </p>
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registerSolicitud)} className="py-5 px-5 space-y-5 ">
+                    <form onSubmit={form.handleSubmit(registerSolicitud)}
+                        className="py-6 px-5 md:px-8 space-y-5">
 
-                        <div className="flex justify-between">
+                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="zona_distribucion"
@@ -190,13 +191,7 @@ export function BitacoraForm() {
                             />
                         </div>
 
-
-
-
-
-                        <div className="flex justify-between">
-
-
+                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="tomas_usadas"
@@ -238,13 +233,9 @@ export function BitacoraForm() {
                                     </FormItem>
                                 )}
                             />
-
                         </div>
 
-
-
-
-                        <div className="flex  justify-between">
+                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="latitud"
@@ -261,7 +252,6 @@ export function BitacoraForm() {
                                 )}
                             />
 
-
                             <FormField
                                 control={form.control}
                                 name="longitud"
@@ -277,13 +267,9 @@ export function BitacoraForm() {
                                     </FormItem>
                                 )}
                             />
-
                         </div>
 
-
-                        <div className="flex justify-between">
-
-
+                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="fecha_registro"
@@ -299,7 +285,6 @@ export function BitacoraForm() {
                                     </FormItem>
                                 )}
                             />
-
 
                             <FormField
                                 control={form.control}
@@ -330,26 +315,24 @@ export function BitacoraForm() {
                             />
                         </div>
 
-                        <div className="flex justify-center  flex-col items-center ">
-                            <FormField
-                                control={form.control}
-                                name="notas"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel htmlFor="notas">Notas</FormLabel>
-                                        <FormControl>
-                                            <Input id="notas"
-                                                className="w-96"
-                                                placeholder="Notas"
-                                                {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                        <FormField
+                            control={form.control}
+                            name="notas"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel htmlFor="notas">Notas</FormLabel>
+                                    <FormControl>
+                                        <Input id="notas"
+                                            placeholder="Notas"
+                                            {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
 
-                        </div>
+
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Solicitud
                         </Button>

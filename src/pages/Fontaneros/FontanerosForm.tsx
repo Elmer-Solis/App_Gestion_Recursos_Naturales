@@ -143,14 +143,14 @@ export function FontanerosForm() {
                             name="renglon"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel htmlFor="renglon">Tarifa</FormLabel>
+                                    <FormLabel htmlFor="renglon">Renglon</FormLabel>
                                     <FormControl>
                                         <Select
                                             onValueChange={(value) => field.onChange(value)}
                                             value={field.value}
                                         >
                                             <SelectTrigger className="w-full" id="renglon">
-                                                <SelectValue placeholder="Elije la opcion" />
+                                                <SelectValue placeholder="Elige una opción" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="contrato">Contrato</SelectItem>

@@ -110,14 +110,15 @@ export function CalidadForm() {
 
     return (
         <div className="md:w-1/2 lg:w-2/5 mx-5">
-            <h2 className="font-black text-3xl text-center">Seguimiento Calidad Agua</h2>
-            <p className="text-lg mt-5 text-center mb-5">
+            <h2 className="font-black text-3xl text-center">Seguimiento de Calidad</h2>
+            <p className="text-lg mt-5 text-center mb-10">
                 Añade Parametros y {''}
                 <span className="text-blue-500 font-bold">Administralos</span>
             </p>
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registerSolicitud)} className="py-5 px-5 space-y-5 ">
+                    <form onSubmit={form.handleSubmit(registerSolicitud)}
+                        className="py-6 px-5 md:px-8 space-y-5">
 
                         <FormField
                             control={form.control}

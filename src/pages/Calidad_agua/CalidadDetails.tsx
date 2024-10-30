@@ -3,8 +3,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useCalidadAguaStore } from "@/store/storeCalidadAgua";
 import {
     Card,
-    CardFooter,
-    CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CalidadDetailItem } from "./CalidadDetailItem";
@@ -39,25 +37,25 @@ export function CalidadDetails({ calidad }: SolicitudDetailsProps) {
         });
     };
     return (
-        <Card className="mx-20 my-8 px-5 ">
-            <CardHeader>
-                <div className="flex items-center gap-3">
-                    <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/agua.png" alt="agua" />
-                    </section>
-                    <div className="flex  flex-wrap justify-between w-full">
-                        <div className="flex flex-col gap-y-2">
-                            <CalidadDetailItem label="Inspeccion" data={calidad.fecha_inspeccion} />
-                            <CalidadDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
-                        </div>
-                        <div className="flex flex-col gap-y-2" >
-                            <CalidadDetailItem label="Cloro" data={calidad.nivel_cloro.toString()} />
-                            <CalidadDetailItem label="PH" data={calidad.nivel_ph.toString()} />
-                        </div>
+        <Card className="mx-5 md:mx-20 my-5 px-5 py-8 ">
+
+            <div className="flex items-center gap-4  mb-5 ">
+                <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
+                    <img src="/agua.png" alt="agua" />
+                </section>
+                <div className="flex  flex-wrap justify-between w-full m">
+                    <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
+                        <CalidadDetailItem label="Inspeccion" data={calidad.fecha_inspeccion} />
+                        <CalidadDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
+                    </div>
+                    <div className="flex flex-col gap-y-2" >
+                        <CalidadDetailItem label="Cloro" data={calidad.nivel_cloro.toString()} />
+                        <CalidadDetailItem label="PH" data={calidad.nivel_ph.toString()} />
                     </div>
                 </div>
-            </CardHeader>
-            <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
                     onClick={() => getCalidadById(calidad.id)}
@@ -71,7 +69,7 @@ export function CalidadDetails({ calidad }: SolicitudDetailsProps) {
                 >
                     Eliminar
                 </Button>
-            </CardFooter>
+            </div>
         </Card>
     )
 }
