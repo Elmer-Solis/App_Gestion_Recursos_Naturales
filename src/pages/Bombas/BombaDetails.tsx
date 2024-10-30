@@ -36,11 +36,10 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
 
             <div className="flex items-center gap-4  mb-5 ">
                 <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]  ">
-                    <img src="/bomba.png" alt="" />
+                    <img src="/bomba.png" alt="bomba" />
                 </section>
 
                 <div className="flex  flex-wrap justify-between w-full ">
-
                     <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
                         <BombaDetailItem label='Nombre' data={bomba.name} />
                         <BombaDetailItem label='NIS' data={bomba.nis} />

@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen, c
                     </ul>
                 </nav>
 
-                <hr className="border-gray-800" />
+                <hr className="border-gray-300 dark:border-gray-800  " />
 
                 <nav>
                     <ul>

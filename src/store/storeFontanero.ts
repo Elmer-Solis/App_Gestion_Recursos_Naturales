@@ -8,10 +8,10 @@ export type Fontanero = {
     name: string
     phone: string
     bomba: string
+    renglon: string
 }
 
 export type DraftFontanero = Omit<Fontanero, 'id'>
-
 
 // Tipo de Row de Supabase
 type Row = {
@@ -19,6 +19,7 @@ type Row = {
     nombre: string;
     telefono: string;
     bomba_id: number | null;
+    renglon: string
 };
 
 type fontaneroState = {
@@ -36,7 +37,8 @@ const mapRowToFontanero = (row: Row): Fontanero => ({
     id: row.id.toString(),
     name: row.nombre,
     phone: row.telefono || '',
-    bomba: row.bomba_id?.toString() || ''
+    bomba: row.bomba_id?.toString() || '',
+    renglon: row.renglon
 });
 
 export const useFontaneroStore = create<fontaneroState>()(
@@ -65,7 +67,8 @@ export const useFontaneroStore = create<fontaneroState>()(
                 const { error } = await supabase.from('fontaneros').insert([{
                     nombre: newFontanero.name,
                     telefono: newFontanero.phone,
-                    bomba_id: newFontanero.bomba ? parseInt(newFontanero.bomba) : null
+                    bomba_id: newFontanero.bomba ? parseInt(newFontanero.bomba) : null,
+                    renglon: newFontanero.renglon
                 }]);
 
                 if (error) {
@@ -103,7 +106,8 @@ export const useFontaneroStore = create<fontaneroState>()(
                     .update({
                         nombre: data.name,
                         telefono: data.phone,
-                        bomba_id: data.bomba ? parseInt(data.bomba) : null
+                        bomba_id: data.bomba ? parseInt(data.bomba) : null,
+                        renglon: data.renglon
                     })
                     .eq('id', parseInt(get().activeId));
 

@@ -1,4 +1,3 @@
-import { Toaster } from '@/components/ui/toaster';
 import { BombaForm } from './BombaForm';
 import BombaList from './BombaList';
 
@@ -14,9 +13,7 @@ export function Bombas() {
                     <BombaForm />
                     <BombaList />
                 </div>
-
             </div>
-            <Toaster />
         </>
     )
 }

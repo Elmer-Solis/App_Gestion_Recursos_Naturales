@@ -4,6 +4,7 @@ export type Fontanero = {
     name: string
     phone: string
     bomba: string
+    renglon: string
 }
 
 export type DraftFontanero = Omit<Fontanero, 'id'>

@@ -189,18 +189,21 @@ export type Database = {
           bomba_id: number | null
           id: number
           nombre: string
+          renglon: string | null
           telefono: string
         }
         Insert: {
           bomba_id?: number | null
           id?: number
           nombre: string
+          renglon?: string | null
           telefono: string
         }
         Update: {
           bomba_id?: number | null
           id?: number
           nombre?: string
+          renglon?: string | null
           telefono?: string
         }
         Relationships: [

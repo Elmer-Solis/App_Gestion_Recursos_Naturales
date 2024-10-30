@@ -34,6 +34,9 @@ const formSchema = z.object({
     bomba: z.string().min(1, {
         message: "Debes seleccionar una bomba de agua.",
     }),
+    renglon: z.string().min(2, {
+        message: "El renglon del fontanero es obligatorio.",
+    })
 });
 
 export function FontanerosForm() {
@@ -53,7 +56,8 @@ export function FontanerosForm() {
         defaultValues: {
             name: "",
             phone: "",
-            bomba: ""
+            bomba: "",
+            renglon: ""
         },
         mode: "onChange",
     });
@@ -70,6 +74,7 @@ export function FontanerosForm() {
                 form.setValue('name', activeFontanero.name);
                 form.setValue('phone', activeFontanero.phone);
                 form.setValue('bomba', activeFontanero.bomba);
+                form.setValue('renglon', activeFontanero.renglon);
             }
         }
     }, [activeId, fontaneros, form]);
@@ -102,7 +107,8 @@ export function FontanerosForm() {
             </p>
             <Card >
                 <Form {...form}  >
-                    <form onSubmit={form.handleSubmit(registerFontanero)} className="py-10 px-5 space-y-5">
+                    <form onSubmit={form.handleSubmit(registerFontanero)}
+                        className="py-6 px-5 md:px-8 space-y-5">
                         <FormField
                             control={form.control}
                             name="name"
@@ -131,6 +137,31 @@ export function FontanerosForm() {
                         />
 
                         {/* Select para Bombas */}
+
+                        <FormField
+                            control={form.control}
+                            name="renglon"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel htmlFor="renglon">Tarifa</FormLabel>
+                                    <FormControl>
+                                        <Select
+                                            onValueChange={(value) => field.onChange(value)}
+                                            value={field.value}
+                                        >
+                                            <SelectTrigger className="w-full" id="renglon">
+                                                <SelectValue placeholder="Elije la opcion" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="contrato">Contrato</SelectItem>
+                                                <SelectItem value="presupuestado">Presupuestado</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
 
                         <FormField
                             control={form.control}

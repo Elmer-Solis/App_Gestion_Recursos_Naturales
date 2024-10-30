@@ -1,7 +1,5 @@
 import {
     Card,
-    CardFooter,
-    CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -37,24 +35,26 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
     };
 
     return (
-        <Card className="mx-20 my-8 px-5 ">
-            <CardHeader>
-                <div className="flex items-center gap-3">
-                    <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/fontanero.png" alt="fontanero" />
-                    </section>
-                    <div className="flex  flex-wrap justify-between w-full">
-                        <div className="flex flex-col gap-y-2">
-                            <FontaneroDetailItem label="Nombre" data={fontanero.name} />
-                            <FontaneroDetailItem label="Teléfono" data={fontanero.phone} />
-                        </div>
-                        <div className="flex flex-col gap-y-2" >
-                            <FontaneroDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
-                        </div>
+        <Card className="mx-5 md:mx-28 my-5 px-5 py-8 ">
+
+            <div className="flex items-center gap-4  mb-5 ">
+                <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
+                    <img src="/fontanero.png" alt="fontanero" />
+                </section>
+
+                <div className="flex  flex-wrap justify-between w-full">
+                    <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
+                        <FontaneroDetailItem label="Nombre" data={fontanero.name} />
+                        <FontaneroDetailItem label="Teléfono" data={fontanero.phone} />
+                    </div>
+                    <div className="flex flex-col gap-y-2 " >
+                        <FontaneroDetailItem label="Bomba" data={bombaAsignada ? bombaAsignada.name : "No asignada"} />
+                        <FontaneroDetailItem label="Renglon" data={fontanero.renglon} />
                     </div>
                 </div>
-            </CardHeader>
-            <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
                     onClick={() => getFontaneroById(fontanero.id)}
@@ -68,7 +68,7 @@ export default function FontaneroDetails({ fontanero }: FontaneroDetailsProps) {
                 >
                     Eliminar
                 </Button>
-            </CardFooter>
+            </div>
         </Card>
     );
 }

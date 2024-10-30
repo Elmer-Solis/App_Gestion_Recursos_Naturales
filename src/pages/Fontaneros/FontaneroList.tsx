@@ -13,12 +13,12 @@ export default function FontaneroList() {
     }, [fetchBombas]); // El efecto se ejecuta solo una vez cuando el componente se monta
 
     return (
-        <div className=" md:w-1/2 lg:w-3/5 md:h-full flex-grow overflow-y-scroll
+        <div className="md:w-1/2 lg:w-3/5 md:h-full  overflow-y-scroll
          dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
          dark:scrollbar-thumb-rounded-lg">
             {fontaneros.length ? (
                 <>
-                    <h2 className="font-black text-3xl text-center">Listado de Fontaneros</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">Listado de Fontaneros</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Administra tus {''}
                         <span className="text-blue-500 font-bold">Fontaneros Disponibles</span>
@@ -32,7 +32,7 @@ export default function FontaneroList() {
                 </>
             ) : (
                 <>
-                    <h2 className="font-black text-3xl text-center">No hay Fontaneros</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">No hay Fontaneros</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Comienza agregando Fontaneros {''}
                         <span className="text-blue-500 font-bold">Y apareceran en este lugar</span>
