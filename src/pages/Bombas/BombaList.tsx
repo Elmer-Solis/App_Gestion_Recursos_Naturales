@@ -16,7 +16,7 @@ export default function BombaList() {
 
 
     return (
-        <div className=" md:w-1/2 lg:w:3/5 md:h-screen  overflow-y-scroll
+        <div className=" md:w-1/2 lg:w:3/5 md:h-full  overflow-y-scroll
         dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
         dark:scrollbar-thumb-rounded-lg">
             {bombas.length ? (
