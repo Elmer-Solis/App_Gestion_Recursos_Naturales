@@ -28,7 +28,7 @@ export function Login() {
                         className="w-32 h-auto sombra-verde"
                     />
                     <img
-                        src="/umgM.png"
+                        src="/umgO.png"
                         alt="logo mariano"
                         className="w-36 h-32 sombra-azul"
                     />

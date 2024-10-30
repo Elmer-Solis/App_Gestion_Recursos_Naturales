@@ -21,10 +21,10 @@ export type BitacoraTomas = {
     notas: string;
 };
 
-
 type SolicitudDetailsProps = {
     bitacoras: BitacoraTomas;
 };
+
 export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
 
     const { toast } = useToast();
@@ -48,7 +48,7 @@ export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/maps.png" alt="" />
+                        <img src="/notas.png" alt="" />
                     </section>
                     <div className="flex flex-wrap justify-between w-full">
                         <div className="flex flex-col gap-y-2">
@@ -62,7 +62,6 @@ export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
                     </div>
                 </div>
             </CardHeader>
-
 
             <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button

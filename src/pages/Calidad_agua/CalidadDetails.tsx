@@ -43,7 +43,7 @@ export function CalidadDetails({ calidad }: SolicitudDetailsProps) {
             <CardHeader>
                 <div className="flex items-center gap-3">
                     <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/ph.png" alt="ph" />
+                        <img src="/agua.png" alt="agua" />
                     </section>
                     <div className="flex  flex-wrap justify-between w-full">
                         <div className="flex flex-col gap-y-2">

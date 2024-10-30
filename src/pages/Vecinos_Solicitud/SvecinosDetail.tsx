@@ -48,7 +48,6 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
     const { deleteSolicitud, getSolicitudById } = useSolicitudstore()
     const { toast } = useToast();
 
-
     const handleClick = () => {
         deleteSolicitud(solicitudes.id);
 
