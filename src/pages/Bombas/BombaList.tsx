@@ -36,7 +36,7 @@ export default function BombaList() {
                 </>
             ) : (
                 <>
-                    <h2 className="font-black text-3xl text-center">No hay Bombas</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0 ">No hay Bombas</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Comienza agregando Bombas {''}
                         <span className="text-blue-500 font-bold">Y aparecerán en este lugar</span>

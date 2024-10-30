@@ -15,7 +15,7 @@ export const Header = () => {
     // Función para transformar la ruta
     const formatPathname = (pathname: string) => {
         if (pathname === "/" || pathname === "") {
-            return "Dashboard Elmer Dev Pruebas"; // Si la ruta es "/", muestra "Dashboard"
+            return "Dashboard"; // Si la ruta es "/", muestra "Dashboard"
         }
         // Excepciones para rutas específicas
         if (pathname === "/calidad") {

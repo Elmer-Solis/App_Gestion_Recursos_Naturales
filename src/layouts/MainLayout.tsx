@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { Sidebar } from "./SideBar";
 import { useAuth } from "@/store/storeLogin";
-import { useInactivityLogout } from "@/hooks/useInactivityLogout";
+// import { useInactivityLogout } from "@/hooks/useInactivityLogout";
 import { Menu } from "lucide-react";
 
 export default function MainLayout() {
@@ -14,7 +14,7 @@ export default function MainLayout() {
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     useAuth();
-    useInactivityLogout();
+    // useInactivityLogout();
 
     return (
         <div className="grid h-screen w-full grid-cols-[auto_1fr]">
