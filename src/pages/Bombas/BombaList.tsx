@@ -16,12 +16,12 @@ export default function BombaList() {
 
 
     return (
-        <div className=" md:w-1/2 lg:3/5 md:h-full flex-grow overflow-y-scroll
+        <div className=" md:w-1/2 lg:w:3/5 md:h-screen  overflow-y-scroll
         dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
         dark:scrollbar-thumb-rounded-lg">
             {bombas.length ? (
                 <>
-                    <h2 className="font-black text-3xl text-center">Listado de Bombas</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">Listado de Bombas</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Administra tus {''}
                         <span className="text-blue-500 font-bold">Bombas</span>
@@ -36,7 +36,7 @@ export default function BombaList() {
                 </>
             ) : (
                 <>
-                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0 ">No hay Bombas</h2>
+                    <h2 className="font-black text-3xl text-center mt-6 md:mt-0">No hay Bombas</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
                         Comienza agregando Bombas {''}
                         <span className="text-blue-500 font-bold">Y aparecerán en este lugar</span>

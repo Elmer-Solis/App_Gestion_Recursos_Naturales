@@ -1,7 +1,5 @@
 import {
     Card,
-    CardFooter,
-    CardHeader,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -33,29 +31,28 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
     }
 
     return (
-        <Card className="mx-20 my-8 px-5 ">
-            <CardHeader >
-                <div className="flex items-center gap-4">
-                    <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]  ">
-                        <img src="/bomba.png" alt="" />
-                    </section>
 
-                    <div className="flex  flex-wrap justify-between w-full">
+        <Card className="mx-5 md:mx-20 my-5 px-5 py-8  ">
 
-                        <div className="flex flex-col gap-y-2">
-                            <BombaDetailItem label='Nombre' data={bomba.name} />
-                            <BombaDetailItem label='NIS' data={bomba.nis} />
-                        </div>
-                        <div className="flex flex-col gap-y-2">
-                            <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
-                            <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
-                        </div>
+            <div className="flex items-center gap-4  mb-5 ">
+                <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]  ">
+                    <img src="/bomba.png" alt="" />
+                </section>
+
+                <div className="flex  flex-wrap justify-between w-full ">
+
+                    <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
+                        <BombaDetailItem label='Nombre' data={bomba.name} />
+                        <BombaDetailItem label='NIS' data={bomba.nis} />
                     </div>
-                    {/* Renderizar las zonas */}
-
+                    <div className="flex flex-col gap-y-2 ">
+                        <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
+                        <BombaDetailItem label='Zonas' data={bomba.zonas.join(', ')} />
+                    </div>
                 </div>
-            </CardHeader>
-            <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
+            </div>
+
+            <div className="flex flex-col lg:flex-row gap-3 justify-between  ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
                     onClick={() => getBombaById(bomba.id)}
@@ -67,7 +64,7 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
                     onClick={handleClick}
                 >
                     Eliminar</Button>
-            </CardFooter>
+            </div>
         </Card>
     )
 }
