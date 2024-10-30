@@ -117,7 +117,7 @@ export function BombaForm() {
             </p>
             <Card>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(registerBomba)} className="py-6 px-5 space-y-5">
+                    <form onSubmit={form.handleSubmit(registerBomba)} className="py-6 px-5 md:px-8 space-y-5">
                         <FormField
                             control={form.control}
                             name="name"

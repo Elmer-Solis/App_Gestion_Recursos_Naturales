@@ -44,7 +44,7 @@ export default function BombaDetails({ bomba }: BombaDetailsProps) {
 
                         <div className="flex flex-col gap-y-2">
                             <BombaDetailItem label='Nombre' data={bomba.name} />
-                            <BombaDetailItem label='Direccion' data={bomba.direccion} />
+                            <BombaDetailItem label='NIS' data={bomba.nis} />
                         </div>
                         <div className="flex flex-col gap-y-2">
                             <BombaDetailItem label='Capacidad' data={bomba.bombeo} />
