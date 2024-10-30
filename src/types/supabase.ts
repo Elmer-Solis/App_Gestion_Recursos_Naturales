@@ -86,6 +86,7 @@ export type Database = {
           capacidad_bombeo: string | null
           direccion: string | null
           id: number
+          nis: string | null
           nombre_bomba: string
           zona_distribucion: string | null
         }
@@ -93,6 +94,7 @@ export type Database = {
           capacidad_bombeo?: string | null
           direccion?: string | null
           id?: number
+          nis?: string | null
           nombre_bomba: string
           zona_distribucion?: string | null
         }
@@ -100,6 +102,7 @@ export type Database = {
           capacidad_bombeo?: string | null
           direccion?: string | null
           id?: number
+          nis?: string | null
           nombre_bomba?: string
           zona_distribucion?: string | null
         }

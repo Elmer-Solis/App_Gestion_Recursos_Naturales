@@ -15,6 +15,7 @@ export type Bomba = {
     direccion: string;
     bombeo: string;
     zonas: string[];
+    nis: string;
 }
 
 export type DraftBomba = Omit<Bomba, 'id'>

@@ -12,6 +12,7 @@ type Row = {
     id: number;
     nombre_bomba: string;
     zona_distribucion: string;
+    nis: string;
 };
 
 type bombaState = {
@@ -30,7 +31,8 @@ const mapRowToBomba = (row: Row): Bomba => ({
     name: row.nombre_bomba, // Mapeamos nombre_bomba a name
     direccion: row.direccion,
     bombeo: row.capacidad_bombeo, // Mapeamos capacidad_bombeo a bombeo
-    zonas: row.zona_distribucion.split(',') // Suponemos que zona_distribucion es un string separado por comas
+    zonas: row.zona_distribucion.split(','), // Suponemos que zona_distribucion es un string separado por comas
+    nis: row.nis
 });
 
 export const useBombaStore = create<bombaState>()(
@@ -59,7 +61,8 @@ export const useBombaStore = create<bombaState>()(
                     nombre_bomba: newBomba.name,
                     direccion: newBomba.direccion,
                     capacidad_bombeo: newBomba.bombeo,
-                    zona_distribucion: newBomba.zonas.join(',') // Unimos las zonas en una string separada por comas
+                    zona_distribucion: newBomba.zonas.join(','), // Unimos las zonas en una string separada por comas
+                    nis: newBomba.nis
                 }]);
 
                 if (error) {
@@ -102,7 +105,8 @@ export const useBombaStore = create<bombaState>()(
                     nombre_bomba: updatedBomba.name,
                     direccion: updatedBomba.direccion,
                     capacidad_bombeo: updatedBomba.bombeo,
-                    zona_distribucion: updatedBomba.zonas.join(',')
+                    zona_distribucion: updatedBomba.zonas.join(','),
+                    nis: updatedBomba.nis
                 }).eq('id', parseInt(activeId)); // Convertimos a número si es necesario
 
                 if (error) {

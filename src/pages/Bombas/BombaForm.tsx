@@ -32,6 +32,9 @@ const formSchema = z.object({
         .max(30, { message: "La direccion no debe ser mayor a 30 caracteres" }),
     bombeo: z.string().min(2, { message: "El nombre de la bomba es obligatorio." }),
     zonas: z.array(z.string()).nonempty("Debe seleccionar al menos una zona."),
+    nis: z
+        .string()
+        .min(2, { message: "El nis de la Bomba es obligatorio." })
 });
 
 export function BombaForm() {
@@ -49,6 +52,7 @@ export function BombaForm() {
             direccion: "",
             bombeo: "",
             zonas: [],
+            nis: "",
         },
         mode: "onChange",
     });
@@ -68,7 +72,7 @@ export function BombaForm() {
                 form.setValue('name', activeBomba.name);
                 form.setValue('direccion', activeBomba.direccion);
                 form.setValue('bombeo', activeBomba.bombeo);
-
+                form.setValue('nis', activeBomba.nis);
                 // Si `zonas` no tiene al menos un valor, proporciona uno predeterminado
                 if (activeBomba.zonas.length > 0) {
                     form.setValue('zonas', activeBomba.zonas as [string, ...string[]]); // Forzar a tupla
@@ -154,6 +158,21 @@ export function BombaForm() {
                                 </FormItem>
                             )}
                         />
+
+                        <FormField
+                            control={form.control}
+                            name="nis"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Nis</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder="Ingresa nis de la bomba" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+
                         {/* <FormField
                             control={form.control}
                             name="zonas"
@@ -235,6 +254,9 @@ export function BombaForm() {
                                     <FormMessage />
                                 </FormItem>
                             )} />
+
+
+
 
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Bomba
