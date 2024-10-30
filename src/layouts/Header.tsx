@@ -33,12 +33,11 @@ export const Header = () => {
     };
 
     // Condicional para ocultar el Header en la ruta "/solicitud"
-    const rutasSinHeader = ["/solicitud", "/bombas", "/fontaneros", "/calidad", "/bitacoras"];
+    const rutasSinHeader = ["/solicitud", "/bombas", "/fontaneros", "/calidad", "/bitacoras", '/calendario'];
 
     if (rutasSinHeader.includes(location.pathname)) {
         return null; // No renderizar el header
     }
-
 
     return (
         <header className="flex h-[57px] justify-between items-center gap-1 border-b bg-background  py-10 px-12">

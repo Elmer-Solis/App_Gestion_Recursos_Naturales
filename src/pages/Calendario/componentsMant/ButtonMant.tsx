@@ -14,7 +14,7 @@ export function ButtonMant() {
         <button
             title="Agregar Mantenimiento"
             className="group cursor-pointer outline-none
-             hover:rotate-90 duration-300 fixed bottom-[50%] right-[8%] "
+             hover:rotate-90 duration-300 fixed bottom-[45%] right-[8%] "
             onClick={handleClick}
         >
             <svg

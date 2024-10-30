@@ -142,7 +142,6 @@ export function Calendario() {
                 events={allEvents}
                 startAccessor="start"
                 endAccessor="end"
-                style={{ height: "calc(100vh - 115px)" }}
                 messages={getMessagesES()}
                 eventPropGetter={eventStyleGetter}
                 dayPropGetter={dayPropGetter}
@@ -159,7 +158,6 @@ export function Calendario() {
                 {!selectedEvent && !selectedMantenimiento && <ButtonCalendar />}
                 {!selectedEvent && !selectedMantenimiento && <ButtonMant />}
                 {(selectedEvent || selectedMantenimiento) && !isDateModalOpen && !isMaintOpen && <ButtonDeleteCalendar />}
-                {/* componente y botón para mantenimiento */}
             </>
         </>
     );

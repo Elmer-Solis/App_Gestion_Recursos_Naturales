@@ -42,8 +42,6 @@ export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
 
     return (
         <Card className="mx-5 md:mx-20 my-5 px-5 py-8  ">
-
-
             <div className="flex items-center gap-4  mb-5 ">
                 <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
                     <img src="/notas.png" alt="" />
