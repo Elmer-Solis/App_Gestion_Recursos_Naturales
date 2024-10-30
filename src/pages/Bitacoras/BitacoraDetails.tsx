@@ -1,7 +1,5 @@
 import {
     Card,
-    CardFooter,
-    CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -43,27 +41,27 @@ export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
 
 
     return (
-        <Card className=" mx-20 my-8 px-5 ">
+        <Card className="mx-5 md:mx-20 my-5 px-5 py-8  ">
 
-            <CardHeader>
-                <div className="flex items-center gap-3">
-                    <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                        <img src="/notas.png" alt="" />
-                    </section>
-                    <div className="flex flex-wrap justify-between w-full">
-                        <div className="flex flex-col gap-y-2">
-                            <BitacoraDetailItem label="Latidud" data={bitacoras.latitud} />
-                            <BitacoraDetailItem label="Longitud" data={bitacoras.longitud} />
-                        </div>
-                        <div className="flex flex-col gap-y-2">
-                            <BitacoraDetailItem label="Registro" data={bitacoras.fecha_registro} />
-                            <BitacoraDetailItem label="Total tomas" data={bitacoras.total_tomas.toString()} />
-                        </div>
+
+            <div className="flex items-center gap-4  mb-5 ">
+                <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
+                    <img src="/notas.png" alt="" />
+                </section>
+                <div className="flex flex-wrap justify-between w-full">
+                    <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
+                        <BitacoraDetailItem label="Latidud" data={bitacoras.latitud} />
+                        <BitacoraDetailItem label="Longitud" data={bitacoras.longitud} />
+                    </div>
+                    <div className="flex flex-col gap-y-2">
+                        <BitacoraDetailItem label="Registro" data={bitacoras.fecha_registro} />
+                        <BitacoraDetailItem label="Total tomas" data={bitacoras.total_tomas.toString()} />
                     </div>
                 </div>
-            </CardHeader>
+            </div>
 
-            <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
+
+            <div className="flex flex-col lg:flex-row gap-3 justify-between ">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
                     onClick={() => getBitacoraById(bitacoras.id)}
@@ -77,7 +75,7 @@ export function BitacoraDetails({ bitacoras }: SolicitudDetailsProps) {
                 >
                     Eliminar
                 </Button>
-            </CardFooter>
+            </div>
         </Card>
     )
 }

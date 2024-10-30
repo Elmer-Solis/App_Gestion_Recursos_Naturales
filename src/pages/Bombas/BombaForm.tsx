@@ -176,46 +176,6 @@ export function BombaForm() {
                             />
                         </div>
 
-                        {/* 
-                        <FormField
-                            control={form.control}
-                            name="zonas"
-                            render={() => (
-                                <FormItem>
-                                    <div className="mb-4">
-                                        <FormLabel className="text-base">Zonas de distribución</FormLabel>
-                                        <FormDescription>
-                                            Selecciona las zonas a las que la bomba va a distribuir agua.
-                                        </FormDescription>
-                                    </div>
-                                    {zonasDisponibles.map((zona) => (
-                                        <FormField
-                                            key={zona.id}
-                                            control={form.control}
-                                            name="zonas"
-                                            render={({ field }) => (
-                                                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                                                    <FormControl>
-                                                        <Checkbox
-                                                            checked={field.value?.includes(zona.id)}
-                                                            onCheckedChange={(checked) => {
-                                                                field.onChange(
-                                                                    checked
-                                                                        ? [...(field.value || []), zona.id]
-                                                                        : field.value?.filter((value) => value !== zona.id)
-                                                                );
-                                                            }}
-                                                        />
-                                                    </FormControl>
-                                                    <FormLabel className="font-normal">{zona.label}</FormLabel>
-                                                </FormItem>
-                                            )}
-                                        />
-                                    ))}
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        /> */}
 
                         <FormField
                             control={form.control}
@@ -260,54 +220,6 @@ export function BombaForm() {
                                 </FormItem>
                             )}
                         />
-
-
-
-
-
-                        {/* 
-                        <FormField
-                            control={form.control}
-                            name="zonas"
-                            render={() => (
-                                <FormItem>
-                                    <div className="mb-4">
-                                        <FormLabel className="text-base">Zonas de distribución</FormLabel>
-                                        <FormDescription>
-                                            Selecciona las zonas de la bomba.
-                                        </FormDescription>
-                                    </div>
-                                    <div className="flex flex-wrap justify-center"> 
-                                        {zonasDisponibles.map((zona) => (
-                                            <FormField
-                                                key={zona.id}
-                                                control={form.control}
-                                                name="zonas"
-                                                render={({ field }) => (
-                                                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 w-1/5 mb-4"> 
-                                                        <FormControl>
-                                                            <Checkbox
-                                                                checked={field.value?.includes(zona.id)}
-                                                                onCheckedChange={(checked) => {
-
-                                                                    field.onChange(
-                                                                        checked
-                                                                            ? [...(field.value || []), zona.id]
-                                                                            : field.value?.filter((value) => value !== zona.id)
-                                                                    );
-                                                                }}
-                                                            />
-                                                        </FormControl>
-                                                        <FormLabel className="font-normal">{zona.label}</FormLabel>
-                                                    </FormItem>
-                                                )}
-                                            />
-                                        ))}
-                                    </div>
-                                    <FormMessage />
-                                </FormItem>
-                            )} /> */}
-
 
 
 

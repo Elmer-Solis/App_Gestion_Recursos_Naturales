@@ -129,7 +129,7 @@ export function BitacoraForm() {
     };
 
     return (
-        <div className="md:w-1/2 lg:w-2/5 mx-5">
+        <div className="md:w-2/5 lg:w-2/5 mx-5">
             <h2 className="font-black text-3xl text-center">Seguimiento Bitacoras</h2>
             <p className="text-lg mt-5 text-center mb-10">
                 Añade Bitacoras y {''}
@@ -138,9 +138,9 @@ export function BitacoraForm() {
             <Card>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(registerSolicitud)}
-                        className="py-6 px-5 md:px-8 space-y-5">
+                        className="py-6 px-5 md:px-8 space-y-5 ">
 
-                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
+                        <div className="flex flex-col md:flex-row md:justify-evenly md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="zona_distribucion"
@@ -152,7 +152,7 @@ export function BitacoraForm() {
                                                 onValueChange={(value) => field.onChange(value)}
                                                 value={field.value}
                                             >
-                                                <SelectTrigger className="w-full" id="zona">
+                                                <SelectTrigger className="w-full md:w-44" id="zona">
                                                     <SelectValue placeholder="Elige una opción" />
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -180,6 +180,7 @@ export function BitacoraForm() {
                                             <Input
                                                 id="total_tomas"
                                                 type="number"
+                                                className="w-full"
                                                 placeholder="Número de Expediente"
                                                 {...field}
                                                 onChange={(e) => field.onChange(Number(e.target.value))}
@@ -191,7 +192,7 @@ export function BitacoraForm() {
                             />
                         </div>
 
-                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
+                        <div className="flex flex-col md:flex-row  md:justify-evenly md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="tomas_usadas"
@@ -204,6 +205,7 @@ export function BitacoraForm() {
                                                 id="tomas_usadas"
                                                 type="number"
                                                 placeholder="Número de Expediente"
+                                                className="w-full"
                                                 {...field}
                                                 onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
@@ -216,7 +218,6 @@ export function BitacoraForm() {
                             <FormField
                                 control={form.control}
                                 name="tomas_legales"
-
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel htmlFor="tomas_legales">Tomas Legales</FormLabel>
@@ -225,6 +226,7 @@ export function BitacoraForm() {
                                                 id="tomas_legales"
                                                 type="number"
                                                 placeholder="Número de Expediente"
+                                                className="w-full"
                                                 {...field}
                                                 onChange={(e) => field.onChange(Number(e.target.value))}
                                             />
@@ -235,7 +237,7 @@ export function BitacoraForm() {
                             />
                         </div>
 
-                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
+                        <div className="flex flex-col md:flex-row md:justify-evenly md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="latitud"
@@ -245,6 +247,7 @@ export function BitacoraForm() {
                                         <FormControl>
                                             <Input id="latitud"
                                                 placeholder="Latitud"
+                                                className="w-full"
                                                 {...field} />
                                         </FormControl>
                                         <FormMessage />
@@ -260,6 +263,7 @@ export function BitacoraForm() {
                                         <FormLabel htmlFor="longitud">Longitud</FormLabel>
                                         <FormControl>
                                             <Input id="longitud"
+                                                className="w-full"
                                                 placeholder="Longitud"
                                                 {...field} />
                                         </FormControl>
@@ -269,7 +273,7 @@ export function BitacoraForm() {
                             />
                         </div>
 
-                        <div className="flex flex-col md:flex-row md:space-x-4 gap-y-4 md:gap-y-0">
+                        <div className="flex flex-col md:flex-row  md:justify-evenly md:space-x-4 gap-y-4 md:gap-y-0">
                             <FormField
                                 control={form.control}
                                 name="fecha_registro"
@@ -278,8 +282,8 @@ export function BitacoraForm() {
                                         <FormLabel htmlFor="fecha_registro">Fecha de Registro</FormLabel>
                                         <FormControl>
                                             <Input id="fecha_registro" type="date" {...field}
-                                                className="custom-datetime-input"
-                                            />
+
+                                                className="custom-datetime-input w-48" />
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -315,24 +319,24 @@ export function BitacoraForm() {
                             />
                         </div>
 
-                        <FormField
-                            control={form.control}
-                            name="notas"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel htmlFor="notas">Notas</FormLabel>
-                                    <FormControl>
-                                        <Input id="notas"
-                                            placeholder="Notas"
-                                            {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-
-
+                        <div className="md:px-4">
+                            <FormField
+                                control={form.control}
+                                name="notas"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="notas">Notas</FormLabel>
+                                        <FormControl>
+                                            <Input id="notas"
+                                                placeholder="Notas"
+                                                className="w-full "
+                                                {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                        </div>
                         <Button type="submit" className="uppercase text-white font-bold w-full">
                             Guardar Solicitud
                         </Button>
