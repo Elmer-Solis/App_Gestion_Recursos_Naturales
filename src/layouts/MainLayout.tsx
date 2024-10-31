@@ -1,4 +1,3 @@
-import { Header } from "./Header";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
 import { Sidebar } from "./SideBar";
@@ -20,9 +19,8 @@ export default function MainLayout() {
     <div className="grid h-screen w-full grid-cols-[auto_1fr]">
       {/* Sidebar visible en escritorio y como menú hamburguesa en móvil */}
       <aside
-        className={`shadow-md ${
-          isMobileMenuOpen ? "fixed inset-0 z-20 w-full" : "hidden md:block"
-        }`}
+        className={`shadow-md ${isMobileMenuOpen ? "fixed inset-0 z-20 w-full" : "hidden md:block"
+          }`}
       >
         <Sidebar
           sidebarOpen={isAsideExpanded || isMobileMenuOpen}
