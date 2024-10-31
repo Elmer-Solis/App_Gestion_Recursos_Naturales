@@ -1,9 +1,9 @@
+// HorasExtras.tsx
 import { useState, useEffect } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, LabelList } from "recharts";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import supabase from "@/supabase/supabase.config";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
-
 import FilterComponent from "./Filtro";
 
 // Tipos de datos
@@ -29,13 +29,17 @@ const chartConfig = {
     },
 } satisfies ChartConfig;
 
-export function HorasExtras() {
+interface HorasExtrasProps {
+    onDataLoaded: (data: ChartData[]) => void; // Callback para enviar los datos a `main`
+}
+
+export function HorasExtras({ onDataLoaded }: HorasExtrasProps) {
     // Obtener mes y año actual
     const today = new Date();
-    const currentMonth = String(today.getMonth() + 1).padStart(2, '0'); // Mes actual con 2 dígitos
-    const currentYear = String(today.getFullYear()); // Año actual
+    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+    const currentYear = String(today.getFullYear());
 
-    // Estado de filtros con valores por defecto
+    // Estado de filtros y datos del gráfico
     const [filters, setFilters] = useState({ month: currentMonth, year: currentYear });
     const [chartData, setChartData] = useState<ChartData[]>([]);
 
@@ -58,11 +62,12 @@ export function HorasExtras() {
                         horas_extras: entry.total_horas_extras ?? 0,
                     }));
                     setChartData(formattedData);
+                    onDataLoaded(formattedData); // Enviar datos al componente superior
                 }
             }
         };
         fetchFilteredData();
-    }, [filters]);
+    }, [filters, onDataLoaded]);
 
     return (
         <Card>
@@ -75,11 +80,7 @@ export function HorasExtras() {
             <hr className="pb-11" />
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-full">
-                    <BarChart
-                        data={chartData}
-                        layout="vertical"
-                        margin={{ right: 14, left: -60 }} // Ajuste de márgenes
-                    >
+                    <BarChart data={chartData} layout="vertical" margin={{ right: 14, left: -60 }}>
                         <CartesianGrid horizontal={false} />
                         <YAxis
                             dataKey="fontanero"
@@ -90,30 +91,10 @@ export function HorasExtras() {
                             tickFormatter={(value) => value?.slice(0, 6)}
                         />
                         <XAxis type="number" hide />
-                        <ChartTooltip
-                            cursor={false}
-                            content={<ChartTooltipContent indicator="line" />}
-                        />
-                        <Bar
-                            dataKey="horas_extras"
-                            layout="vertical"
-                            fill="var(--color-desktop)"
-                            radius={5}
-                        >
-                            <LabelList
-                                dataKey="fontanero"
-                                position="insideLeft"
-                                offset={8}
-                                className="fill-[--color-label]"
-                                fontSize={12}
-                            />
-                            <LabelList
-                                dataKey="horas_extras"
-                                position="right"
-                                offset={8}
-                                className="fill-foreground"
-                                fontSize={12}
-                            />
+                        <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+                        <Bar dataKey="horas_extras" layout="vertical" fill="var(--color-desktop)" radius={5}>
+                            <LabelList dataKey="fontanero" position="insideLeft" offset={8} className="fill-[--color-label]" fontSize={12} />
+                            <LabelList dataKey="horas_extras" position="right" offset={8} className="fill-foreground" fontSize={12} />
                         </Bar>
                     </BarChart>
                 </ChartContainer>

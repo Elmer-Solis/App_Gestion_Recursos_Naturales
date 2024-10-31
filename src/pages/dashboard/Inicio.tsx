@@ -3,9 +3,20 @@ import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
 import { HorasExtras } from './HorasExtras/HorasExtras';
+import GeneratePDFButton from "../PDF/pdfHorasExtras";
+
+
+interface ChartData {
+    fontanero: string | null;
+    horas_extras: number | null;
+}
+
 
 // Importamos los hooks de Zustand
 export function Inicio() {
+
+    const [chartData, setChartData] = useState<ChartData[]>([]);
+
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
     const fetchBombas = useBombaStore((state) => state.fetchBombas);
     const [loading, setLoading] = useState(true); // Estado de carga
@@ -35,13 +46,12 @@ export function Inicio() {
             <div className="grid grid-cols-1
              md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 h-full">
                 <div className="pt-4 md:pt-0">
-                    <HorasExtras />
+                    <HorasExtras onDataLoaded={setChartData} />
+                </div>
+                <div>
+                    <GeneratePDFButton data={chartData} />
                 </div>
             </div>
-            <h2>Confirm your signup</h2>
-
-            <p>Follow this link to confirm your user:</p>
-            <p><a href="{{ .ConfirmationURL }}">Confirm your mail</a></p>
         </main>
     );
 }

@@ -29,6 +29,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "jspdf": "^2.5.2",
     "lucide-react": "^0.427.0",
     "micromatch": "^4.0.8",
     "react": "^18.3.1",
