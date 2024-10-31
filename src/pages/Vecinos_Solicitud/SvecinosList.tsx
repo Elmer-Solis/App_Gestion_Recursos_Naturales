@@ -72,7 +72,7 @@ export function SvecinosList() {
                 className=" h-full overflow-y-scroll
                 dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
                 dark:scrollbar-thumb-rounded-lg"
-                style={{ maxHeight: "calc(100vh - 100px)" }}
+
             >
                 {filteredSolicitudes.length ? (
                     <>
