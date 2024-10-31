@@ -33,7 +33,9 @@ export const Header = () => {
     };
 
     // Condicional para ocultar el Header en la ruta "/solicitud"
-    const rutasSinHeader = ["/solicitud", "/bombas", "/fontaneros", "/calidad", "/bitacoras", '/calendario'];
+    const rutasSinHeader = ["/solicitud", "/bombas", "/fontaneros", "/calidad", "/bitacoras", '/calendario', '/', '/tablas',
+        '/contadores'
+    ];
 
     if (rutasSinHeader.includes(location.pathname)) {
         return null; // No renderizar el header
