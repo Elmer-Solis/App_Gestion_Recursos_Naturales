@@ -1,6 +1,6 @@
-import { BellRing, Check } from "lucide-react";
+// import { BellRing, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,20 +10,20 @@ import {
 } from "@/components/ui/card";
 import { ModeToggle } from "@/components/settings/ModelToggle";
 
-const notifications = [
-  {
-    title: "Your call has been confirmed.",
-    description: "1 hour ago",
-  },
-  {
-    title: "You have a new message!",
-    description: "1 hour ago",
-  },
-  {
-    title: "Your subscription is expiring soon!",
-    description: "2 hours ago",
-  },
-];
+// const notifications = [
+//   {
+//     title: "Your call has been confirmed.",
+//     description: "1 hour ago",
+//   },
+//   {
+//     title: "You have a new message!",
+//     description: "1 hour ago",
+//   },
+//   {
+//     title: "Your subscription is expiring soon!",
+//     description: "2 hours ago",
+//   },
+// ];
 
 type CardProps = React.ComponentProps<typeof Card>;
 
@@ -45,7 +45,7 @@ export function Cambios({ className, ...props }: CardProps) {
           </div>
         </div>
 
-        <div className="flex items-center space-x-4 rounded-md border p-4">
+        {/* <div className="flex items-center space-x-4 rounded-md border p-4">
           <BellRing />
           <div className="flex-1 space-y-1">
             <p className="text-sm font-medium leading-none">
@@ -55,9 +55,9 @@ export function Cambios({ className, ...props }: CardProps) {
               Envía notificaciones al dispositivo.
             </p>
           </div>
-        </div>
+        </div> */}
 
-        <div>
+        {/* <div>
           {notifications.map((notification, index) => (
             <div
               key={index}
@@ -74,12 +74,13 @@ export function Cambios({ className, ...props }: CardProps) {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
+
       </CardContent>
       <CardFooter>
-        <Button className="w-full">
+        {/* <Button className="w-full">
           <Check /> Marcar todo como leído
-        </Button>
+        </Button> */}
       </CardFooter>
     </Card>
   );

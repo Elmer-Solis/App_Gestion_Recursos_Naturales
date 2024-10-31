@@ -47,9 +47,12 @@ export function Inicio() {
              md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 h-full">
                 <div className="pt-4 md:pt-0">
                     <HorasExtras onDataLoaded={setChartData} />
-                </div>
-                <div>
-                    <GeneratePDFButton data={chartData} />
+                    <GeneratePDFButton
+                        data={chartData.map((item) => ({
+                            fontanero: item.fontanero ?? "Desconocido",
+                            horas_extras: item.horas_extras ?? 0,
+                        }))}
+                    />
                 </div>
             </div>
         </main>

@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { jsPDF } from "jspdf";
 
-// Cambiamos la interfaz GeneratePDFButtonProps para aceptar valores nulos
 interface GeneratePDFButtonProps {
-    data: Array<{ fontanero: string | null; horas_extras: number | null }>;
+    data: Array<{ fontanero: string; horas_extras: number }>;
 }
-
-
 
 const GeneratePDFButton: React.FC<GeneratePDFButtonProps> = ({ data }) => {
     const handleGeneratePDF = () => {
@@ -40,19 +37,19 @@ const GeneratePDFButton: React.FC<GeneratePDFButtonProps> = ({ data }) => {
         // Generate rows with fontanero, horas and extras
         let yPosition = 80;
         data.forEach((item) => {
-            const fontanero = item.fontanero ?? "Desconocido"; // Usar "Desconocido" si es null
+            const fontanero = item.fontanero || "Desconocido";
             const horas = item.horas_extras?.toString() || "0";
             const extras =
-                item.horas_extras && item.horas_extras > 0
+                item.horas_extras > 0
                     ? "Sí"
-                    : item.horas_extras && item.horas_extras < 0
+                    : item.horas_extras < 0
                         ? "Debe"
                         : "";
 
             doc.text(fontanero, 20, yPosition);
-            doc.text(horas, 250, yPosition);
-            doc.text(extras, 400, yPosition);
-            yPosition += 20;
+            doc.text(horas, 100, yPosition);
+            doc.text(extras, 150, yPosition);
+            yPosition += 10;
         });
 
         // Save the PDF

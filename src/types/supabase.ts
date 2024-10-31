@@ -438,6 +438,27 @@ export type Database = {
         }
         Relationships: []
       }
+      vista_solicitudes_pendientes: {
+        Row: {
+          direccion: string | null
+          nombre_solicitante: string | null
+          telefono: number | null
+          zona: string | null
+        }
+        Insert: {
+          direccion?: string | null
+          nombre_solicitante?: string | null
+          telefono?: number | null
+          zona?: string | null
+        }
+        Update: {
+          direccion?: string | null
+          nombre_solicitante?: string | null
+          telefono?: number | null
+          zona?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never

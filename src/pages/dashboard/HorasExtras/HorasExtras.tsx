@@ -70,7 +70,7 @@ export function HorasExtras({ onDataLoaded }: HorasExtrasProps) {
     }, [filters, onDataLoaded]);
 
     return (
-        <Card>
+        <Card className="">
             <div className="flex justify-center items-center p-4">
                 <CardTitle className="text-sm sm:text-xs md:text-lg lg:text-xl pr-2">
                     Horas Extras
