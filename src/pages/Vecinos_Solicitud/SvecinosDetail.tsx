@@ -66,7 +66,7 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
                         <img src="/documentos.png" alt="" />
                     </section>
                     <div className="flex flex-wrap justify-between w-full">
-                        <div className="flex flex-col gap-y-2">
+                        <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
                             <SvecinosDetailItem label="Nombre" data={solicitudes.nombre_solicitante} />
                             <SvecinosDetailItem label="Telefono" data={solicitudes.telefono.toString()} />
                         </div>
@@ -77,7 +77,7 @@ export function SvecinosDetail({ solicitudes }: SolicitudDetailsProps) {
                     </div>
                 </div>
             </CardHeader>
-            <CardFooter className="flex flex-col lg:flex-row gap-3 justify-between ">
+            <CardFooter className="hidden md:flex flex-col lg:flex-row gap-3 justify-between">
                 <Button
                     className="py-2 px-10 text-white font-bold uppercase"
                     onClick={() => getSolicitudById(solicitudes.id)}

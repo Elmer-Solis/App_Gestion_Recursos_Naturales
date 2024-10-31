@@ -35,7 +35,7 @@ export function SvecinosList() {
 
     return (
         <div className="mt-4 md:w-2/5 lg:w-2/5 md:h-full flex-grow">
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-col md:flex-row mt-14 md:mt-0 mb-4 md:mb-0 justify-center gap-4">
 
                 <Input
                     type="text"
@@ -85,7 +85,7 @@ export function SvecinosList() {
                     </>
                 ) : (
                     <>
-                        <h2 className="font-black text-3xl text-center">
+                        <h2 className="font-black text-3xl text-center mt-6 md:mt-0">
                             No hay solicitudes
                         </h2>
                         <p className="text-xl mt-5 mb-10 text-center">
