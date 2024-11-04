@@ -16,7 +16,7 @@ export function Login() {
 
     return (
         <div className="flex justify-center items-center h-screen bg-main ">
-            <Card className="w-[350px]  bg-gradient-to-r from-green-950  to-blue-950 p-">
+            <Card className="w-[350px]  bg-gradient-to-r from-green-950  to-blue-950 ">
                 <CardHeader>
                     <CardTitle className="text-center mb-3 text-white">Gestion De Recursos Naturales</CardTitle>
                     <hr />
@@ -33,7 +33,7 @@ export function Login() {
                         className="w-36 h-32 sombra-azul"
                     />
                 </CardContent>
-                <CardFooter className="flex justify-between  ">
+                <CardFooter className=" flex flex-col  ">
                     <button
                         className="flex items-center  dark:bg-gray-950 dark:hover:bg-gray-900 border border-black 
                         rounded-lg px-6 py-2 text-sm font-medium dark:text-white hover:bg-gray-950
@@ -58,6 +58,16 @@ export function Login() {
                         </svg>
                         <span>Continue Con Google</span>
                     </button>
+
+                    <Card className=" w-[30%] md:w-[12%] fixed bottom-6 right-6 bg-gradient-to-r from-green-950 to-blue-950 text-white p-3 rounded-lg shadow-lg 
+                left-1/2 transform -translate-x-1/2 md:transform-none md:left-auto md:bottom-6 md:right-6">
+                        <p className="text-xs md:text-base opacity-80">Desarrollado por:</p>
+                        {/* Texto corto para móviles */}
+                        <p className="text-base md:text-lg font-semibold tracking-wide  md:hidden">Elmer Solis </p>
+                        {/* Texto completo para pantallas medianas o mayores */}
+                        <p className="hidden md:block text-base md:text-lg font-semibold tracking-wide ">Elmer Isai Solis Coyoy</p>
+                        <p className="text-xs md:text-base opacity-80 ">Versión 1.0.0</p>
+                    </Card>
                 </CardFooter>
             </Card>
         </div>

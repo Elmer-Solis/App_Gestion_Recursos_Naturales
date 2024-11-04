@@ -35,14 +35,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <div
-      className={`relative h-screen ${
-        sidebarOpen ? "w-full md:w-auto" : "md:w-auto"
-      } ${sidebarOpen && "bg-black bg-opacity-95 md:bg-opacity-0"}`}
+      className={`relative h-screen ${sidebarOpen ? "w-full md:w-auto" : "md:w-auto"
+        } ${sidebarOpen && "bg-black bg-opacity-95 md:bg-opacity-0"}`}
     >
       <button
-        className={`absolute top-5 transform ${
-          sidebarOpen ? "right-[-16px]" : "right-[-26px] rotate-180"
-        } w-8 h-8 rounded-full flex items-center justify-center transition-all duration-400`}
+        className={`absolute top-5 transform ${sidebarOpen ? "right-[-16px]" : "right-[-26px] rotate-180"
+          } w-8 h-8 rounded-full flex items-center justify-center transition-all duration-400`}
         onClick={toggleSidebar}
         style={{ zIndex: 1000 }}
       >
@@ -50,18 +48,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </button>
 
       <aside
-        className={`border-r text-white transition-all duration-300 ${
-          sidebarOpen ? "w-full md:w-44" : "w-18"
-        } h-full flex flex-col`}
+        className={`border-r text-white transition-all duration-300 ${sidebarOpen ? "w-full md:w-44" : "w-18"
+          } h-full flex flex-col`}
       >
         <div className="flex justify-center items-center pt-5 mb-5">
           <div className="transform transition-transform">
             <img
               src="/umgO.png"
               alt="Logo"
-              className={`h-8 w-9 ${
-                sidebarOpen ? "scale-90" : "scale-150"
-              } transition-transform`}
+              className={`h-8 w-9 ${sidebarOpen ? "scale-90" : "scale-150"
+                } transition-transform`}
             />
           </div>
           {sidebarOpen && (
@@ -77,10 +73,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   <NavLink
                     to={to}
                     className={({ isActive }) =>
-                      `flex items-center p-2 ${
-                        sidebarOpen ? "px-6" : "px-2"
-                      } rounded ${
-                        isActive ? "bg-gray-200 dark:bg-gray-800" : ""
+                      `flex items-center p-2 ${sidebarOpen ? "px-6" : "px-2"
+                      } rounded ${isActive ? "bg-gray-200 dark:bg-gray-800" : ""
                       } hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors w-full`
                     }
                     onClick={closeMobileMenu}
@@ -112,8 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         <NavLink
                           to={subTo}
                           className={({ isActive }) =>
-                            `flex items-center p-2 px-4 rounded ${
-                              isActive ? "bg-gray-200 dark:bg-gray-800" : ""
+                            `flex items-center p-2 px-4 rounded ${isActive ? "bg-gray-200 dark:bg-gray-800" : ""
                             } hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors w-full`
                           }
                         >
@@ -177,5 +170,5 @@ const linksArray = [
   { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
   { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
   { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
-  { label: "Configuracion", icon: <Settings />, to: "/settings" },
+  { label: "Ajustes", icon: <Settings />, to: "/settings" },
 ];
