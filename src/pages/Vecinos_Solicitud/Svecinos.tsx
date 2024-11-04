@@ -20,7 +20,7 @@ export function SVecinos() {
 
     return (
         <div className="container mx-auto mt-4">
-            <div className="mt-4 md:flex">
+            <div className="mt-4 md:flex  md:h-[calc(100vh-135px)]">
                 {/* Mostrar solo en pantallas medianas o superiores */}
                 {isMediumScreen && <SvecinosForm />}
 

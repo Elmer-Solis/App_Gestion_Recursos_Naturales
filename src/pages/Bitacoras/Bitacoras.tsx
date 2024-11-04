@@ -10,7 +10,7 @@ export function Bitacoras() {
                 Bitacoras {''}
             </h1>
 
-            <div className="mt-6 md:flex">
+            <div className="mt-6 md:flex md:h-[calc(100vh-135px)]">
                 <BitacoraForm />
                 <BitacoraList />
             </div>

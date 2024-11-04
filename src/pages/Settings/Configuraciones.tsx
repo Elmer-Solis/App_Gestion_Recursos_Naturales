@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -29,59 +28,45 @@ type CardProps = React.ComponentProps<typeof Card>;
 
 export function Cambios({ className, ...props }: CardProps) {
   return (
-    <Card className={cn("w-[380px] mx-auto", className)} {...props}>
-      <CardHeader>
+    <Card className={cn(" ", className)} {...props}>
+      <CardHeader className="flex items-center ">
+        <img src="/umgO.png" alt="fontanero" className="w-15 h-20 md:w-25  rounded-full" />
         <CardTitle>Configuración General</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
         {/* Mode Toggle with description */}
-        <div className="flex items-center space-x-4 rounded-md border p-4">
+        <div className="flex items-center p-3 rounded-md border gap-4 ">
           <ModeToggle />
           <div className="flex-1 space-y-1">
             <p className="text-sm font-medium leading-none">Tema</p>
             <p className="text-sm text-muted-foreground">
-              Cambia entre el tema claro y oscuro.
+              Cambia entre tema claro y oscuro.
             </p>
           </div>
         </div>
-
-        {/* <div className="flex items-center space-x-4 rounded-md border p-4">
-          <BellRing />
+        <div className="flex items-center p-3 rounded-md border ">
           <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium leading-none">
-              Notificaciones Push
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Envía notificaciones al dispositivo.
-            </p>
+            <p className="leading-none">Desarrollado por:</p>
+            {/* Texto corto para móviles */}
+            <p className="text-sm text-muted-foreground">Elmer Isai Solis Coyoy</p>
+            {/* Texto completo para pantallas medianas o mayores */}
+            {/* <p className="hidden md:block text-base md:text-lg  font-semibold tracking-wide ">Elmer Isai Solis Coyoy</p> */}
           </div>
-        </div> */}
+        </div>
 
-        {/* <div>
-          {notifications.map((notification, index) => (
-            <div
-              key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-            >
-              <span className="flex h-2 w-2 translate-y-1 rounded-full bg-sky-500" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">
-                  {notification.title}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {notification.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div> */}
+
+        <div className="flex items-center p-3 rounded-md border ">
+          <div className="flex-1 space-y-1">
+            <p className="leading-none">Versión</p>
+            {/* Texto corto para móviles */}
+            <p className="text-sm text-muted-foreground">1.0.0</p>
+            {/* Texto completo para pantallas medianas o mayores */}
+            {/* <p className="hidden md:block text-base md:text-lg  font-semibold tracking-wide ">Elmer Isai Solis Coyoy</p> */}
+          </div>
+        </div>
 
       </CardContent>
-      <CardFooter>
-        {/* <Button className="w-full">
-          <Check /> Marcar todo como leído
-        </Button> */}
-      </CardFooter>
+
     </Card>
   );
 }

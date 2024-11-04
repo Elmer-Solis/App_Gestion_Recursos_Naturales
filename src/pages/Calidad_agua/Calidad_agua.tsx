@@ -9,7 +9,7 @@ export function Calidad_agua() {
                 Calidad Del Agua{''}
             </h1>
 
-            <div className="mt-6 md:flex ">
+            <div className="mt-6 md:flex md:h-[calc(100vh-135px)]">
                 <CalidadForm />
                 <CalidadList />
             </div>

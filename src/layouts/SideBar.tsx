@@ -155,7 +155,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 // Data links con submenú
 const linksArray = [
   {
-    label: "Home",
+    label: "Inicio",
     icon: <Home />,
     to: "/",
     subMenu: [

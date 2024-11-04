@@ -34,7 +34,7 @@ export function SvecinosList() {
     }, [fetchBombas, fetchFontaneros, fetchSolicitudes]);
 
     return (
-        <div className="mt-4 md:w-2/5 lg:w-2/5 md:h-full flex-grow">
+        <div className="mt-4 md:w-2/5 lg:w-2/5 md:h-full flex-grow ">
             <div className="flex flex-col md:flex-row mt-14 md:mt-0 mb-4 md:mb-0 justify-center gap-4">
 
                 <Input
