@@ -4,7 +4,7 @@
 // import { useEffect, useState } from "react";
 // import { HorasExtras } from './HorasExtras/HorasExtras';
 // import GeneratePDFButton from "../PDF/pdfHorasExtras";
-import DashboardPrincipal from './dashboardprincipal/DashboardPrincipal';
+// import DashboardPrincipal from './dashboardprincipal/DashboardPrincipal';
 import Graficos from './Tablas/Graficos';
 
 // import {

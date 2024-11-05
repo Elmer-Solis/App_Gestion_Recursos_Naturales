@@ -3,7 +3,7 @@ import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
 import { TablaFontanerosBombas } from "../Tablas/TablaFontanerosBombas";
 import { MantBombas } from "../MantenimientoBombas/MantBombas";
-import Graficos from '../Tablas/Graficos';
+// import Graficos from '../Tablas/Graficos';
 
 export const Tablas = () => {
 
@@ -53,7 +53,6 @@ export const Tablas = () => {
         mx-auto mt-5 px-4 sm:px-6 ">
             <div className="grid grid-cols-1
              md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 h-full">
-
                 <div>
                     <div >
                         <TablaFontanerosBombas />
@@ -62,8 +61,6 @@ export const Tablas = () => {
                         <MantBombas />
                     </div>
                 </div>
-
-
             </div>
         </main>
     )
