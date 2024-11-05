@@ -8,8 +8,8 @@ import {
   Login,
   Bitacoras,
   Calidad_agua,
-  Vecinos,
   Contadores,
+  Permisos,
   Tablas,
   SVecinos,
   Settings,
@@ -23,51 +23,18 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route
-            path="/"
-            element={<ProtectedRoute element={<Inicio />} />}
-            index
-          />
-          <Route
-            path="/fontaneros"
-            element={<ProtectedRoute element={<Fontaneros />} />}
-          />
-          <Route
-            path="/bombas"
-            element={<ProtectedRoute element={<Bombas />} />}
-          />
-          <Route
-            path="/calendario"
-            element={<ProtectedRoute element={<Calendario />} />}
-          />
-          <Route
-            path="/bitacoras"
-            element={<ProtectedRoute element={<Bitacoras />} />}
-          />
-          <Route
-            path="/calidad"
-            element={<ProtectedRoute element={<Calidad_agua />} />}
-          />
-          <Route
-            path="/solicitu"
-            element={<ProtectedRoute element={<Vecinos />} />}
-          />
-          <Route
-            path="/solicitud"
-            element={<ProtectedRoute element={<SVecinos />} />}
-          />
-          <Route
-            path="/tablas"
-            element={<ProtectedRoute element={<Tablas />} />}
-          />
-          <Route
-            path="/contadores"
-            element={<ProtectedRoute element={<Contadores />} />}
-          />
-          <Route
-            path="/settings"
-            element={<ProtectedRoute element={<Settings />} />}
-          />
+          <Route path="/" element={<ProtectedRoute element={<Inicio />} />} index />
+          <Route path="/fontaneros" element={<ProtectedRoute element={<Fontaneros />} />} />
+          <Route path="/bombas" element={<ProtectedRoute element={<Bombas />} />} />
+          <Route path="/calendario" element={<ProtectedRoute element={<Calendario />} />} />
+          <Route path="/bitacoras" element={<ProtectedRoute element={<Bitacoras />} />} />
+          <Route path="/calidad" element={<ProtectedRoute element={<Calidad_agua />} />} />
+          {/* <Route path="/solicitu" element={<ProtectedRoute element={<Vecinos />} />} /> */}
+          <Route path="/solicitud" element={<ProtectedRoute element={<SVecinos />} />} />
+          <Route path="/tablas" element={<ProtectedRoute element={<Tablas />} />} />
+          <Route path="/contadores" element={<ProtectedRoute element={<Contadores />} />} />
+          <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
+          <Route path="/permisos" element={<ProtectedRoute element={<Permisos />} />} />
         </Route>
 
         {/* Ruta pública */}

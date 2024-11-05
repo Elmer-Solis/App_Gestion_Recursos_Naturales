@@ -11,6 +11,7 @@ import {
   FileText,
   ChevronDown,
   Settings,
+  FileLock
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "../store/storeLogin";
@@ -170,5 +171,6 @@ const linksArray = [
   { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
   { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
   { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
+  { label: "Permisos", icon: <FileLock />, to: "/permisos" },
   { label: "Ajustes", icon: <Settings />, to: "/settings" },
 ];

@@ -54,7 +54,6 @@ export function Cambios({ className, ...props }: CardProps) {
           </div>
         </div>
 
-
         <div className="flex items-center p-3 rounded-md border ">
           <div className="flex-1 space-y-1">
             <p className="leading-none">Versión</p>
@@ -64,9 +63,7 @@ export function Cambios({ className, ...props }: CardProps) {
             {/* <p className="hidden md:block text-base md:text-lg  font-semibold tracking-wide ">Elmer Isai Solis Coyoy</p> */}
           </div>
         </div>
-
       </CardContent>
-
     </Card>
   );
 }

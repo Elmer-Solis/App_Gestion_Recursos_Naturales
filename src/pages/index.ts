@@ -11,3 +11,4 @@ export * from "./dashboard/SubDashboard/Contadores";
 export * from "./dashboard/SubDashboard/Contadores";
 export * from "./Vecinos_Solicitud/Svecinos";
 export * from "./Settings/Settings";
+export * from "./Permisos/Permisos";
