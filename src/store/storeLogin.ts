@@ -111,6 +111,7 @@ interface UserMetadata {
     email: string;
     picture: string;
     name: string;
+    role: string | null;  // Permitir que el rol sea `null`
 }
 
 // Definición del tipo para el estado de autenticación
@@ -173,7 +174,7 @@ export const useAuth = () => {
                 const email = session.user?.email || '';
                 const { data, error } = await supabase
                     .from('users')
-                    .select('*')
+                    .select('email, role')  // Ahora también obtenemos el rol del usuario
                     .eq('email', email);
 
                 if (error || data.length === 0) {
@@ -191,6 +192,7 @@ export const useAuth = () => {
                         email: email,
                         picture: session.user?.user_metadata?.picture || '',
                         name: session.user?.user_metadata?.name || '',
+                        role: data[0].role  // Aquí guardamos el rol
                     };
                     setUser(userMetadata);
                 }

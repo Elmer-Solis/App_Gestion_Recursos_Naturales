@@ -408,14 +408,17 @@ export type Database = {
         Row: {
           email: string
           id: number
+          role: string | null
         }
         Insert: {
           email: string
           id?: number
+          role?: string | null
         }
         Update: {
           email?: string
           id?: number
+          role?: string | null
         }
         Relationships: []
       }

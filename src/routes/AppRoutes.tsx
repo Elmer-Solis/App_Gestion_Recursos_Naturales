@@ -23,18 +23,17 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<ProtectedRoute element={<Inicio />} />} index />
-          <Route path="/fontaneros" element={<ProtectedRoute element={<Fontaneros />} />} />
-          <Route path="/bombas" element={<ProtectedRoute element={<Bombas />} />} />
-          <Route path="/calendario" element={<ProtectedRoute element={<Calendario />} />} />
-          <Route path="/bitacoras" element={<ProtectedRoute element={<Bitacoras />} />} />
-          <Route path="/calidad" element={<ProtectedRoute element={<Calidad_agua />} />} />
-          {/* <Route path="/solicitu" element={<ProtectedRoute element={<Vecinos />} />} /> */}
-          <Route path="/solicitud" element={<ProtectedRoute element={<SVecinos />} />} />
-          <Route path="/tablas" element={<ProtectedRoute element={<Tablas />} />} />
-          <Route path="/contadores" element={<ProtectedRoute element={<Contadores />} />} />
-          <Route path="/settings" element={<ProtectedRoute element={<Settings />} />} />
-          <Route path="/permisos" element={<ProtectedRoute element={<Permisos />} />} />
+          <Route path="/" element={<ProtectedRoute element={<Inicio />} allowedRoles={['Superadmin', 'Admin', 'Fontanero']} />} index />
+          <Route path="/fontaneros" element={<ProtectedRoute element={<Fontaneros />} allowedRoles={['Superadmin', 'Admin']} />} />
+          <Route path="/bombas" element={<ProtectedRoute element={<Bombas />} allowedRoles={['Superadmin', 'Admin', 'Fontanero']} />} />
+          <Route path="/calendario" element={<ProtectedRoute element={<Calendario />} allowedRoles={['Superadmin', 'Admin', 'Fontanero']} />} />
+          <Route path="/bitacoras" element={<ProtectedRoute element={<Bitacoras />} allowedRoles={['Superadmin', 'Admin']} />} />
+          <Route path="/calidad" element={<ProtectedRoute element={<Calidad_agua />} allowedRoles={['Superadmin', 'Admin']} />} />
+          <Route path="/solicitud" element={<ProtectedRoute element={<SVecinos />} allowedRoles={['Superadmin', 'Admin', 'Fontanero']} />} />
+          <Route path="/tablas" element={<ProtectedRoute element={<Tablas />} allowedRoles={['Superadmin']} />} />
+          <Route path="/contadores" element={<ProtectedRoute element={<Contadores />} allowedRoles={['Superadmin', 'Admin']} />} />
+          <Route path="/settings" element={<ProtectedRoute element={<Settings />} allowedRoles={['Superadmin']} />} />
+          <Route path="/permisos" element={<ProtectedRoute element={<Permisos />} allowedRoles={['Superadmin']} />} />
         </Route>
 
         {/* Ruta pública */}

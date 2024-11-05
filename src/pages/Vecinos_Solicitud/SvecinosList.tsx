@@ -20,7 +20,6 @@ export function SvecinosList() {
     const [searchNombre, setSearchNombre] = useState('');
     const [searchZona, setSearchZona] = useState<null | string>(null); // Estado para zona, inicialmente null
 
-
     const filteredSolicitudes = solicitudes.filter((solicitud) =>
         solicitud.numero_expediente.toString().includes(searchExpediente) &&
         solicitud.nombre_solicitante.toLowerCase().includes(searchNombre.toLowerCase()) &&

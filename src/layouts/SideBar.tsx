@@ -27,12 +27,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
   setSidebarOpen,
   closeMobileMenu,
 }) => {
-  const { signOut } = useAuthStore();
+  const { signOut, user } = useAuthStore();
   const [isSubMenuOpen, setSubMenuOpen] = useState(false); // Estado para controlar el submenú
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+
+  // Filtra las opciones de menú basadas en el rol del usuario
+  const filteredLinks = linksArray.filter((link) =>
+    link.roles.includes(user?.role || "")
+  );
+
+
 
   return (
     <div
@@ -66,9 +74,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
-        <nav className="flex-1  overflow-y-auto">
+        <nav className="flex-1 overflow-y-auto">
           <ul>
-            {linksArray.map(({ icon, label, to, subMenu }) => (
+            {filteredLinks.map(({ icon, label, to, subMenu }) => (
               <li className="my-2" key={label}>
                 <div className="flex items-center justify-between">
                   <NavLink
@@ -99,22 +107,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   )}
                 </div>
 
-                {/* Renderiza el submenú si está abierto */}
+                {/* Renderiza el submenú si está abierto y filtra según el rol del usuario */}
                 {subMenu && isSubMenuOpen && sidebarOpen && (
                   <ul className="ml-6">
-                    {subMenu.map(({ label: subLabel, to: subTo }) => (
-                      <li key={subLabel} className="my-2">
-                        <NavLink
-                          to={subTo}
-                          className={({ isActive }) =>
-                            `flex items-center p-2 px-4 rounded ${isActive ? "bg-gray-200 dark:bg-gray-800" : ""
-                            } hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors w-full`
-                          }
-                        >
-                          {subLabel}
-                        </NavLink>
-                      </li>
-                    ))}
+                    {subMenu
+                      .filter((subItem) => subItem.roles.includes(user?.role || ""))
+                      .map(({ label: subLabel, to: subTo }) => (
+                        <li key={subLabel} className="my-2">
+                          <NavLink
+                            to={subTo}
+                            className={({ isActive }) =>
+                              `flex items-center p-2 px-4 rounded ${isActive ? "bg-gray-200 dark:bg-gray-800" : ""
+                              } hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors w-full`
+                            }
+                          >
+                            {subLabel}
+                          </NavLink>
+                        </li>
+                      ))}
                   </ul>
                 )}
               </li>
@@ -122,7 +132,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </ul>
         </nav>
 
-        <hr className="border-gray-300 dark:border-gray-800  " />
+        <hr className="border-gray-300 dark:border-gray-800" />
 
         <nav>
           <ul>
@@ -131,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={() => {
                   signOut();
                   if (closeMobileMenu) {
-                    closeMobileMenu(); // Cierra el menú en móvil al cerrar sesión
+                    closeMobileMenu();
                   }
                 }}
                 className="w-full flex items-center p-2 px-4 rounded hover:bg-gray-700 transition-colors"
@@ -154,23 +164,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
 };
 
 // Data links con submenú
+// const linksArray = [
+//   {
+//     label: "Inicio",
+//     icon: <Home />,
+//     to: "/",
+//     subMenu: [
+//       { label: "Tablas", to: "/tablas" },
+//       { label: "Contadores", to: "/contadores" },
+//     ],
+//   },
+//   { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
+//   // { label: "Vecinos", icon: <UserPlus />, to: "/solicitu" },
+//   { label: "Vecinos", icon: <UserPlus />, to: "/solicitud" },
+//   { label: "Calidad", icon: <Droplet />, to: "/calidad" },
+//   { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
+//   { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
+//   { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
+//   { label: "Permisos", icon: <FileLock />, to: "/permisos" },
+//   { label: "Ajustes", icon: <Settings />, to: "/settings" },
+// ];
+
 const linksArray = [
   {
     label: "Inicio",
     icon: <Home />,
     to: "/",
+    roles: ["Superadmin", "Admin", "Fontanero"],
     subMenu: [
-      { label: "Tablas", to: "/tablas" },
-      { label: "Contadores", to: "/contadores" },
+      { label: "Tablas", to: "/tablas", roles: ["Superadmin"] },
+      { label: "Contadores", to: "/contadores", roles: ["Superadmin", "Admin"] },
     ],
   },
-  { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
-  // { label: "Vecinos", icon: <UserPlus />, to: "/solicitu" },
-  { label: "Vecinos", icon: <UserPlus />, to: "/solicitud" },
-  { label: "Calidad", icon: <Droplet />, to: "/calidad" },
-  { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
-  { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
-  { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
-  { label: "Permisos", icon: <FileLock />, to: "/permisos" },
-  { label: "Ajustes", icon: <Settings />, to: "/settings" },
+  { label: "Calendario", icon: <CalendarDays />, to: "/calendario", roles: ["Superadmin", "Admin", 'Fontanero'] },
+  { label: "Vecinos", icon: <UserPlus />, to: "/solicitud", roles: ["Superadmin", "Admin", "Fontanero"] },
+  { label: "Calidad", icon: <Droplet />, to: "/calidad", roles: ["Superadmin", "Admin"] },
+  { label: "Bitacoras", icon: <FileText />, to: "/bitacoras", roles: ["Superadmin", "Admin"] },
+  { label: "Bombas", icon: <WashingMachine />, to: "/bombas", roles: ["Superadmin", "Admin", "Fontanero"] },
+  { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros", roles: ["Superadmin", "Admin"] },
+  { label: "Permisos", icon: <FileLock />, to: "/permisos", roles: ["Superadmin"] },
+  { label: "Ajustes", icon: <Settings />, to: "/settings", roles: ["Superadmin"] },
 ];
