@@ -1,33 +1,22 @@
+
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
-import { TablaFontanerosBombas } from "../Tablas/TablaFontanerosBombas";
-import { MantBombas } from "../MantenimientoBombas/MantBombas";
-import Graficos from '../Tablas/Graficos';
+import { HorasExtras } from "../HorasExtras/HorasExtras";
+import GeneratePDFButton from "@/pages/PDF/pdfHorasExtras";
 
-export const Tablas = () => {
+interface ChartData {
+    fontanero: string | null;
+    horas_extras: number | null;
+}
 
+export default function Graficos() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const [chartData, setChartData] = useState<ChartData[]>([]);
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
     const fetchBombas = useBombaStore((state) => state.fetchBombas);
-    const [loading, setLoading] = useState(true); // Estado de carga
+    const [loading, setLoading] = useState(true);
+    // Estado de carga
     useEffect(() => {
         // Fetch both fontaneros and bombas when the component mounts
         const fetchData = async () => {
@@ -53,17 +42,15 @@ export const Tablas = () => {
         mx-auto mt-5 px-4 sm:px-6 ">
             <div className="grid grid-cols-1
              md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 h-full">
-
-                <div>
-                    <div >
-                        <TablaFontanerosBombas />
-                    </div>
-                    <div >
-                        <MantBombas />
-                    </div>
+                <div className="pt-4 md:pt-0">
+                    <HorasExtras onDataLoaded={setChartData} />
+                    <GeneratePDFButton
+                        data={chartData.map((item) => ({
+                            fontanero: item.fontanero ?? "Desconocido",
+                            horas_extras: item.horas_extras ?? 0,
+                        }))}
+                    />
                 </div>
-
-
             </div>
         </main>
     )

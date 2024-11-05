@@ -18,8 +18,10 @@ export function PermisosList() {
     }, [fetchPermiso]);
 
     return (
-        <div className="mt-4 md:w-2/5 lg:w-2/5 md:h-full flex-grow">
-            <div className="flex flex-col md:flex-row mt-14 md:mt-0 mb-4 px-20 md:mb-0 justify-center gap-4">
+        <div className="md:w-1/2 lg:w-3/5 md:h-full overflow-y-scroll
+         dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
+         dark:scrollbar-thumb-rounded-lg">
+            <div className="flex flex-col md:flex-row mt-14 md:mt-0 mb-4 md:mx-28 md:mb-0 justify-center gap-4">
                 <Select
                     onValueChange={(value) => setSearchUser(value === "todas" ? null : value)}
                     value={searchUser || "todas"}
@@ -36,9 +38,7 @@ export function PermisosList() {
                 </Select>
             </div>
             <div
-                className="h-full overflow-y-scroll
-                dark:scrollbar-thin dark:scrollbar-thumb-[#000000] dark:scrollbar-track-[#0a0a0a] 
-                dark:scrollbar-thumb-rounded-lg"
+                className=""
             >
                 {filteredSolicitudes.length ? (
                     <>

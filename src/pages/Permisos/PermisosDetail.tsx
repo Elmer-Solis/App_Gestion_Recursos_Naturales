@@ -28,20 +28,32 @@ export function PermisosDetail({ permiso }: SolicitudDetailsProps) {
             description: "Fontanero eliminado correctamente",
         });
     };
+
+    // Función para seleccionar la imagen según el rol
+    const getRoleImage = () => {
+        switch (permiso.role) {
+            case "Fontanero":
+                return "/fontanero.png";
+            case "Admin":
+                return "/admin.png";
+            case "Superadmin":
+                return "/superadmin.png";
+            default:
+                return "/default.png"; // Imagen por defecto si el rol no coincide
+        }
+    };
     return (
-        <Card className="mx-5 md:mx-20 my-5 px-5 py-8 ">
+        <Card className="mx-5 md:mx-28 my-5 px-5 py-8 ">
 
-            <div className="flex items-center gap-4  mb-5 ">
+            <div className="flex items-center gap-4 mb-5">
                 <section className="flex justify-center items-center w-14 h-14 rounded-full shadow-md bg-gradient-to-r from-[#000000] to-[#030a8f]">
-                    <img src="/admin.png" alt="agua" />
+                    <img src={getRoleImage()} alt={permiso.role} />
                 </section>
-                <div className="flex  flex-wrap justify-between w-full m">
+                <div className="flex flex-wrap justify-between w-full">
                     <div className="flex flex-col gap-y-2 mb-2 md:mb-0">
-                        <PermisosDetailItem label="Inspeccion" data={permiso.email} />
-                        <PermisosDetailItem label="Inspeccion" data={permiso.role} />
-
+                        <PermisosDetailItem label="Correo" data={permiso.email} />
+                        <PermisosDetailItem label="Rol" data={permiso.role} />
                     </div>
-
                 </div>
             </div>
 

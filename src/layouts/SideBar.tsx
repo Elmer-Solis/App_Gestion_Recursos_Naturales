@@ -41,7 +41,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   );
 
 
-
   return (
     <div
       className={`relative h-screen ${sidebarOpen ? "w-full md:w-auto" : "md:w-auto"

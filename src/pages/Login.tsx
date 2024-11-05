@@ -62,7 +62,7 @@ export function Login() {
                     <Card className=" w-[30%] lg:w-[14%] fixed bottom-6 right-6 bg-gradient-to-r
                      from-green-950 to-blue-950 text-white p-3  rounded-lg shadow-lg 
                 left-1/2 transform -translate-x-1/2 md:transform-none md:left-auto md:bottom-6 md:right-6 ">
-                        <p className="text-xs md:text-base opacity-80">Desarrollado por:</p>
+                        <p className="text-xs md:text-base opacity-80">Autor:</p>
                         {/* Texto corto para móviles */}
                         <p className="text-base md:text-lg font-semibold tracking-wide  md:hidden">Elmer Solis </p>
                         {/* Texto completo para pantallas medianas o mayores */}

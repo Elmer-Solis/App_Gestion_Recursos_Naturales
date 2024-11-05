@@ -89,7 +89,6 @@ export function PermisosForm() {
                     <form onSubmit={form.handleSubmit(registerPermiso)}
                         className="py-6 px-5 md:px-8 space-y-5">
 
-
                         <FormField
                             control={form.control}
                             name="email"
@@ -120,7 +119,7 @@ export function PermisosForm() {
                                             value={field.value}
                                         >
                                             <SelectTrigger className="w-full" id="role">
-                                                <SelectValue placeholder="Selecciona un Role" />
+                                                <SelectValue placeholder="Selecciona un rol" />
                                             </SelectTrigger>
                                             <SelectContent>
                                                 <SelectItem value="Superadmin">Superadmin</SelectItem>

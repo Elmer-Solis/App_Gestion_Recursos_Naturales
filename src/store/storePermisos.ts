@@ -37,7 +37,6 @@ const mapRowToSolicitud = (row: UserRow): User => ({
     role: row.role
 });
 
-
 export const usePermisoStore = create<solicitudUserState>()(
     devtools(
         (set, get) => ({
