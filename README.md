@@ -2,4 +2,4 @@
 
 ## UMG Ing Sistemas
 
-![Login de la APP](img/loginUmg.png)
+![Login de la APP](./public/loginUmg.png) 
