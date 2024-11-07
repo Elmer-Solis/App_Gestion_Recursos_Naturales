@@ -1,5 +1,9 @@
-# App_Gestion_Recursos_Naturales 2024 
-
+# App Gestion Recursos Naturales 2024
+ 
 ## UMG Ing Sistemas
 
-![Login de la APP](./public/loginUmg.png) 
+## Elmer Isai Solis Coyoy
+
+<div style="display: flex; justify-content: center;">
+    <img src="./public/loginUmg.png" alt="Login de la APP">
+</div>
