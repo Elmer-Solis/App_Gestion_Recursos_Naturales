@@ -2,15 +2,15 @@
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
-import { HorasExtras } from "../HorasExtras/HorasExtras";
-import GeneratePDFButton from "@/pages/PDF/pdfHorasExtras";
+import { HorasExtras } from "./Chart";
+import GeneratePDFButton from "@/pages/dashboard/SubDashboard/HorasExtras/PDF";
 
 interface ChartData {
     fontanero: string | null;
     horas_extras: number | null;
 }
 
-export default function Graficos() {
+export default function Gestion() {
 
     const [chartData, setChartData] = useState<ChartData[]>([]);
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);

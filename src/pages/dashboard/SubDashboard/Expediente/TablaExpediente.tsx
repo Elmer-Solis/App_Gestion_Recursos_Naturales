@@ -26,7 +26,7 @@ interface Expediente {
     zona: string | null;
 }
 
-export default function TablaIncompleto() {
+export default function TablaExpediente() {
     const { setActiveSolicitudId } = useSolicitudstore();
     const [expedientes, setExpedientes] = useState<Expediente[]>([]); // Explicitly typed
 

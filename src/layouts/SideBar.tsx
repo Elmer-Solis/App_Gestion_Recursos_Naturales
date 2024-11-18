@@ -173,8 +173,9 @@ const linksArray = [
     roles: ["Superadmin", "Admin", "Fontanero"],
     subMenu: [
       { label: "Tablas", to: "/tablas", roles: ["Superadmin"] },
-      { label: "Expediente", to: "/contadores", roles: ["Superadmin", "Admin"] },
+      { label: "Expediente", to: "/Expediente", roles: ["Superadmin", "Admin"] },
       { label: "Fin_Expediente", to: "/fin_expediente", roles: ["Superadmin", "Admin"] },
+      { label: "Horas_Extras", to: "/Horas_extras", roles: ["Superadmin", "Admin"] },
     ],
   },
   { label: "Calendario", icon: <CalendarDays />, to: "/calendario", roles: ["Superadmin", "Admin", 'Fontanero'] },

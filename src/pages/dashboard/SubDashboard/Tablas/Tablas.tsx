@@ -1,29 +1,11 @@
 import { useFontaneroStore } from "@/store/storeFontanero";
 import { useBombaStore } from "@/store/storeBombas";
 import { useEffect, useState } from "react";
-import { TablaFontanerosBombas } from "../Tablas/TablaFontanerosBombas";
-import { MantBombas } from "../MantenimientoBombas/MantBombas";
+import { TablaFontanerosBombas } from "./TablaFontanerosBombas";
+import { MantBombas } from "./TablaBombas";
 // import Graficos from '../Tablas/Graficos';
 
 export const Tablas = () => {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
     const fetchBombas = useBombaStore((state) => state.fetchBombas);

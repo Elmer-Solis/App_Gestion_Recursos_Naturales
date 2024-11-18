@@ -22,9 +22,7 @@ import { useEffect, useState } from "react";
 export function TableFontaneros() {
     const fontaneros = useFontaneroStore((state) => state.fontaneros);
     const fetchFontaneros = useFontaneroStore((state) => state.fetchFontaneros);
-
     const fetchBombas = useBombaStore((state) => state.fetchBombas);
-
     const [loading, setLoading] = useState(true); // Estado de carga
 
     useEffect(() => {
