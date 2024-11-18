@@ -13,6 +13,7 @@ import {
   Tablas,
   SVecinos,
   Settings,
+  Fin_expediente
 } from "@/pages";
 import NotFound from "@/pages/NotFound";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -32,6 +33,7 @@ export default function AppRoutes() {
           <Route path="/solicitud" element={<ProtectedRoute element={<SVecinos />} allowedRoles={['Superadmin', 'Admin', 'Fontanero']} />} />
           <Route path="/tablas" element={<ProtectedRoute element={<Tablas />} allowedRoles={['Superadmin']} />} />
           <Route path="/contadores" element={<ProtectedRoute element={<Contadores />} allowedRoles={['Superadmin', 'Admin']} />} />
+          <Route path="/fin_expediente" element={<ProtectedRoute element={<Fin_expediente />} allowedRoles={['Superadmin', 'Admin']} />} />
           <Route path="/settings" element={<ProtectedRoute element={<Settings />} allowedRoles={['Superadmin']} />} />
           <Route path="/permisos" element={<ProtectedRoute element={<Permisos />} allowedRoles={['Superadmin']} />} />
         </Route>

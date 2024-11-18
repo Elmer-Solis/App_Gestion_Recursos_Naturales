@@ -7,8 +7,9 @@ export * from "./Bitacoras/Bitacoras";
 export * from "./Calidad_agua/Calidad_agua";
 export * from "./Solicitud_vecinos/Vecinos";
 export * from "./dashboard/SubDashboard/Tablas";
-export * from "./dashboard/SubDashboard/Contadores";
-export * from "./dashboard/SubDashboard/Contadores";
+export * from "./dashboard/SubDashboard/Expediente";
+export * from "./dashboard/SubDashboard/Expediente";
 export * from "./Vecinos_Solicitud/Svecinos";
 export * from "./Settings/Settings";
 export * from "./Permisos/Permisos";
+export * from "./dashboard/SubDashboard/Fin_expediente"

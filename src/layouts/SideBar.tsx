@@ -120,7 +120,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                               } hover:bg-gray-400 dark:hover:bg-gray-700 transition-colors w-full`
                             }
                           >
-                            {subLabel}
+                            <span className="text-gray-800 dark:text-gray-50 hover:text-gray-900 dark:hover:text-white">
+                              {subLabel}
+                            </span>
                           </NavLink>
                         </li>
                       ))}
@@ -162,27 +164,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   );
 };
 
-// Data links con submenú
-// const linksArray = [
-//   {
-//     label: "Inicio",
-//     icon: <Home />,
-//     to: "/",
-//     subMenu: [
-//       { label: "Tablas", to: "/tablas" },
-//       { label: "Contadores", to: "/contadores" },
-//     ],
-//   },
-//   { label: "Calendario", icon: <CalendarDays />, to: "/calendario" },
-//   // { label: "Vecinos", icon: <UserPlus />, to: "/solicitu" },
-//   { label: "Vecinos", icon: <UserPlus />, to: "/solicitud" },
-//   { label: "Calidad", icon: <Droplet />, to: "/calidad" },
-//   { label: "Bitacoras", icon: <FileText />, to: "/bitacoras" },
-//   { label: "Bombas", icon: <WashingMachine />, to: "/bombas" },
-//   { label: "Fontaneros", icon: <Wrench />, to: "/fontaneros" },
-//   { label: "Permisos", icon: <FileLock />, to: "/permisos" },
-//   { label: "Ajustes", icon: <Settings />, to: "/settings" },
-// ];
 
 const linksArray = [
   {
@@ -192,7 +173,8 @@ const linksArray = [
     roles: ["Superadmin", "Admin", "Fontanero"],
     subMenu: [
       { label: "Tablas", to: "/tablas", roles: ["Superadmin"] },
-      { label: "Contadores", to: "/contadores", roles: ["Superadmin", "Admin"] },
+      { label: "Expediente", to: "/contadores", roles: ["Superadmin", "Admin"] },
+      { label: "Fin_Expediente", to: "/fin_expediente", roles: ["Superadmin", "Admin"] },
     ],
   },
   { label: "Calendario", icon: <CalendarDays />, to: "/calendario", roles: ["Superadmin", "Admin", 'Fontanero'] },
